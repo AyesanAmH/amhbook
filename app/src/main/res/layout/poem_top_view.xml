@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="8dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#B0ECCD"
+>
+
+    <TextView
+            android:id="@+id/poem_title"
+            android:text="@string/poem_title"
+            android:textColor="#580363"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            android:textSize="22sp"
+            android:paddingLeft="58dp"
+            android:layout_marginTop="8dp" android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/poem_content"/>
+
+    <TextView
+            android:id="@+id/poem_content"
+            android:text="@string/poem_content"
+            android:textColor="#680274"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:textSize="18sp"
+            android:paddingLeft="58dp"
+            app:layout_constraintTop_toBottomOf="@+id/poem_title"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="2dp"/>
+
+
+    <TextView
+            android:id="@+id/poem_detail"
+            android:text="@string/poem_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#0F0780"
+            app:layout_constraintTop_toBottomOf="@+id/poem_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintHorizontal_bias="0.8"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="16dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

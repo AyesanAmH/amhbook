@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MoeHein</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="poem_content">လယ်တောကပြန် \nပန်ချင်တယ်ခရေဖူးဆိုလို့\nမောင်ခူးကာပေး။ \n မနက်တုန်းဆီက \n ကျော့ဆုံးကို
+        မောင်မြင်တော့ \n သူ့ဆံပင် နှင်းဆီပွင့်တွေနဲ့ရယ် \n ဂုဏ်တင့်တယ်လေး။
+    </string>
+    <string name="poem_title">နှင်းဆီပွင့်</string>
+    <string name="poem_detail">အပြည့်အစုံ</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
