@@ -39,7 +39,7 @@
                         android:text="TextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/pome_detail_writer"
+                        android:id="@+id/poem_detail_writer"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="8dp"

@@ -21,7 +21,7 @@ class PoemListAdapter(context: Context):RecyclerView.Adapter<PoemListAdapter.Poe
     private var poems = emptyList<Poem>()
 
 
-    class PoemViewHolder(itemView:View):RecyclerView.ViewHolder(itemView),View.OnClickListener {
+    class PoemViewHolder(itemView:View,adapter: PoemListAdapter):RecyclerView.ViewHolder(itemView),View.OnClickListener {
 
         init {
             itemView.setOnClickListener(this)
@@ -29,16 +29,18 @@ class PoemListAdapter(context: Context):RecyclerView.Adapter<PoemListAdapter.Poe
 
         val title = itemView.findViewById<TextView>(R.id.title)
         val context = itemView.findViewById<TextView>(R.id.context)
-        private var holderpoems = emptyList<Poem>()
-        val detailFragment = PoemDetailFragment()
-        val args = Bundle()
+        private val poemListAdapter = adapter
         override fun onClick(v: View?) {
-            val poem_details = PoemListFragmentDirections.poemDetailAction()
+            val poem_details = PoemListFragmentDirections
+                .poemDetailAction(poemListAdapter.poems[adapterPosition].title,
+                    poemListAdapter.poems[adapterPosition].context,
+                    poemListAdapter.poems[adapterPosition].writer)
+
             Navigation.findNavController(context).navigate(poem_details)
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PoemListAdapter.PoemViewHolder {
-        return PoemViewHolder(layoutInflater.inflate(R.layout.poem_list_layout,parent,false))
+        return PoemViewHolder(layoutInflater.inflate(R.layout.poem_list_layout,parent,false),this)
     }
 
     override fun getItemCount(): Int {

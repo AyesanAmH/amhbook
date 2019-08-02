@@ -21,5 +21,9 @@
     <fragment android:id="@+id/poemAddFragment" android:name="com.aungmoehein.moehein.PoemAddFragment"
               android:label="fragment_poem_add" tools:layout="@layout/fragment_poem_add"/>
     <fragment android:id="@+id/poemDetailFragment" android:name="com.aungmoehein.moehein.PoemDetailFragment"
-              android:label="fragment_poem_detail" tools:layout="@layout/fragment_poem_detail"/>
+              android:label="fragment_poem_detail" tools:layout="@layout/fragment_poem_detail">
+        <argument android:name="poemtitle" app:argType="string"/>
+        <argument android:name="poemcontext" app:argType="string"/>
+        <argument android:name="poemWriter" app:argType="string"/>
+    </fragment>
 </navigation>

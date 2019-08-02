@@ -16,5 +16,5 @@ interface PoemDao {
 
     //select poem by id
     @Query("select * from poem_table where id = :id")
-    fun getPoemById(id:Long):List<Poem>
+    suspend fun getPoemById(id:Long):Poem
 }
