@@ -30,7 +30,7 @@
                     android:id="@+id/poem_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#09D9F5"
+                    android:background="#3CF554"
                     android:src="@drawable/icon_poem"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"

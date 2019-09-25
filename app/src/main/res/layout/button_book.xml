@@ -30,7 +30,7 @@
                     android:id="@+id/book_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#6CDFD3"
+                    android:background="#B4F85A9A"
                     android:src="@drawable/icon_book_button"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"

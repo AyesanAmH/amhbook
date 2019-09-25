@@ -4,10 +4,14 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
-    <string name="poem_content">လယ်တောကပြန် \nပန်ချင်တယ်ခရေဖူးဆိုလို့\nမောင်ခူးကာပေး။ \n မနက်တုန်းဆီက \n ကျော့ဆုံးကို
-        မောင်မြင်တော့ \n သူ့ဆံပင် နှင်းဆီပွင့်တွေနဲ့ရယ် \n ဂုဏ်တင့်တယ်လေး။
+    <string name="poem_content">လမင်းက အရှင်\nကြယ်စင်က ကိုယ်ဆိုပါတော့။\nမြေကမ္ဘာ ပတ်ချာဝိုက်လို့
+        \nလိုက်ပါ့မယ်နော့။\nနှင်းဆီက ကလျာ\nဆူးညှာက ကိုယ်ဆိုပါတော့\nရွှေလိပ်ပြာ တောင်ပံကားကို\nတားပါ့မယ်နော့။
+        \nဗေဒါက သခင်\nရေပြင်က ကိုယ်ဆိုပါဆိုတော့\nသောင်မတင် လိုရာကြွအောင်\nဆောင်ပါ့မယ်နော့။\nသို့ပေမင့်
+        \nကြွေပွင့်က ချစ်နှမ\nအပင်က ကိုယ်သာလျှင်\nဖြစ်ချင်ဘူး ကိုယ်တွေး။\nကြွေပွင့်ငယ် ချာချာဝဲ\nလေထဲမှာ ပျံပျံကာ
+        \nသင်လွင့်ရာ ကိုယ်မှာမကြွနိုင်ဘု\nအထီးကျန် မျက်ရည်စငယ်နဲ့\nလွမ်းရမယ်လေး။ ။
     </string>
-    <string name="poem_title">နှင်းဆီပွင့်</string>
+    <string name="poem_title">ချစ်သူ့အတွေး</string>
+    <string name="poem_writer">တင်မိုး</string>
     <string name="poem_detail">အပြည့်အစုံ</string>
 
     <!-- TODO: Remove or change this placeholder text -->

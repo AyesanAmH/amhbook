@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.aungmoehein.moehein.adapter.PoemListAdapter
 import com.aungmoehein.moehein.viewmodel.PoemViewModel
 import com.example.poemroomone.db.K5L
@@ -45,7 +46,12 @@ class PoemDetailFragment : Fragment() {
         poem_detail_title.text = MDetect.getText(ptitle)
         poem_detail_context.text = MDetect.getText(pcontext)
         poem_detail_writer.text = MDetect.getText(pwriter)
+        i("tes",randomnumber.toString())
+        deletebutton.setOnClickListener {
+            Navigation.findNavController(it).navigateUp()
+        }
     }
+    val randomnumber = (1..12).shuffled().first()
 
 
 }

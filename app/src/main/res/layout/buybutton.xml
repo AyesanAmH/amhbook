@@ -30,7 +30,7 @@
                     android:id="@+id/buy_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/md_green_A200"
+                    android:background="#B45477F8"
                     android:src="@drawable/icon_buy_button"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"

@@ -16,5 +16,12 @@ interface PoemDao {
 
     //select poem by id
     @Query("select * from poem_table where id = :id")
-    suspend fun getPoemById(id:Long):Poem
+    fun getPoemById(id:Long):Poem
+
+    //select all id
+    @Query("select id from poem_table")
+    fun getAllId():List<Long>
+
+    @Delete
+    fun deletePoem(poem: Poem)
 }

@@ -2,11 +2,13 @@ package com.aungmoehein.moehein
 
 
 import android.os.Bundle
+import android.util.Log.i
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import com.example.poemroomone.db.K5L
 import kotlinx.android.synthetic.main.button_book.*
 import kotlinx.android.synthetic.main.button_lovepresent.*
 import kotlinx.android.synthetic.main.button_music.*
@@ -14,6 +16,9 @@ import kotlinx.android.synthetic.main.button_poem.*
 import kotlinx.android.synthetic.main.button_review.*
 import kotlinx.android.synthetic.main.buybutton.*
 import kotlinx.android.synthetic.main.poem_top_view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import me.myatminsoe.mdetect.MDetect
 
 
@@ -43,14 +48,50 @@ class HomeFragment : Fragment() {
             val poemList = HomeFragmentDirections.poemListAction()
             Navigation.findNavController(it).navigate(poemList)
         }
+
+        val db = K5L.getInstance(context!!)
+        val scope = CoroutineScope(Dispatchers.IO)
+        scope.launch {
+
+            //poem_top_view
+            val poemIdArray = db.poemDao().getAllId()
+            if(poemIdArray.isEmpty()){
+                poem_title.text = MDetect.getText(poem_title.text.toString())
+                poem_content.text = MDetect.getText(poem_content.text.toString())
+                poem_top_writer.text = MDetect.getText(poem_top_writer.text.toString())
+                poem_detail.text = MDetect.getText(poem_detail.text.toString())
+            }
+            else{
+                val randomnumber = (poemIdArray[0]..poemIdArray[poemIdArray.size-1]).shuffled().first()
+                i("itest",randomnumber.toString())
+                poem_title.text = MDetect.getText( db.poemDao().getPoemById(randomnumber).title)
+                poem_content.text = MDetect.getText(db.poemDao().getPoemById(randomnumber).context)
+                poem_top_writer.text = MDetect.getText(db.poemDao().getPoemById(randomnumber).writer)
+                poem_detail.text = MDetect.getText(poem_detail.text.toString())
+            }
+
+
+            poem_detail.setOnClickListener {
+                if(poem_detail.text.equals(MDetect.getText("မူလ"))){
+                    poem_content.setExpand(false)
+                    poem_detail.text = MDetect.getText("အပြည့်အစုံ")
+                    poem_top_writer.visibility = View.INVISIBLE
+                }
+                else{
+                    poem_content.setExpand(true)
+                    poem_detail.text = MDetect.getText("မူလ")
+                    poem_top_writer.visibility = View.VISIBLE
+                }
+            }
+
+        }
     }
 
 
 
     fun setText(){
-        poem_title.text = MDetect.getText(poem_title.text.toString())
-        poem_content.text = MDetect.getText(poem_content.text.toString())
-        poem_detail.text = MDetect.getText(poem_detail.text.toString())
+        //set text to top poem
+
         poem_btn_text.text = MDetect.getText("ကဗျာ၊စာစု")
         love_btn_text.text = MDetect.getText("သို့")
         buy_btn_text.text = MDetect.getText("ဝယ်မည်")
@@ -58,5 +99,6 @@ class HomeFragment : Fragment() {
         review_btn_text.text = MDetect.getText("သုံးသပ်ချက်")
         book_btn_text.text = MDetect.getText("ဖတ်မည်")
     }
+
 
 }

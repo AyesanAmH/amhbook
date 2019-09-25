@@ -52,9 +52,15 @@ class PoemAddFragment : Fragment() {
             return Rabbit.zg2uni(text)
         }
 
+        //set hint
+        poem_title.hint = MDetect.getText("အမည်")
+        poem_context.hint = MDetect.getText("ကဗျာ/စကားစု")
+        poem_writer.hint = MDetect.getText("စာရေးသူ")
 
         val viewModel = ViewModelProviders.of(this).get(PoemViewModel::class.java)
         val db= K5L.getInstance(context!!)
+
+
 
         //save poem
         save_poem.setOnClickListener {
@@ -69,7 +75,7 @@ class PoemAddFragment : Fragment() {
             else if(add_writer.equals(""))
                poem_writer.hint = "Enter Writer"
             else{
-               viewModel.insertPoem(Poem(title =add_title ,context = add_context,writer =add_writer ))
+               viewModel.insertPoem(Poem(title = add_title ,context = add_context,writer = add_writer ))
                activity!!.onBackPressed()
            }
 

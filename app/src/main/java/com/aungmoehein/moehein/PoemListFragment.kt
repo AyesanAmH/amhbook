@@ -1,6 +1,7 @@
 package com.aungmoehein.moehein
 
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log.i
 import androidx.fragment.app.Fragment
@@ -8,13 +9,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aungmoehein.moehein.adapter.PoemListAdapter
 import com.aungmoehein.moehein.viewmodel.PoemViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_poem_list.*
 
 
@@ -28,6 +34,9 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class PoemListFragment : Fragment() {
+
+    private lateinit var navController: NavController
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +59,6 @@ class PoemListFragment : Fragment() {
             poems?.let { poemListAdapter.setPoems(it) }
         })
 
-
         //floating button
         fab.setOnClickListener {
             i("Add","Add Worked!!")
@@ -58,5 +66,16 @@ class PoemListFragment : Fragment() {
             Navigation.findNavController(it).navigate(poemAdd)
         }
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this){
+        }
+
+
+
+
+    }
+
 
 }

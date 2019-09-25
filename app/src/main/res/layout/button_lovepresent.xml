@@ -30,7 +30,7 @@
                     android:id="@+id/loveBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/md_deep_purple_100"
+                    android:background="#AB5EF8"
                     android:src="@drawable/icon_love_present"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"

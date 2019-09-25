@@ -5,7 +5,7 @@
             app:startDestination="@id/navigation_home">
 
     <fragment android:id="@+id/navigation_home" android:name="com.aungmoehein.moehein.HomeFragment"
-              android:label="fragment_home" tools:layout="@layout/fragment_home">
+              android:label="Moe Hein" tools:layout="@layout/fragment_home">
         <action android:id="@+id/poemListAction" app:destination="@id/poemListFragment"/>
     </fragment>
     <fragment android:id="@+id/navigation_library" android:name="com.aungmoehein.moehein.LibraryFragment"
@@ -13,15 +13,15 @@
     <fragment android:id="@+id/navigation_account" android:name="com.aungmoehein.moehein.AccountFragment"
               android:label="fragment_account" tools:layout="@layout/fragment_account"/>
     <fragment android:id="@+id/poemListFragment" android:name="com.aungmoehein.moehein.PoemListFragment"
-              android:label="fragment_poem_list" tools:layout="@layout/fragment_poem_list">
+              android:label="Poem List" tools:layout="@layout/fragment_poem_list">
         <action android:id="@+id/poemAddAction" app:destination="@id/poemAddFragment"/>
         <action android:id="@+id/poemDetailAction"
                 app:destination="@id/poemDetailFragment"/>
     </fragment>
     <fragment android:id="@+id/poemAddFragment" android:name="com.aungmoehein.moehein.PoemAddFragment"
-              android:label="fragment_poem_add" tools:layout="@layout/fragment_poem_add"/>
+              android:label="Add Poem" tools:layout="@layout/fragment_poem_add"/>
     <fragment android:id="@+id/poemDetailFragment" android:name="com.aungmoehein.moehein.PoemDetailFragment"
-              android:label="fragment_poem_detail" tools:layout="@layout/fragment_poem_detail">
+              android:label="Poem Details" tools:layout="@layout/fragment_poem_detail">
         <argument android:name="poemtitle" app:argType="string"/>
         <argument android:name="poemcontext" app:argType="string"/>
         <argument android:name="poemWriter" app:argType="string"/>
