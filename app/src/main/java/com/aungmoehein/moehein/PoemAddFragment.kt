@@ -1,22 +1,17 @@
 package com.aungmoehein.moehein
 
 
-import android.graphics.Color
-import android.graphics.Color.rgb
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.aungmoehein.moehein.viewmodel.PoemViewModel
-import com.example.poemroomone.db.K5L
+import com.example.poemroomone.db.PoemDb
 import com.example.poemroomone.db.Poem
 import kotlinx.android.synthetic.main.fragment_poem_add.*
 import kotlinx.android.synthetic.main.fragment_poem_add.poem_title
-import kotlinx.android.synthetic.main.poem_top_view.*
 import me.myatminsoe.mdetect.MDetect
 import me.myatminsoe.mdetect.Rabbit
 
@@ -57,9 +52,12 @@ class PoemAddFragment : Fragment() {
         poem_context.hint = MDetect.getText("ကဗျာ/စကားစု")
         poem_writer.hint = MDetect.getText("စာရေးသူ")
 
-        val viewModel = ViewModelProviders.of(this).get(PoemViewModel::class.java)
-        val db= K5L.getInstance(context!!)
+        //Set Button Text
+        save_poem.text = MDetect.getText("သိမ်းမည်")
+        cancel_poem.text = MDetect.getText("မသိမ်းတော့ပါ")
 
+        val viewModel = ViewModelProviders.of(this).get(PoemViewModel::class.java)
+        val db= PoemDb.getInstance(context!!)
 
 
         //save poem
@@ -68,12 +66,12 @@ class PoemAddFragment : Fragment() {
             val add_context = roomText(poem_context.text.toString())
             val add_writer = roomText(poem_writer.text.toString())
            if(add_title.equals("")){
-               poem_title.hint = "Enter Title"
+               poem_title.hint = MDetect.getText("ခေါင်းစဉ်ရေးပါ")
            }
             else if (add_context.equals(""))
-               poem_context.hint = "Enter Context"
+               poem_context.hint = MDetect.getText("ကဗျာ/စကားစုကိုရေးပါ")
             else if(add_writer.equals(""))
-               poem_writer.hint = "Enter Writer"
+               poem_writer.hint = MDetect.getText("စာရေးသူအမည်ရေးပါ")
             else{
                viewModel.insertPoem(Poem(title = add_title ,context = add_context,writer = add_writer ))
                activity!!.onBackPressed()

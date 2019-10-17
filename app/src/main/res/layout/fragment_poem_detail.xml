@@ -1,62 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".PoemDetailFragment">
-    <androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAlignment="viewEnd">
+
+    <!--<FrameLayout -->
+    <!--             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"-->
+    <!--             android:layout_width="match_parent"-->
+    <!--             android:layout_height="match_parent"-->
+    <!--             tools:context=".PoemDetailFragment">-->
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <ScrollView
-                android:id="@+id/scroll"
+            android:layout_height="0dp"
+            android:orientation="vertical">
+
+
+        <TextView
+                android:id="@+id/poem_detail_title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                <TextView
-                        android:text="TextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/poem_detail_title"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="8dp" android:textSize="18sp" />
-                <TextView
-                        android:text="TextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/poem_detail_context"
-                        app:layout_constraintTop_toBottomOf="@+id/poem_detail_title"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="8dp" android:textSize="18sp" />
-                <TextView
-                        android:text="TextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/poem_detail_writer"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/poem_detail_context"
-                        android:textSize="18sp"
-                        />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
-        <Button
-                android:text="Button"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/deletebutton" app:layout_constraintEnd_toEndOf="@+id/scroll"
-                app:layout_constraintStart_toStartOf="@+id/scroll" android:layout_marginStart="8dp"
-                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="@+id/scroll"/>
+                android:layout_marginStart="8dp"
+                android:paddingLeft="88dp"
+                android:text="TextView"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+                android:id="@+id/poem_detail_context"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:paddingLeft="52dp"
+                android:text="TextView"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/poem_detail_title" />
+
+        <TextView
+                android:id="@+id/poem_detail_writer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:paddingRight="64dp"
+                android:text="TextView"
+                android:textAlignment="viewEnd"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/poem_detail_context" />
+
+    </LinearLayout>
 
 
-</FrameLayout>
+    <!--</FrameLayout>-->
+
+</ScrollView>

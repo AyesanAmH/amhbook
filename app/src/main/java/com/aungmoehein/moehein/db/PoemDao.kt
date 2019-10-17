@@ -20,7 +20,7 @@ interface PoemDao {
 
     //select all id
     @Query("select id from poem_table")
-    fun getAllId():List<Long>
+     fun getAllId():List<Long>
 
     @Delete
     fun deletePoem(poem: Poem)

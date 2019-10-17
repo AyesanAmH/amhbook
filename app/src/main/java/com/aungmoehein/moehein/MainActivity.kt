@@ -1,40 +1,67 @@
 package com.aungmoehein.moehein
 
+import android.content.ComponentName
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.widget.MediaController
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
+import android.util.Log.d
+import android.util.Log.i
 import android.widget.TextView
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
-import androidx.core.view.GravityCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.Navigator
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.poem_top_view.*
 import me.myatminsoe.mdetect.MDetect
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI.setupWithNavController
-import kotlinx.android.synthetic.main.fragment_poem_list.*
+import com.aungmoehein.moehein.viewmodel.PoemViewModel
+import com.example.poemroomone.db.PoemDb
+import kotlinx.android.synthetic.main.poem_top_view.*
+import kotlinx.coroutines.*
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.widget.Toast
+
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var navController: NavController
+    lateinit var ptitle: String
+    lateinit var pcontext : String
+    lateinit var pwriter : String
+    var random : Long =0
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         //MDetect
         MDetect.init(this)
+
+
+        val scope = CoroutineScope(Dispatchers.IO)
+        scope.launch {
+            val db = PoemDb.getInstance(applicationContext)
+            val list = db.poemDao().getAllId()
+            if(list.isNotEmpty()){
+                random = list.random()
+                ptitle = db.poemDao().getPoemById(random).title
+                pcontext = db.poemDao().getPoemById(random).context
+                pwriter = db.poemDao().getPoemById(random).writer
+            }
+
+        }
+
+
+
         //toolbar
         NavigationUI.setupActionBarWithNavController(this, NavHostFragment.findNavController(host_fragment))
+
 
         navController = Navigation.findNavController(this,R.id.host_fragment)
 
@@ -47,7 +74,6 @@ class MainActivity : AppCompatActivity() {
 
     //toolbar action
     override fun onSupportNavigateUp() =
-        findNavController(this, R.id.host_fragment).navigateUp()
-
+        navController.navigateUp()
 
 }

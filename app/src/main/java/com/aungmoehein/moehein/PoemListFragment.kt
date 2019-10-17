@@ -50,6 +50,7 @@ class PoemListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+
         //recycler
         val viewModel = ViewModelProviders.of(this).get(PoemViewModel::class.java)
         val poemListAdapter = PoemListAdapter(context!!)
@@ -58,6 +59,7 @@ class PoemListFragment : Fragment() {
         viewModel.allPoems.observe(this, Observer { poems ->
             poems?.let { poemListAdapter.setPoems(it) }
         })
+
 
         //floating button
         fab.setOnClickListener {
@@ -71,10 +73,6 @@ class PoemListFragment : Fragment() {
         super.onCreate(savedInstanceState)
         val callback = requireActivity().onBackPressedDispatcher.addCallback(this){
         }
-
-
-
-
     }
 
 

@@ -7,15 +7,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [Poem::class],version = 1)
-abstract class K5L:RoomDatabase() {
+abstract class PoemDb:RoomDatabase() {
     abstract fun poemDao() : PoemDao
     companion object {
-        private var INSTANCE: K5L? = null
-        fun getInstance(context: Context): K5L {
+        private var INSTANCE: PoemDb? = null
+        fun getInstance(context: Context): PoemDb {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(
                     context.applicationContext,
-                    K5L::class.java,
+                    PoemDb::class.java,
                     "test.db"
                 ).build()
                 Toast.makeText(context,"Database Created!!!",Toast.LENGTH_SHORT).show()

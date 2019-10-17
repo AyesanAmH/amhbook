@@ -63,28 +63,20 @@
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp">
                 <Button
-                        android:text="Save"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/save_poem"
-                        android:layout_weight="1"/>
-                <Button
                         android:text="Cancel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/cancel_poem"
                         android:layout_weight="1"/>
+                <Button
+                        android:text="Save"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/save_poem"
+                        android:layout_weight="1"/>
 
 
             </LinearLayout>
-            <!--<Button-->
-            <!--android:text="Save"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/save_poem" android:layout_marginTop="8dp"-->
-            <!--app:layout_constraintTop_toBottomOf="@+id/poem_writer" app:layout_constraintStart_toStartOf="parent"-->
-            <!--android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>-->
-
 
         </LinearLayout>
 

@@ -40,14 +40,12 @@
             />
         </LinearLayout>
 
-            <Button
+            <ImageButton
+                    android:src="@drawable/ic_more_horiz_black_24dp"
                     android:id="@+id/deletebtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="DELETE"
-                    android:gravity="right"
-                    android:textAlignment="center"/>
+                    />
 
 
     </LinearLayout>
