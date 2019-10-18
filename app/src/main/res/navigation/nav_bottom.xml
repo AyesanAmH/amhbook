@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+ <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_botton"
             app:startDestination="@id/navigation_home">
@@ -12,18 +12,41 @@
               android:label="fragment_library" tools:layout="@layout/fragment_library"/>
     <fragment android:id="@+id/navigation_account" android:name="com.aungmoehein.moehein.AccountFragment"
               android:label="fragment_account" tools:layout="@layout/fragment_account"/>
-    <fragment android:id="@+id/poemListFragment" android:name="com.aungmoehein.moehein.PoemListFragment"
+    <fragment android:id="@+id/poemListFragment" android:name="com.aungmoehein.moehein.poem.PoemListFragment"
               android:label="Poem List" tools:layout="@layout/fragment_poem_list">
         <action android:id="@+id/poemAddAction" app:destination="@id/poemAddFragment"/>
         <action android:id="@+id/poemDetailAction"
                 app:destination="@id/poemDetailFragment"/>
+        <action
+                android:id="@+id/poemEditAction"
+                app:destination="@id/poemEditFragment" />
     </fragment>
-    <fragment android:id="@+id/poemAddFragment" android:name="com.aungmoehein.moehein.PoemAddFragment"
-              android:label="Add Poem" tools:layout="@layout/fragment_poem_add"/>
-    <fragment android:id="@+id/poemDetailFragment" android:name="com.aungmoehein.moehein.PoemDetailFragment"
+    <fragment
+            android:id="@+id/poemAddFragment"
+            android:name="com.aungmoehein.moehein.poem.PoemAddFragment"
+            android:label="Add Poem" />
+    <fragment android:id="@+id/poemDetailFragment" android:name="com.aungmoehein.moehein.poem.PoemDetailFragment"
               android:label="Poem Details" tools:layout="@layout/fragment_poem_detail">
         <argument android:name="poemtitle" app:argType="string"/>
         <argument android:name="poemcontext" app:argType="string"/>
         <argument android:name="poemWriter" app:argType="string"/>
+    </fragment>
+    <fragment
+            android:id="@+id/poemEditFragment"
+            android:name="com.aungmoehein.moehein.poem.PoemEditFragment"
+            android:label="Edit Poem"
+            tools:layout="@layout/fragment_poem_edit">
+        <argument
+                android:name="id"
+                app:argType="long" />
+        <argument
+                android:name="title"
+                app:argType="string" />
+        <argument
+                android:name="context"
+                app:argType="string" />
+        <argument
+                android:name="writer"
+                app:argType="string" />
     </fragment>
 </navigation>

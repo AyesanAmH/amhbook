@@ -24,4 +24,9 @@ interface PoemDao {
 
     @Delete
     fun deletePoem(poem: Poem)
+
+    @Update
+    fun updatePoem(poem:Poem)
+
+
 }

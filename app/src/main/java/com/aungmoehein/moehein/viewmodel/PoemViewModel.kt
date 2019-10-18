@@ -19,11 +19,4 @@ class PoemViewModel(application: Application):AndroidViewModel(application) {
 
     val db = PoemDb.getInstance(application)
     val allPoems: LiveData<List<Poem>> = db.poemDao().getAllPoems()
-    private val scope = CoroutineScope(Dispatchers.IO)
-    fun insertPoem(poem: Poem) = scope.launch {
-
-        db.poemDao().insertPoem(poem)
-    }
-
-
 }

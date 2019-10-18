@@ -1,13 +1,13 @@
-package com.aungmoehein.moehein
+package com.aungmoehein.moehein.poem
 
 
 import android.os.Bundle
-import android.util.Log.i
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
+import com.aungmoehein.moehein.poem.PoemDetailFragmentArgs
+import com.aungmoehein.moehein.R
 import kotlinx.android.synthetic.main.fragment_poem_detail.*
 import me.myatminsoe.mdetect.MDetect
 

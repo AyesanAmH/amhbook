@@ -1,4 +1,4 @@
-package com.aungmoehein.moehein
+package com.aungmoehein.moehein.poem
 
 
 import android.os.Bundle
@@ -7,11 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
+import com.aungmoehein.moehein.R
 import com.aungmoehein.moehein.viewmodel.PoemViewModel
-import com.example.poemroomone.db.PoemDb
 import com.example.poemroomone.db.Poem
+import com.example.poemroomone.db.PoemDb
 import kotlinx.android.synthetic.main.fragment_poem_add.*
 import kotlinx.android.synthetic.main.fragment_poem_add.poem_title
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import me.myatminsoe.mdetect.MDetect
 import me.myatminsoe.mdetect.Rabbit
 
@@ -57,7 +61,6 @@ class PoemAddFragment : Fragment() {
         cancel_poem.text = MDetect.getText("မသိမ်းတော့ပါ")
 
         val viewModel = ViewModelProviders.of(this).get(PoemViewModel::class.java)
-        val db= PoemDb.getInstance(context!!)
 
 
         //save poem
@@ -73,7 +76,11 @@ class PoemAddFragment : Fragment() {
             else if(add_writer.equals(""))
                poem_writer.hint = MDetect.getText("စာရေးသူအမည်ရေးပါ")
             else{
-               viewModel.insertPoem(Poem(title = add_title ,context = add_context,writer = add_writer ))
+               val scope = CoroutineScope(Dispatchers.IO)
+               scope.launch {
+                   val db = PoemDb.getInstance(context!!)
+                   db.poemDao().insertPoem(Poem(title = add_title ,context = add_context,writer = add_writer ))
+               }
                activity!!.onBackPressed()
            }
 
