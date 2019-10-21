@@ -58,7 +58,7 @@ class PoemListFragment : Fragment() {
         val viewModel = ViewModelProviders.of(this).get(PoemViewModel::class.java)
         val poemListAdapter = PoemListAdapter(context!!)
         recycler.adapter = poemListAdapter
-        recycler.layoutManager = LinearLayoutManager(context!!)
+        recycler.layoutManager =LinearLayoutManager(context!!)
         viewModel.allPoems.observe(this, Observer { poems ->
             poems?.let { poemListAdapter.setPoems(it) }
         })

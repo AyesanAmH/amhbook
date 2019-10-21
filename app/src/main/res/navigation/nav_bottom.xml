@@ -7,6 +7,9 @@
     <fragment android:id="@+id/navigation_home" android:name="com.aungmoehein.moehein.HomeFragment"
               android:label="Moe Hein" tools:layout="@layout/fragment_home">
         <action android:id="@+id/poemListAction" app:destination="@id/poemListFragment"/>
+        <action
+                android:id="@+id/buyAction"
+                app:destination="@id/buyFragment" />
     </fragment>
     <fragment android:id="@+id/navigation_library" android:name="com.aungmoehein.moehein.LibraryFragment"
               android:label="fragment_library" tools:layout="@layout/fragment_library"/>
@@ -47,6 +50,86 @@
                 app:argType="string" />
         <argument
                 android:name="writer"
+                app:argType="string" />
+    </fragment>
+    <fragment
+            android:id="@+id/buyFragment"
+            android:name="com.aungmoehein.moehein.buy.BuyFragment"
+            android:label="To Buy List"
+            tools:layout="@layout/fragment_buy" >
+        <action
+                android:id="@+id/addBuy"
+                app:destination="@id/addBuyBookFragment2" />
+        <action
+                android:id="@+id/buyDetailAction"
+                app:destination="@id/buyDetailsFragment" />
+        <action
+                android:id="@+id/buyEditAction"
+                app:destination="@id/buyEditFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/buyDetailsFragment"
+            android:name="com.aungmoehein.moehein.buy.BuyDetailsFragment"
+            android:label="fragment_buy_details"
+            tools:layout="@layout/fragment_buy_details" >
+        <argument
+                android:name="title"
+                app:argType="string" />
+        <argument
+                android:name="writer"
+                app:argType="string" />
+        <argument
+                android:name="quantity"
+                app:argType="long" />
+        <argument
+                android:name="comment"
+                app:argType="string" />
+    </fragment>
+    <fragment
+            android:id="@+id/buyBookFragment"
+            android:name="com.aungmoehein.moehein.buy.BuyBookFragment"
+            android:label="fragment_buy_book"
+            tools:layout="@layout/fragment_buy_book" />
+    <fragment
+            android:id="@+id/buyWriterFragment"
+            android:name="com.aungmoehein.moehein.buy.BuyWriterFragment"
+            android:label="fragment_buy_writer"
+            tools:layout="@layout/fragment_buy_writer" >
+        <argument
+                android:name="title"
+                app:argType="string" />
+        <argument
+                android:name="writer"
+                app:argType="string" />
+        <argument
+                android:name="quantity"
+                app:argType="long" />
+        <argument
+                android:name="comment"
+                app:argType="string" />
+    </fragment>
+    <fragment
+            android:id="@+id/addBuyBookFragment2"
+            android:name="com.aungmoehein.moehein.buy.BuyAddBookFragment"
+            android:label="AddBuyBookFragment" />
+    <fragment
+            android:id="@+id/buyEditFragment"
+            android:name="com.aungmoehein.moehein.buy.BuyEditFragment"
+            android:label="BuyEditFragment" >
+        <argument
+                android:name="id"
+                app:argType="long" />
+        <argument
+                android:name="title"
+                app:argType="string" />
+        <argument
+                android:name="writer"
+                app:argType="string" />
+        <argument
+                android:name="quantity"
+                app:argType="long" />
+        <argument
+                android:name="comment"
                 app:argType="string" />
     </fragment>
 </navigation>

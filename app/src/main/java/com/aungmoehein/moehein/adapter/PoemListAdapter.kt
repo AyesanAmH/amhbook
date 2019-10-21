@@ -4,17 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.aungmoehein.moehein.poem.PoemListFragmentDirections
 import com.aungmoehein.moehein.R
-import com.example.poemroomone.db.PoemDb
-import com.example.poemroomone.db.Poem
+import com.aungmoehein.moehein.db.MoeHein
+import com.aungmoehein.moehein.db.Poem
 import kotlinx.android.synthetic.main.pop_up_layout.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +22,7 @@ import me.myatminsoe.mdetect.MDetect
 class PoemListAdapter(context: Context):RecyclerView.Adapter<PoemListAdapter.PoemViewHolder>(){
     private val layoutInflater = LayoutInflater.from(context)
     private var poems = emptyList<Poem>()
-    val db = PoemDb.getInstance(context)
+    val db = MoeHein.getInstance(context)
     val context = context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PoemListAdapter.PoemViewHolder {
@@ -89,7 +87,7 @@ class PoemListAdapter(context: Context):RecyclerView.Adapter<PoemListAdapter.Poe
                     poemListAdapter.poems[adapterPosition].context,
                     poemListAdapter.poems[adapterPosition].writer)
 
-            Navigation.findNavController(context).navigate(poem_details)
+            Navigation.findNavController(itemView).navigate(poem_details)
         }
 
 

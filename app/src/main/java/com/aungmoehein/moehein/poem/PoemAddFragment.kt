@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import com.aungmoehein.moehein.R
 import com.aungmoehein.moehein.viewmodel.PoemViewModel
-import com.example.poemroomone.db.Poem
-import com.example.poemroomone.db.PoemDb
+import com.aungmoehein.moehein.db.Poem
+import com.aungmoehein.moehein.db.MoeHein
 import kotlinx.android.synthetic.main.fragment_poem_add.*
 import kotlinx.android.synthetic.main.fragment_poem_add.poem_title
 import kotlinx.coroutines.CoroutineScope
@@ -60,8 +60,6 @@ class PoemAddFragment : Fragment() {
         save_poem.text = MDetect.getText("သိမ်းမည်")
         cancel_poem.text = MDetect.getText("မသိမ်းတော့ပါ")
 
-        val viewModel = ViewModelProviders.of(this).get(PoemViewModel::class.java)
-
 
         //save poem
         save_poem.setOnClickListener {
@@ -78,7 +76,7 @@ class PoemAddFragment : Fragment() {
             else{
                val scope = CoroutineScope(Dispatchers.IO)
                scope.launch {
-                   val db = PoemDb.getInstance(context!!)
+                   val db = MoeHein.getInstance(context!!)
                    db.poemDao().insertPoem(Poem(title = add_title ,context = add_context,writer = add_writer ))
                }
                activity!!.onBackPressed()

@@ -1,4 +1,4 @@
-package com.example.poemroomone.db
+package com.aungmoehein.moehein.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -7,7 +7,7 @@ import androidx.room.*
 interface PoemDao {
 
     //select all poem
-    @Query("select * from poem_table")
+    @Query("select * from poem_table order by id desc")
     fun getAllPoems(): LiveData<List<Poem>>
 
     //insert poem

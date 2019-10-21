@@ -10,11 +10,9 @@ import androidx.lifecycle.ViewModelProviders
 
 import com.aungmoehein.moehein.R
 import com.aungmoehein.moehein.viewmodel.PoemViewModel
-import com.example.poemroomone.db.Poem
-import com.example.poemroomone.db.PoemDb
-import kotlinx.android.synthetic.main.fragment_poem_add.*
+import com.aungmoehein.moehein.db.Poem
+import com.aungmoehein.moehein.db.MoeHein
 import kotlinx.android.synthetic.main.fragment_poem_add.cancel_poem
-import kotlinx.android.synthetic.main.fragment_poem_add.save_poem
 import kotlinx.android.synthetic.main.fragment_poem_edit.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +23,7 @@ import me.myatminsoe.mdetect.Rabbit
 /**
  * A simple [Fragment] subclass.
  */
-class PoemEditFragment : Fragment() {
+class  PoemEditFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,9 +56,9 @@ class PoemEditFragment : Fragment() {
         val ptitle = PoemEditFragmentArgs.fromBundle(arguments!!).title
         val pcontext = PoemEditFragmentArgs.fromBundle(arguments!!).context
         val pwriter = PoemEditFragmentArgs.fromBundle(arguments!!).writer
-        edit_poem_title.setText(ptitle)
-        edit_poem_context.setText(pcontext)
-        edit_poem_writer.setText(pwriter)
+        edit_poem_title.setText(MDetect.getText(ptitle))
+        edit_poem_context.setText(MDetect.getText(pcontext))
+        edit_poem_writer.setText(MDetect.getText(pwriter))
         edit_poem.text = MDetect.getText("ပြင်မည်")
         cancel_poem.text = MDetect.getText("မပြင်တော့ပါ")
 
@@ -82,7 +80,7 @@ class PoemEditFragment : Fragment() {
             else{
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch {
-                    val db = PoemDb.getInstance(context!!)
+                    val db = MoeHein.getInstance(context!!)
                     db.poemDao().updatePoem(Poem(id = pid,title = add_title ,context = add_context,writer = add_writer ))
                 }
 //                viewModel.insertPoem(Poem(title = add_title ,context = add_context,writer = add_writer ))

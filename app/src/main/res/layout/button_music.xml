@@ -27,7 +27,7 @@
                 android:background="@drawable/layout_music_button">
 
             <ImageButton
-                    android:id="@+id/buy_btn"
+                    android:id="@+id/music_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#C2FA47"

@@ -1,28 +1,15 @@
 package com.aungmoehein.moehein
 
-import android.content.ComponentName
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log.d
-import android.util.Log.i
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import kotlinx.android.synthetic.main.activity_main.*
 import me.myatminsoe.mdetect.MDetect
 import androidx.navigation.fragment.NavHostFragment
-import com.aungmoehein.moehein.viewmodel.PoemViewModel
-import com.example.poemroomone.db.PoemDb
-import kotlinx.android.synthetic.main.poem_top_view.*
+import com.aungmoehein.moehein.db.MoeHein
 import kotlinx.coroutines.*
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.widget.Toast
 
 
 class MainActivity : AppCompatActivity() {
@@ -46,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         val scope = CoroutineScope(Dispatchers.IO)
         scope.launch {
-            val db = PoemDb.getInstance(applicationContext)
+            val db = MoeHein.getInstance(applicationContext)
             val list = db.poemDao().getAllId()
             if(list.isNotEmpty()){
                 random = list.random()

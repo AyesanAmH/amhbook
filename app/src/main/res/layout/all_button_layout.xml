@@ -18,7 +18,7 @@
             android:layout_marginEnd="8dp"
             android:id="@+id/linearLayout3">
         <include layout="@layout/button_poem"></include>
-        <include layout="@layout/buybutton"></include>
+        <include layout="@layout/button_buy"></include>
         <include layout="@layout/button_music"></include>
     </LinearLayout>
 

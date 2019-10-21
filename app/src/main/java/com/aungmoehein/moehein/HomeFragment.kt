@@ -2,28 +2,20 @@ package com.aungmoehein.moehein
 
 
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log.i
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
-import com.aungmoehein.moehein.viewmodel.PoemViewModel
-import com.example.poemroomone.db.PoemDb
 import kotlinx.android.synthetic.main.button_book.*
 import kotlinx.android.synthetic.main.button_lovepresent.*
 import kotlinx.android.synthetic.main.button_music.*
 import kotlinx.android.synthetic.main.button_poem.*
 import kotlinx.android.synthetic.main.button_review.*
-import kotlinx.android.synthetic.main.buybutton.*
+import kotlinx.android.synthetic.main.button_buy.*
 import kotlinx.android.synthetic.main.poem_top_view.*
 import kotlinx.android.synthetic.main.poem_top_view.poem_title
-import kotlinx.coroutines.*
 import me.myatminsoe.mdetect.MDetect
 
 
@@ -78,13 +70,18 @@ class HomeFragment : Fragment() {
 
 
 
-
-
+        //poem action
         poem_btn.setOnClickListener {
             val poemList = HomeFragmentDirections.poemListAction()
             Navigation.findNavController(it).navigate(poemList)
         }
 
+
+        //buy action
+        buy_btn.setOnClickListener {
+            val buy = HomeFragmentDirections.buyAction()
+            Navigation.findNavController(it).navigate(buy)
+        }
 
         //Expandable Text
         poem_detail.setOnClickListener {
@@ -98,6 +95,8 @@ class HomeFragment : Fragment() {
                 poem_top_writer.visibility = View.VISIBLE
             }
         }
+
+
 
     }
 
