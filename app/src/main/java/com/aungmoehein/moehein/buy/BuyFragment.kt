@@ -34,7 +34,7 @@ class BuyFragment : Fragment() {
 
         val adapter = PagerAdapter(childFragmentManager)
         adapter.addFragment(BuyBookFragment(),"Name")
-        adapter.addFragment(LibraryFragment(),"Writer")
+        adapter.addFragment(BuyWriterFragment(),"Writer")
         view_pager.adapter = adapter
         tab_layout.setupWithViewPager(view_pager)
 

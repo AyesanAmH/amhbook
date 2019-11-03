@@ -1,5 +1,6 @@
 package com.aungmoehein.moehein.db
 
+import androidx.appcompat.widget.DialogTitle
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
@@ -27,6 +28,10 @@ interface PoemDao {
 
     @Update
     fun updatePoem(poem:Poem)
+
+    //check conflict
+    @Query("select * from poem_table where title = :title and writer = :writer and context = :context")
+    fun checkPoemConflict(title: String,writer :String,context :String):Poem
 
 
 }

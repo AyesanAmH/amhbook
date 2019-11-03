@@ -66,6 +66,9 @@
         <action
                 android:id="@+id/buyEditAction"
                 app:destination="@id/buyEditFragment" />
+        <action
+                android:id="@+id/writerbookAction"
+                app:destination="@id/buyWriterBookFragment" />
     </fragment>
     <fragment
             android:id="@+id/buyDetailsFragment"
@@ -130,6 +133,15 @@
                 app:argType="long" />
         <argument
                 android:name="comment"
+                app:argType="string" />
+    </fragment>
+    <fragment
+            android:id="@+id/buyWriterBookFragment"
+            android:name="com.aungmoehein.moehein.buy.BuyWriterBookFragment"
+            android:label="fragment_buy_writer_book"
+            tools:layout="@layout/fragment_buy_writer_book" >
+        <argument
+                android:name="buybookwriter"
                 app:argType="string" />
     </fragment>
 </navigation>

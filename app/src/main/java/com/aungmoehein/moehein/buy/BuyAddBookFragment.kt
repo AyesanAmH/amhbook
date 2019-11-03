@@ -2,6 +2,7 @@ package com.aungmoehein.moehein.buy
 
 
 import android.os.Bundle
+import android.util.Log.i
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +11,7 @@ import android.view.ViewGroup
 import com.aungmoehein.moehein.R
 import com.aungmoehein.moehein.db.Buy
 import com.aungmoehein.moehein.db.MoeHein
-import kotlinx.android.synthetic.main.buy_book_list_layout.*
-import kotlinx.android.synthetic.main.buy_book_list_layout.writer
 import kotlinx.android.synthetic.main.fragment_add_buy_book.*
-import kotlinx.android.synthetic.main.fragment_poem_add.*
-import kotlinx.android.synthetic.main.poem_list_layout.*
-import kotlinx.android.synthetic.main.poem_list_layout.title
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -74,7 +70,10 @@ class BuyAddBookFragment : Fragment() {
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch {
                     val db = MoeHein.getInstance(context!!)
-                    db.buyDao().insertBuy(Buy(title = add_title,writer = add_writer,quantity = add_quantity.toLong(),comment = add_comment))
+                    val checkConflict = db.buyDao().checkBuyConflict(add_title,add_writer,add_quantity.toLong(),add_comment)
+                    if(checkConflict == null)
+                        db.buyDao().insertBuy(Buy(title = add_title,writer = add_writer,quantity = add_quantity.toLong(),comment = add_comment))
+
                 }
                 activity!!.onBackPressed()
             }

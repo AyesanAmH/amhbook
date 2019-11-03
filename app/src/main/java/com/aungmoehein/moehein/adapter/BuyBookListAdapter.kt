@@ -39,7 +39,6 @@ class BuyBookListAdapter(context: Context):RecyclerView.Adapter<BuyBookListAdapt
 
     override fun onBindViewHolder(holder: BuyBookListAdapter.BuyViewHolder, position: Int) {
         holder.title.text = MDetect.getText(buy[position].title)
-        holder.writer.text = MDetect.getText(buy[position].writer)
 
         holder.pop_up_button.setOnClickListener {
             val dialog = LayoutInflater.from(context).inflate(R.layout.pop_up_layout,null)
@@ -77,7 +76,6 @@ class BuyBookListAdapter(context: Context):RecyclerView.Adapter<BuyBookListAdapt
         }
 
         val title = itemView.findViewById<TextView>(R.id.title)
-        val writer =itemView.findViewById<TextView>(R.id.writer)
         val pop_up_button = itemView.findViewById<ImageButton>(R.id.pop_up_btn)
         val buyListAdapter = adapter
 

@@ -62,7 +62,6 @@ class  PoemEditFragment : Fragment() {
         edit_poem.text = MDetect.getText("ပြင်မည်")
         cancel_poem.text = MDetect.getText("မပြင်တော့ပါ")
 
-        val viewModel = ViewModelProviders.of(this).get(PoemViewModel::class.java)
 
 
         //edit poem

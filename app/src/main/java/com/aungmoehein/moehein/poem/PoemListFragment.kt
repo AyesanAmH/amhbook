@@ -9,23 +9,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.aungmoehein.moehein.poem.PoemListFragmentDirections
 import com.aungmoehein.moehein.R
 import com.aungmoehein.moehein.adapter.PoemListAdapter
 import com.aungmoehein.moehein.viewmodel.PoemViewModel
 import kotlinx.android.synthetic.main.fragment_poem_list.*
-import kotlinx.android.synthetic.main.poem_list_layout.*
-import kotlinx.android.synthetic.main.pop_up_layout.view.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -66,7 +58,6 @@ class PoemListFragment : Fragment() {
 
         //floating button
         fab.setOnClickListener {
-            i("Add","Add Worked!!")
             val poemAdd = PoemListFragmentDirections.poemAddAction()
             Navigation.findNavController(it).navigate(poemAdd)
         }
