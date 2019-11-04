@@ -13,31 +13,30 @@ import com.aungmoehein.moehein.R
 import com.aungmoehein.moehein.buy.BuyFragmentDirections
 import com.aungmoehein.moehein.db.Buy
 import com.aungmoehein.moehein.db.MoeHein
-import com.aungmoehein.moehein.poem.PoemListFragmentDirections
 import kotlinx.android.synthetic.main.pop_up_layout.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import me.myatminsoe.mdetect.MDetect
 
-class BuyBookListAdapter(context: Context):RecyclerView.Adapter<BuyBookListAdapter.BuyViewHolder>() {
+class BuyNameAdapter(context: Context):RecyclerView.Adapter<BuyNameAdapter.BuyViewHolder>() {
     private val layoutInflater = LayoutInflater.from(context)
-    private var buy = emptyList<Buy>()
     val db = MoeHein.getInstance(context)
     val context = context
+    private var buy = emptyList<Buy>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BuyBookListAdapter.BuyViewHolder {
-        return BuyViewHolder(layoutInflater.inflate(R.layout.buy_book_list_layout,parent,false),this)
+    ): BuyNameAdapter.BuyViewHolder {
+        return BuyViewHolder(layoutInflater.inflate(R.layout.name_list_layout,parent,false),this)
     }
 
     override fun getItemCount(): Int {
         return buy.size
     }
 
-    override fun onBindViewHolder(holder: BuyBookListAdapter.BuyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BuyNameAdapter.BuyViewHolder, position: Int) {
         holder.title.text = MDetect.getText(buy[position].title)
 
         holder.pop_up_button.setOnClickListener {
@@ -69,7 +68,7 @@ class BuyBookListAdapter(context: Context):RecyclerView.Adapter<BuyBookListAdapt
         notifyDataSetChanged()
     }
 
-    class BuyViewHolder(itemView:View,adapter: BuyBookListAdapter):RecyclerView.ViewHolder(itemView),View.OnClickListener {
+    class BuyViewHolder(itemView:View,adapter: BuyNameAdapter):RecyclerView.ViewHolder(itemView),View.OnClickListener {
 
         init {
             itemView.setOnClickListener(this)

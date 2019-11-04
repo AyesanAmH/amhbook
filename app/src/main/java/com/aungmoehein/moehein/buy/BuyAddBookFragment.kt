@@ -42,18 +42,18 @@ class BuyAddBookFragment : Fragment() {
             return Rabbit.zg2uni(text)
         }
 
-        //set hint
         buy_title.hint = MDetect.getText("အမည်")
         buy_writer.hint = MDetect.getText("စာရေးသူ")
         buy_quantity.hint = MDetect.getText("အရေအတွက်")
         buy_comment.hint = MDetect.getText("မှတ်ချက်")
 
-        //Set Button Text
         save_buy.text = MDetect.getText("သိမ်းမည်")
         cancel_buy.text = MDetect.getText("မသိမ်းတော့ပါ")
 
-        //save buy
+
+
         save_buy.setOnClickListener {
+
             val add_title = roomText(buy_title.text.toString())
             val add_writer = roomText(buy_writer.text.toString())
             val add_quantity = roomText(buy_quantity.text.toString())

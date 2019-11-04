@@ -10,7 +10,4 @@ class BuyViewModel(application: Application) :AndroidViewModel(application) {
     val db = MoeHein.getInstance(application)
     val allbuy = db.buyDao().getAllBuy()
     val allbuywriter = db.buyDao().getAllBuyWriter()
-    val allbuywriterbooks = db.buyDao().getAllWriterBooks()
-
-    val test = db.buyDao().test()
 }

@@ -1,4 +1,4 @@
-package com.aungmoehein.moehein.buy
+package com.aungmoehein.moehein
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

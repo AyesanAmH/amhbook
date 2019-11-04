@@ -10,6 +10,9 @@
         <action
                 android:id="@+id/buyAction"
                 app:destination="@id/buyFragment" />
+        <action
+                android:id="@+id/readAction"
+                app:destination="@id/readFragment" />
     </fragment>
     <fragment android:id="@+id/navigation_library" android:name="com.aungmoehein.moehein.LibraryFragment"
               android:label="fragment_library" tools:layout="@layout/fragment_library"/>
@@ -90,7 +93,7 @@
     </fragment>
     <fragment
             android:id="@+id/buyBookFragment"
-            android:name="com.aungmoehein.moehein.buy.BuyBookFragment"
+            android:name="com.aungmoehein.moehein.buy.BuyNameFragment"
             android:label="fragment_buy_book"
             tools:layout="@layout/fragment_buy_book" />
     <fragment
@@ -142,6 +145,65 @@
             tools:layout="@layout/fragment_buy_writer_book" >
         <argument
                 android:name="buybookwriter"
+                app:argType="string" />
+    </fragment>
+    <fragment
+            android:id="@+id/readFragment"
+            android:name="com.aungmoehein.moehein.read.ReadFragment"
+            android:label="fragment_read"
+            tools:layout="@layout/fragment_read" >
+        <action
+                android:id="@+id/addRead"
+                app:destination="@+id/readAddFragment" />
+        <action
+                android:id="@+id/editAction"
+                app:destination="@id/readEditFragment" />
+        <action
+                android:id="@+id/detailsAction"
+                app:destination="@id/readDetailsFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/readAddFragment"
+            android:name="com.aungmoehein.moehein.read.ReadAddFragment"
+            android:label="fragment_read_add"
+            tools:layout="@layout/fragment_read_add" />
+    <fragment
+            android:id="@+id/readDetailsFragment"
+            android:name="com.aungmoehein.moehein.read.ReadDetailsFragment"
+            android:label="fragment_read_details"
+            tools:layout="@layout/fragment_read_details" >
+        <argument
+                android:name="title"
+                app:argType="string" />
+        <argument
+                android:name="writer"
+                app:argType="string" />
+        <argument
+                android:name="recom"
+                app:argType="string" />
+        <argument
+                android:name="comment"
+                app:argType="string" />
+    </fragment>
+    <fragment
+            android:id="@+id/readEditFragment"
+            android:name="com.aungmoehein.moehein.read.ReadEditFragment"
+            android:label="fragment_read_edit"
+            tools:layout="@layout/fragment_read_edit" >
+        <argument
+                android:name="id"
+                app:argType="long" />
+        <argument
+                android:name="title"
+                app:argType="string" />
+        <argument
+                android:name="writer"
+                app:argType="string" />
+        <argument
+                android:name="recom"
+                app:argType="string" />
+        <argument
+                android:name="comment"
                 app:argType="string" />
     </fragment>
 </navigation>

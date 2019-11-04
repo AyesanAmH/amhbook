@@ -83,6 +83,13 @@ class HomeFragment : Fragment() {
             Navigation.findNavController(it).navigate(buy)
         }
 
+
+        //read action
+        read_btn.setOnClickListener {
+            val read = HomeFragmentDirections.readAction()
+            Navigation.findNavController(it).navigate(read)
+        }
+
         //Expandable Text
         poem_detail.setOnClickListener {
             if (poem_detail.text.equals(MDetect.getText("မူလ"))) {
