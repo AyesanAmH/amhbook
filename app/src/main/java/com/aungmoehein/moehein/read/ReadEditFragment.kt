@@ -49,8 +49,8 @@ class ReadEditFragment : Fragment() {
         read_edit_recom.hint = MDetect.getText("အကြံပြုသူ")
         read_edit_comment.hint = MDetect.getText("မှတ်ချက်")
 
-        save_edit_read.text = MDetect.getText("သိမ်းမည်")
-        cancel_edit_read.text = MDetect.getText("မသိမ်းတော့ပါ")
+        save_edit_read.text = MDetect.getText("ပြင်မည်")
+        cancel_edit_read.text = MDetect.getText("မပြင်တော့ပါ")
 
         val eid = ReadEditFragmentArgs.fromBundle(arguments!!).id
         val etitle = ReadEditFragmentArgs.fromBundle(arguments!!).title
@@ -78,7 +78,13 @@ class ReadEditFragment : Fragment() {
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch {
                     val db = MoeHein.getInstance(context!!)
-                    db.readDao().updateRead(Read(id = eid,title = etitle,writer = ewriter,recom = erecom,comment = ecomment))
+                    val read = Read(id = eid,title = etitle,writer = ewriter,recom = erecom,comment = ecomment)
+                    val checkConflict = db.readDao().checkConflict(etitle,ewriter,erecom)
+                    if(checkConflict == null)
+                        db.readDao().updateRead(read)
+                    else
+                        db.readDao().deleteRead(read)
+
                 }
                 activity!!.onBackPressed()
             }

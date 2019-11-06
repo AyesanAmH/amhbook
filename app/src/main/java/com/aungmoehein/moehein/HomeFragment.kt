@@ -3,12 +3,13 @@ package com.aungmoehein.moehein
 
 
 import android.os.Bundle
+import android.util.Log.i
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
-import kotlinx.android.synthetic.main.button_book.*
+import kotlinx.android.synthetic.main.button_read.*
 import kotlinx.android.synthetic.main.button_lovepresent.*
 import kotlinx.android.synthetic.main.button_music.*
 import kotlinx.android.synthetic.main.button_poem.*
@@ -45,6 +46,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
 
         setText()

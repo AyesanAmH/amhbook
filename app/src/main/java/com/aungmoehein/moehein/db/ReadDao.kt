@@ -19,8 +19,8 @@ interface ReadDao {
     @Delete
     fun deleteRead(read: Read)
 
-    @Query("select * from read_table where title = :title and writer = :writer and recom = :recom and comment = :comment")
-    fun checkConflict(title: String,writer :String,recom :String,comment:String):Read
+    @Query("select * from read_table where title = :title and writer = :writer and recom = :recom")
+    fun checkConflict(title: String,writer :String,recom :String):Read
 
 
     @Query("select * from read_table group by writer order by writer asc")

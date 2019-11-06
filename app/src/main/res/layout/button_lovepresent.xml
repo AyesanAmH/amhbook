@@ -30,7 +30,7 @@
                     android:id="@+id/loveBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#AB5EF8"
+                    android:background="#FDDABDF8"
                     android:src="@drawable/icon_love_present"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"
@@ -47,7 +47,7 @@
         <TextView
                 android:id="@+id/love_btn_text"
                 android:text="LovePresent"
-                android:textColor="@color/md_deep_purple_400"
+                android:textColor="#454745"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

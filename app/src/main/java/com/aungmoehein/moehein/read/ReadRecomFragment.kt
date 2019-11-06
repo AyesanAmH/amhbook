@@ -38,11 +38,11 @@ class ReadRecomFragment : Fragment() {
         read_recom_recycler.layoutManager = LinearLayoutManager(context)
 
         viewModel.allread.observe(this, Observer { allrecom ->
-            allrecom?.let { readRecomAdapter.setRecomWriter(it) }
+            allrecom?.let { readRecomAdapter.setReadWriterBooks(it) }
         })
 
         viewModel.allreadrecom.observe(this, Observer { allrebooks ->
-            allrebooks?.let { readRecomAdapter.setReadWriterBooks(it) }
+            allrebooks?.let { readRecomAdapter.setRecomWriter(it) }
         })
     }
 

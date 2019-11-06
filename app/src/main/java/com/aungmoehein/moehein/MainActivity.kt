@@ -1,5 +1,6 @@
 package com.aungmoehein.moehein
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -10,6 +11,13 @@ import me.myatminsoe.mdetect.MDetect
 import androidx.navigation.fragment.NavHostFragment
 import com.aungmoehein.moehein.db.MoeHein
 import kotlinx.coroutines.*
+import android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+import android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+import android.os.Build
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.view.View
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +38,10 @@ class MainActivity : AppCompatActivity() {
         //MDetect
         MDetect.init(this)
 
-
+        setSupportActionBar(toolbar)
+        val elevation = 0
+        supportActionBar!!.elevation = elevation.toFloat()
+        window.decorView.systemUiVisibility = SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         val scope = CoroutineScope(Dispatchers.IO)
         scope.launch {
             val db = MoeHein.getInstance(applicationContext)

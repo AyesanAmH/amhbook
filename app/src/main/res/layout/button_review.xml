@@ -30,7 +30,7 @@
                     android:id="@+id/reivew_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#FAB981"
+                    android:background="#F9FD9C"
                     android:src="@drawable/icon_review_button"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"
@@ -47,7 +47,7 @@
         <TextView
                 android:id="@+id/review_btn_text"
                 android:text="Review"
-                android:textColor="#069170"
+                android:textColor="#454745"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

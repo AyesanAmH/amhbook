@@ -82,7 +82,12 @@ class BuyEditFragment : Fragment() {
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch {
                     val db = MoeHein.getInstance(context!!)
-                    db.buyDao().updateBuy(Buy(id = bid,title = add_title,writer = add_writer,quantity = add_quantity.toLong(),comment = add_comment))
+                    val buy = Buy(id = bid,title = add_title,writer = add_writer,quantity = add_quantity.toLong(),comment = add_comment)
+                    val checkConflict = db.buyDao().checkBuyConflict(add_title,add_writer)
+                    if(checkConflict == null)
+                    db.buyDao().updateBuy(buy)
+                    else
+                        db.buyDao().deleteBuy(buy)
                 }
                 activity!!.onBackPressed()
             }

@@ -1,43 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="6dp"
-        android:layout_marginLeft="6dp"
-        android:layout_marginBottom="6dp"
+<!--<androidx.cardview.widget.CardView-->
+<!--        xmlns:tools="http://schemas.android.com/tools"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginRight="6dp"-->
+<!--        android:layout_marginLeft="6dp"-->
+<!--        android:layout_marginBottom="6dp"-->
+<!--        android:elevation="0dp"-->
+<!--        android:background="@color/colorPrimary"-->
+<!--        xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        xmlns:app="http://schemas.android.com/apk/res-auto">-->
+
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/layout_poem_top"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#B0ECCD"
-    >
-
-        <TextView
-                android:id="@+id/poem_title"
-                android:text="@string/poem_title"
-                android:textColor="#580363"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp"
-                android:textSize="22sp"
-                android:paddingLeft="58dp"
-                android:layout_marginTop="8dp" android:layout_marginBottom="32dp"
-                app:layout_constraintBottom_toTopOf="@+id/poem_content"/>
+    <TextView
+            android:id="@+id/poem_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp"
+            android:paddingLeft="58dp"
+            android:text="@string/poem_title"
+            android:textColor="#454645"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toTopOf="@+id/poem_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <net.expandable.ExpandableTextView
                 android:id="@+id/poem_content"
                 android:text="@string/poem_content"
-                android:textColor="#680274"
+                android:textColor="#454645"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:collapse_lines="3"
+                android:minLines="3"
+                app:collapse_lines="4"
                 app:expand_enabled="false"
                 app:expand="false"
                 android:textSize="18sp"
@@ -55,7 +62,7 @@
                 android:text="@string/poem_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#0F0780"
+                android:textColor="#454645"
                 app:layout_constraintTop_toBottomOf="@+id/poem_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="32dp"
@@ -63,7 +70,7 @@
                 app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"/>
         <TextView
                 android:text="@string/poem_writer"
-                android:textColor="#580363"
+                android:textColor="#454645"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,4 +83,4 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+<!--</androidx.cardview.widget.CardView>-->

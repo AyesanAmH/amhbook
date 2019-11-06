@@ -4,8 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
->
+        android:layout_weight="1">
 
 
     <LinearLayout
@@ -24,13 +23,13 @@
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@drawable/layout_book_button">
+                android:background="@drawable/layout_read_button">
 
             <ImageButton
                     android:id="@+id/read_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#B4F85A9A"
+                    android:background="#B471F5DB"
                     android:src="@drawable/icon_book_button"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"
@@ -47,7 +46,7 @@
         <TextView
                 android:id="@+id/book_btn_text"
                 android:text="Book"
-                android:textColor="#D5AF2D"
+                android:textColor="#454745"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

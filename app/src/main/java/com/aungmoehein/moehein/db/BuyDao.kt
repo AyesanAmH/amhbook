@@ -20,8 +20,8 @@ interface BuyDao {
     @Update
     fun updateBuy(buy: Buy)
 
-    @Query("select * from buy_table where title = :title and writer = :writer and quantity = :quantity and comment = :comment")
-    fun checkBuyConflict(title:String,writer:String,quantity:Long,comment: String):Buy
+    @Query("select * from buy_table where title = :title and writer = :writer")
+    fun checkBuyConflict(title:String,writer:String):Buy
 
 
     @Query("select * from buy_table group by writer order by writer asc")

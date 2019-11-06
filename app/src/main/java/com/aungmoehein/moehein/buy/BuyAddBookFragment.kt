@@ -70,7 +70,7 @@ class BuyAddBookFragment : Fragment() {
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch {
                     val db = MoeHein.getInstance(context!!)
-                    val checkConflict = db.buyDao().checkBuyConflict(add_title,add_writer,add_quantity.toLong(),add_comment)
+                    val checkConflict = db.buyDao().checkBuyConflict(add_title,add_writer)
                     if(checkConflict == null)
                         db.buyDao().insertBuy(Buy(title = add_title,writer = add_writer,quantity = add_quantity.toLong(),comment = add_comment))
 

@@ -77,9 +77,10 @@ class PoemAddFragment : Fragment() {
                val scope = CoroutineScope(Dispatchers.IO)
                scope.launch {
                    val db = MoeHein.getInstance(context!!)
-                   val checkConflict = db.poemDao().checkPoemConflict(add_title,add_writer,add_context)
+                   val poem = Poem(title = add_title ,context = add_context,writer = add_writer )
+                   val checkConflict = db.poemDao().checkPoemConflict(add_title,add_context,add_writer)
                    if(checkConflict == null)
-                   db.poemDao().insertPoem(Poem(title = add_title ,context = add_context,writer = add_writer ))
+                   db.poemDao().insertPoem(poem)
                }
                activity!!.onBackPressed()
            }

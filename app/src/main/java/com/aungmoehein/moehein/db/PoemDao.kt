@@ -30,8 +30,8 @@ interface PoemDao {
     fun updatePoem(poem:Poem)
 
     //check conflict
-    @Query("select * from poem_table where title = :title and writer = :writer and context = :context")
-    fun checkPoemConflict(title: String,writer :String,context :String):Poem
+    @Query("select * from poem_table where title = :title and context = :context and writer = :writer")
+    fun checkPoemConflict(title: String,context :String,writer :String):Poem
 
 
 }

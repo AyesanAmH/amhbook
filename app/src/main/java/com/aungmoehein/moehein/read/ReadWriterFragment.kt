@@ -37,11 +37,11 @@ class ReadWriterFragment : Fragment() {
         read_recycler.layoutManager = LinearLayoutManager(context)
 
         viewModel.allread.observe(this, Observer { read ->
-            read?.let { readWriterAdapter.setReadWriter(it) }
+            read?.let { readWriterAdapter.setReadWriterBooks(it) }
         })
 
        viewModel.allreadwriter.observe(this, Observer { readwriter ->
-           readwriter?.let { readWriterAdapter.setReadWriterBooks(it) }
+           readwriter?.let { readWriterAdapter.setReadWriter(it) }
        })
 
     }

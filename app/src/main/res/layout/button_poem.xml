@@ -30,7 +30,7 @@
                     android:id="@+id/poem_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#3CF554"
+                    android:background="#4DE4A1"
                     android:src="@drawable/icon_poem"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"
@@ -47,7 +47,7 @@
         <TextView
                 android:id="@+id/poem_btn_text"
                 android:text="Poem"
-                android:textColor="@color/md_cyan_800"
+                android:textColor="#454745"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

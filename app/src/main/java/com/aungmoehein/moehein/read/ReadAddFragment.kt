@@ -68,7 +68,7 @@ class ReadAddFragment : Fragment() {
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch {
                     val db = MoeHein.getInstance(context!!)
-                    val checkConflict = db.readDao().checkConflict(add_title,add_writer,add_recom,add_comment)
+                    val checkConflict = db.readDao().checkConflict(add_title,add_writer,add_recom)
                     if(checkConflict == null)
                         db.readDao().insertRead(Read(title = add_title,writer = add_writer,recom = add_recom,comment = add_comment))
                 }

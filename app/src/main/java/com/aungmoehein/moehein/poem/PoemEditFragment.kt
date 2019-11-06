@@ -80,9 +80,14 @@ class  PoemEditFragment : Fragment() {
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch {
                     val db = MoeHein.getInstance(context!!)
-                    db.poemDao().updatePoem(Poem(id = pid,title = add_title ,context = add_context,writer = add_writer ))
+                    val poem = Poem(id = pid,title = add_title ,context = add_context,writer = add_writer)
+                    val checkConflict = db.poemDao().checkPoemConflict(add_title,add_context,add_writer)
+
+                    if(checkConflict == null)
+                        db.poemDao().updatePoem(poem)
+                    else
+                        db.poemDao().deletePoem(poem)
                 }
-//                viewModel.insertPoem(Poem(title = add_title ,context = add_context,writer = add_writer ))
                 activity!!.onBackPressed()
             }
 
