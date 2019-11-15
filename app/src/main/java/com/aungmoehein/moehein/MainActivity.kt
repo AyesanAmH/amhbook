@@ -41,7 +41,9 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         val elevation = 0
         supportActionBar!!.elevation = elevation.toFloat()
+
         window.decorView.systemUiVisibility = SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
         val scope = CoroutineScope(Dispatchers.IO)
         scope.launch {
             val db = MoeHein.getInstance(applicationContext)

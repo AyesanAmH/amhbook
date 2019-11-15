@@ -23,19 +23,19 @@
                 android:layout_marginRight="4dp"
                 android:layout_marginBottom="8dp"/>
 
-        <EditText
+        <AutoCompleteTextView
+                android:id="@+id/buy_writer"
                 android:hint="Enter A Writer"
                 android:background="@drawable/poem_edit_text"
                 android:paddingLeft="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:id="@+id/buy_writer"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="4dp"
                 android:layout_marginBottom="8dp"/>
 
-        <EditText
+        <AutoCompleteTextView
                 android:id="@+id/buy_quantity"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"

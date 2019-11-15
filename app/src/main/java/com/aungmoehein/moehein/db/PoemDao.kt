@@ -12,8 +12,8 @@ interface PoemDao {
     fun getAllPoems(): LiveData<List<Poem>>
 
     //insert poem
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertPoem(poem: Poem)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertPoem(poem: Poem)
 
     //select poem by id
     @Query("select * from poem_table where id = :id")
@@ -30,8 +30,8 @@ interface PoemDao {
     fun updatePoem(poem:Poem)
 
     //check conflict
-    @Query("select * from poem_table where title = :title and context = :context and writer = :writer")
-    fun checkPoemConflict(title: String,context :String,writer :String):Poem
+    @Query("select * from poem_table where title = :title and  writer = :writer")
+    fun checkPoemConflict(title: String,writer :String):Poem
 
 
 }

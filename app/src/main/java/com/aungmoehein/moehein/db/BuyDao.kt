@@ -20,12 +20,17 @@ interface BuyDao {
     @Update
     fun updateBuy(buy: Buy)
 
-    @Query("select * from buy_table where title = :title and writer = :writer")
-    fun checkBuyConflict(title:String,writer:String):Buy
-
+    @Query("select * from buy_table where title = :title")
+    fun checkBuyConflict(title:String):Buy
 
     @Query("select * from buy_table group by writer order by writer asc")
     fun getAllBuyWriter():LiveData<List<Buy>>
+
+    @Query("select writer from buy_table group by writer order by count(writer) desc")
+    fun getSugWriter():Array<String>
+
+    @Query("select quantity  from buy_table group by quantity order by count(quantity) desc")
+    fun getSugQty():Array<Long>
 
 
 

@@ -70,4 +70,5 @@ dependencies {
     //expandable textview
     implementation 'com.github.yuzumone:ExpandableTextView:0.2.2'
 
+
 }

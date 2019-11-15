@@ -92,6 +92,13 @@ class HomeFragment : Fragment() {
             Navigation.findNavController(it).navigate(read)
         }
 
+
+        review_btn.setOnClickListener{
+            val review = HomeFragmentDirections.reviewAction()
+            Navigation.findNavController(it).navigate(review)
+        }
+
+
         //Expandable Text
         poem_detail.setOnClickListener {
             if (poem_detail.text.equals(MDetect.getText("မူလ"))) {

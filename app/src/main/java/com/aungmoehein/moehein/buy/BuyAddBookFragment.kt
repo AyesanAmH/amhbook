@@ -7,16 +7,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
+import android.widget.ArrayAdapter
 
 import com.aungmoehein.moehein.R
 import com.aungmoehein.moehein.db.Buy
 import com.aungmoehein.moehein.db.MoeHein
 import kotlinx.android.synthetic.main.fragment_add_buy_book.*
+import kotlinx.android.synthetic.main.fragment_review_add.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import me.myatminsoe.mdetect.MDetect
 import me.myatminsoe.mdetect.Rabbit
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -42,7 +47,36 @@ class BuyAddBookFragment : Fragment() {
             return Rabbit.zg2uni(text)
         }
 
-        buy_title.hint = MDetect.getText("အမည်")
+        val scope = CoroutineScope(Dispatchers.IO)
+        scope.launch {
+            val db = MoeHein.getInstance(context!!)
+            val writer = MDetect.getStringArray(db.buyDao().getSugWriter())
+            val qty = db.buyDao().getSugQty()
+            async(Dispatchers.Main){
+                val writerAdapter = ArrayAdapter<String>(context!!,
+                    android.R.layout.simple_dropdown_item_1line,writer)
+                buy_writer.setAdapter(writerAdapter)
+                buy_writer.threshold = 1
+
+                val qtyAdapter = ArrayAdapter<Long>(context!!,
+                    android.R.layout.simple_dropdown_item_1line,qty)
+                buy_quantity.setAdapter(qtyAdapter)
+                buy_quantity.threshold = 1
+            }
+
+            buy_writer.onFocusChangeListener = View.OnFocusChangeListener{
+                view,b ->
+                if(b)
+                    buy_writer.showDropDown()
+            }
+            buy_quantity.onFocusChangeListener = View.OnFocusChangeListener{
+                    view,b ->
+                if(b)
+                    buy_quantity.showDropDown()
+            }
+        }
+
+        buy_title.hint = MDetect.getText("စာအုပ်အမည်")
         buy_writer.hint = MDetect.getText("စာရေးသူ")
         buy_quantity.hint = MDetect.getText("အရေအတွက်")
         buy_comment.hint = MDetect.getText("မှတ်ချက်")
@@ -59,18 +93,18 @@ class BuyAddBookFragment : Fragment() {
             val add_quantity = roomText(buy_quantity.text.toString())
             val add_comment = roomText(buy_comment.text.toString())
 
-            if(add_title.equals("")){
+            if(add_title.isEmpty()){
                 buy_title.hint = MDetect.getText("စာအုပ်အမည်ရေးပါ")
-            }else if(add_writer.equals("")){
+            }else if(add_writer.isEmpty()){
                 buy_writer.hint = MDetect.getText("စာရေးသူအမည်ရေးပါ")
-            }else if(add_quantity.equals("")){
+            }else if(add_quantity.isEmpty()){
                 buy_quantity.hint = MDetect.getText("စာအုပ်အရေအတွက်ရေးပါ")
             }
             else{
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch {
                     val db = MoeHein.getInstance(context!!)
-                    val checkConflict = db.buyDao().checkBuyConflict(add_title,add_writer)
+                    val checkConflict = db.buyDao().checkBuyConflict(add_title)
                     if(checkConflict == null)
                         db.buyDao().insertBuy(Buy(title = add_title,writer = add_writer,quantity = add_quantity.toLong(),comment = add_comment))
 

@@ -81,7 +81,7 @@ class  PoemEditFragment : Fragment() {
                 scope.launch {
                     val db = MoeHein.getInstance(context!!)
                     val poem = Poem(id = pid,title = add_title ,context = add_context,writer = add_writer)
-                    val checkConflict = db.poemDao().checkPoemConflict(add_title,add_context,add_writer)
+                    val checkConflict = db.poemDao().checkPoemConflict(add_title,add_writer)
 
                     if(checkConflict == null)
                         db.poemDao().updatePoem(poem)

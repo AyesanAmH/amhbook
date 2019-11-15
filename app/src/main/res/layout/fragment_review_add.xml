@@ -12,7 +12,7 @@
 
 
         <EditText
-                android:id="@+id/read_title"
+                android:id="@+id/review_title"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:paddingLeft="8dp"
@@ -23,7 +23,7 @@
                 android:layout_marginBottom="8dp"/>
 
         <AutoCompleteTextView
-                android:id="@+id/read_writer"
+                android:id="@+id/review_writer"
                 android:background="@drawable/poem_edit_text"
                 android:paddingLeft="8dp"
                 android:layout_width="match_parent"
@@ -32,21 +32,18 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="4dp"
                 android:layout_marginBottom="8dp"/>
-
         <AutoCompleteTextView
-                android:id="@+id/read_recom"
+                android:id="@+id/review_cat"
+                android:background="@drawable/poem_edit_text"
+                android:paddingLeft="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="4dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/poem_edit_text"
-                android:paddingLeft="8dp" />
-
-
+                android:layout_marginBottom="8dp"/>
         <EditText
-                android:id="@+id/read_comment"
+                android:id="@+id/review_context"
                 android:paddingLeft="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,8 +59,15 @@
                 android:layout_marginRight="4dp"
                 android:layout_marginBottom="8dp"
                 />
-
-
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/fav_check_box"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="asp"/>
+        </LinearLayout>
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -78,16 +82,14 @@
                     android:text="Cancel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cancel_read"
+                    android:id="@+id/cancel_review"
                     android:layout_weight="1"/>
             <Button
                     android:text="Save"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/save_read"
+                    android:id="@+id/save_review"
                     android:layout_weight="1"/>
-
-
         </LinearLayout>
 
     </LinearLayout>

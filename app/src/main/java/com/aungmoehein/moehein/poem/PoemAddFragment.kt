@@ -66,19 +66,19 @@ class PoemAddFragment : Fragment() {
             val add_title = roomText(poem_title.text.toString())
             val add_context = roomText(poem_context.text.toString())
             val add_writer = roomText(poem_writer.text.toString())
-           if(add_title.equals("")){
+           if(add_title.isEmpty()){
                poem_title.hint = MDetect.getText("ခေါင်းစဉ်ရေးပါ")
            }
-            else if (add_context.equals(""))
+            else if (add_context.isEmpty())
                poem_context.hint = MDetect.getText("ကဗျာ/စကားစုကိုရေးပါ")
-            else if(add_writer.equals(""))
+            else if(add_writer.isEmpty())
                poem_writer.hint = MDetect.getText("စာရေးသူအမည်ရေးပါ")
             else{
                val scope = CoroutineScope(Dispatchers.IO)
                scope.launch {
                    val db = MoeHein.getInstance(context!!)
                    val poem = Poem(title = add_title ,context = add_context,writer = add_writer )
-                   val checkConflict = db.poemDao().checkPoemConflict(add_title,add_context,add_writer)
+                   val checkConflict = db.poemDao().checkPoemConflict(add_title,add_writer)
                    if(checkConflict == null)
                    db.poemDao().insertPoem(poem)
                }

@@ -79,7 +79,7 @@ class ReadEditFragment : Fragment() {
                 scope.launch {
                     val db = MoeHein.getInstance(context!!)
                     val read = Read(id = eid,title = etitle,writer = ewriter,recom = erecom,comment = ecomment)
-                    val checkConflict = db.readDao().checkConflict(etitle,ewriter,erecom)
+                    val checkConflict = db.readDao().checkConflict(etitle)
                     if(checkConflict == null)
                         db.readDao().updateRead(read)
                     else

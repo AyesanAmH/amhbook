@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_buy_book.*
 /**
  * A simple [Fragment] subclass.
  */
-class BuyNameFragment : Fragment() {
+class   BuyNameFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

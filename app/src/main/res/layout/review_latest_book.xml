@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="100dp"
+        android:layout_height="125dp"
+        android:orientation="vertical"
+        android:background="@drawable/layout_review_top"
+        android:layout_marginLeft="14sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <TextView
+                android:id="@+id/review_latest_book_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textColor="#09221E"/>
+
+        <TextView
+                android:id="@+id/review_latest_writer_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textColor="#09221E" />
+
+    </LinearLayout>
+

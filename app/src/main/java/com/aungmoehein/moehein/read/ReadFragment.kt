@@ -32,7 +32,7 @@ class ReadFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = PagerAdapter(childFragmentManager)
-        adapter.addFragment(ReadNameFragment(),MDetect.getText("အမည်"))
+        adapter.addFragment(ReadNameFragment(),MDetect.getText("စာအုပ်"))
         adapter.addFragment(ReadWriterFragment(),MDetect.getText("စာရေးသူ"))
         adapter.addFragment(ReadRecomFragment(),MDetect.getText("အကြံပြုသူ"))
         view_pager.adapter = adapter

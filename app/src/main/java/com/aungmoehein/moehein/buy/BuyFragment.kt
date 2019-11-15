@@ -30,7 +30,7 @@ class BuyFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = PagerAdapter(childFragmentManager)
-        adapter.addFragment(BuyNameFragment(),MDetect.getText("အမည်"))
+        adapter.addFragment(BuyNameFragment(),MDetect.getText("စာအုပ်"))
         adapter.addFragment(BuyWriterFragment(),MDetect.getText("စာရေးသူ"))
         view_pager.adapter = adapter
         tab_layout.setupWithViewPager(view_pager)
