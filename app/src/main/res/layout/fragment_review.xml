@@ -7,6 +7,7 @@
    <TextView
            android:id="@+id/no_review_books"
            android:visibility="gone"
+           android:textAlignment="center"
            android:paddingLeft="18dp"
            android:textColor="@color/md_grey_900"
            android:layout_width="match_parent"

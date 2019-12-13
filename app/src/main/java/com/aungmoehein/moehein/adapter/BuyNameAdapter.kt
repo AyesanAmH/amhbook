@@ -1,6 +1,7 @@
 package com.aungmoehein.moehein.adapter
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,8 @@ import com.aungmoehein.moehein.R
 import com.aungmoehein.moehein.buy.BuyFragmentDirections
 import com.aungmoehein.moehein.db.Buy
 import com.aungmoehein.moehein.db.MoeHein
+import com.aungmoehein.moehein.review.ReviewFragment
+import kotlinx.android.synthetic.main.details_buy_layout.view.*
 import kotlinx.android.synthetic.main.pop_up_layout.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +32,7 @@ class BuyNameAdapter(context: Context):RecyclerView.Adapter<BuyNameAdapter.BuyVi
         parent: ViewGroup,
         viewType: Int
     ): BuyNameAdapter.BuyViewHolder {
-        return BuyViewHolder(layoutInflater.inflate(R.layout.name_list_layout,parent,false),this)
+        return BuyViewHolder(layoutInflater.inflate(R.layout.name_list_layout,parent,false),this,context)
     }
 
     override fun getItemCount(): Int {
@@ -44,6 +47,8 @@ class BuyNameAdapter(context: Context):RecyclerView.Adapter<BuyNameAdapter.BuyVi
             val builder = AlertDialog.Builder(context)
                 .setView(dialog)
             val alertDialog = builder.show()
+            dialog.pop_up_edit.text = MDetect.getText("ပြင်မည်")
+            dialog.pop_up_delete.text = MDetect.getText("ဖျက်မည်")
             dialog.pop_up_delete.setOnClickListener {
                 alertDialog.dismiss()
                 val scope = CoroutineScope(Dispatchers.IO)
@@ -68,7 +73,7 @@ class BuyNameAdapter(context: Context):RecyclerView.Adapter<BuyNameAdapter.BuyVi
         notifyDataSetChanged()
     }
 
-    class BuyViewHolder(itemView:View,adapter: BuyNameAdapter):RecyclerView.ViewHolder(itemView),View.OnClickListener {
+    class BuyViewHolder(itemView:View,adapter: BuyNameAdapter,val context: Context):RecyclerView.ViewHolder(itemView),View.OnClickListener {
 
         init {
             itemView.setOnClickListener(this)
@@ -79,13 +84,17 @@ class BuyNameAdapter(context: Context):RecyclerView.Adapter<BuyNameAdapter.BuyVi
         val buyListAdapter = adapter
 
         override fun onClick(v: View?) {
-            val buy_details = BuyFragmentDirections.buyDetailAction(
-                buyListAdapter.buy[adapterPosition].title,
-                buyListAdapter.buy[adapterPosition].writer,
-                buyListAdapter.buy[adapterPosition].quantity,
-                buyListAdapter.buy[adapterPosition].comment
-            )
-            Navigation.findNavController(itemView).navigate(buy_details)
+            val dialog = LayoutInflater.from(context).inflate(R.layout.details_buy_layout,null)
+            val builder = AlertDialog.Builder(context).setView(dialog)
+            builder.show()
+            val position = buyListAdapter.buy[adapterPosition]
+            dialog.details_buy_title.text = MDetect.getText("စာအုပ်အမည် - ${position.title}")
+            dialog.details_buy_writer.text = MDetect.getText("စာရေးသူ - ${position.writer}")
+            dialog.details_buy_qty.text = MDetect.getText("အရေအတွက် - ${ReviewFragment().myanNum(position.quantity.toString())}အုပ်")
+            if (buyListAdapter.buy[adapterPosition].comment.isNotEmpty()){
+                dialog.details_buy_comment.visibility = View.VISIBLE
+                dialog.details_buy_comment.text = MDetect.getText("မှတ်ချက်  ။      ။\n${position.comment}")
+            }
         }
 
     }

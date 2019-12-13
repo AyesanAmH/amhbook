@@ -2,6 +2,7 @@ package com.aungmoehein.moehein.poem
 
 
 import android.os.Bundle
+import android.util.Log.i
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import me.myatminsoe.mdetect.MDetect
 import me.myatminsoe.mdetect.Rabbit
+import org.jetbrains.anko.support.v4.toast
 
 /**
  * A simple [Fragment] subclass.
@@ -68,6 +70,15 @@ class  PoemEditFragment : Fragment() {
         edit_poem.setOnClickListener {
             val add_title = roomText(edit_poem_title.text.toString())
             val add_context = roomText(edit_poem_context.text.toString())
+            var formatted_add_context = ""
+            add_context.lines().forEach {
+                if( it.isNotBlank()){
+                    if(formatted_add_context.isEmpty())
+                        formatted_add_context = it
+                    else
+                        formatted_add_context += "\n$it"
+                }
+            }
             val add_writer = roomText(edit_poem_writer.text.toString())
             if(add_title.equals("")){
                 edit_poem_title.hint = MDetect.getText("ခေါင်းစဉ်ရေးပါ")
@@ -80,13 +91,8 @@ class  PoemEditFragment : Fragment() {
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch {
                     val db = MoeHein.getInstance(context!!)
-                    val poem = Poem(id = pid,title = add_title ,context = add_context,writer = add_writer)
-                    val checkConflict = db.poemDao().checkPoemConflict(add_title,add_writer)
-
-                    if(checkConflict == null)
+                    val poem = Poem(id = pid,title = add_title ,context = formatted_add_context,writer = add_writer)
                         db.poemDao().updatePoem(poem)
-                    else
-                        db.poemDao().deletePoem(poem)
                 }
                 activity!!.onBackPressed()
             }

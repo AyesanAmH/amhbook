@@ -1,6 +1,7 @@
 package com.aungmoehein.moehein.review
 
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log.i
 import androidx.fragment.app.Fragment
@@ -24,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_review_add.*
 import kotlinx.coroutines.*
 import me.myatminsoe.mdetect.MDetect
 import me.myatminsoe.mdetect.Rabbit
+import org.jetbrains.anko.hintTextColor
 import java.lang.reflect.Array
 
 /**
@@ -92,14 +94,22 @@ class ReviewAddFragment : Fragment() {
             val rcontext = roomText(review_context.text.toString())
             val fav = fav_check_box.isChecked
 
-            if(rtitle.isEmpty())
+            if(rtitle.isEmpty()){
                 review_title.hint = MDetect.getText("စာအုပ်အမည်ရေးပါ")
-            else if (rwriter.isEmpty())
+                review_title.hintTextColor = Color.RED
+            }
+            else if (rwriter.isEmpty()){
                 read_writer.hint = MDetect.getText("စာရေးသူအမည်ရေးပါ")
-            else if(rcat .isEmpty())
+                read_writer.hintTextColor = Color.RED
+            }
+            else if(rcat .isEmpty()){
                 review_cat.hint = MDetect.getText("စာအုပ်အမျိုးအစားရေးပါ")
-            else if(rcontext .isEmpty())
+                review_cat.hintTextColor = Color.RED
+            }
+            else if(rcontext .isEmpty()){
                 review_context.hint = MDetect.getText("သုံးသပ်ချက်ရေးပါ")
+                review_context.hintTextColor = Color.RED
+            }
             else{
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch {

@@ -11,7 +11,6 @@ import com.aungmoehein.moehein.R
 import com.aungmoehein.moehein.db.MoeHein
 import com.aungmoehein.moehein.db.Read
 import kotlinx.android.synthetic.main.fragment_read_add.*
-import kotlinx.android.synthetic.main.fragment_read_details.*
 import kotlinx.android.synthetic.main.fragment_read_edit.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -79,12 +78,7 @@ class ReadEditFragment : Fragment() {
                 scope.launch {
                     val db = MoeHein.getInstance(context!!)
                     val read = Read(id = eid,title = etitle,writer = ewriter,recom = erecom,comment = ecomment)
-                    val checkConflict = db.readDao().checkConflict(etitle)
-                    if(checkConflict == null)
                         db.readDao().updateRead(read)
-                    else
-                        db.readDao().deleteRead(read)
-
                 }
                 activity!!.onBackPressed()
             }

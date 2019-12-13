@@ -59,7 +59,6 @@ class ReadWriterAdapter(context: Context):RecyclerView.Adapter<ReadWriterAdapter
             }
 
             read = readBook
-            Log.i("books", read.toString())
             val adapter = ReadWriterRecomBookAdapter(context, read)
             holder.writer_book_recycler?.adapter = adapter
             holder.writer_book_recycler?.layoutManager = LinearLayoutManager(

@@ -19,8 +19,7 @@
     </fragment>
     <fragment android:id="@+id/navigation_library" android:name="com.aungmoehein.moehein.LibraryFragment"
               android:label="fragment_library" tools:layout="@layout/fragment_library"/>
-    <fragment android:id="@+id/navigation_account" android:name="com.aungmoehein.moehein.AccountFragment"
-              android:label="fragment_account" tools:layout="@layout/fragment_account"/>
+
     <fragment android:id="@+id/poemListFragment" android:name="com.aungmoehein.moehein.poem.PoemListFragment"
               android:label="Poem List" tools:layout="@layout/fragment_poem_list">
         <action android:id="@+id/poemAddAction" app:destination="@id/poemAddFragment"/>
@@ -66,34 +65,13 @@
         <action
                 android:id="@+id/addBuy"
                 app:destination="@id/addBuyBookFragment2" />
-        <action
-                android:id="@+id/buyDetailAction"
-                app:destination="@id/buyDetailsFragment" />
+
         <action
                 android:id="@+id/buyEditAction"
                 app:destination="@id/buyEditFragment" />
-        <action
-                android:id="@+id/writerbookAction"
-                app:destination="@id/buyWriterBookFragment" />
+
     </fragment>
-    <fragment
-            android:id="@+id/buyDetailsFragment"
-            android:name="com.aungmoehein.moehein.buy.BuyDetailsFragment"
-            android:label="fragment_buy_details"
-            tools:layout="@layout/fragment_buy_details" >
-        <argument
-                android:name="title"
-                app:argType="string" />
-        <argument
-                android:name="writer"
-                app:argType="string" />
-        <argument
-                android:name="quantity"
-                app:argType="long" />
-        <argument
-                android:name="comment"
-                app:argType="string" />
-    </fragment>
+
     <fragment
             android:id="@+id/buyBookFragment"
             android:name="com.aungmoehein.moehein.buy.BuyNameFragment"
@@ -141,15 +119,15 @@
                 android:name="comment"
                 app:argType="string" />
     </fragment>
-    <fragment
-            android:id="@+id/buyWriterBookFragment"
-            android:name="com.aungmoehein.moehein.buy.BuyWriterBookFragment"
-            android:label="fragment_buy_writer_book"
-            tools:layout="@layout/fragment_buy_writer_book" >
-        <argument
-                android:name="buybookwriter"
-                app:argType="string" />
-    </fragment>
+<!--    <fragment-->
+<!--            android:id="@+id/buyWriterBookFragment"-->
+<!--            android:name="com.aungmoehein.moehein.buy.BuyWriterBookFragment"-->
+<!--            android:label="fragment_buy_writer_book"-->
+<!--            tools:layout="@layout/fragment_buy_writer_book" >-->
+<!--        <argument-->
+<!--                android:name="buybookwriter"-->
+<!--                app:argType="string" />-->
+<!--    </fragment>-->
     <fragment
             android:id="@+id/readFragment"
             android:name="com.aungmoehein.moehein.read.ReadFragment"
@@ -161,33 +139,13 @@
         <action
                 android:id="@+id/editAction"
                 app:destination="@id/readEditFragment" />
-        <action
-                android:id="@+id/detailsAction"
-                app:destination="@id/readDetailsFragment" />
     </fragment>
     <fragment
             android:id="@+id/readAddFragment"
             android:name="com.aungmoehein.moehein.read.ReadAddFragment"
             android:label="fragment_read_add"
             tools:layout="@layout/fragment_read_add" />
-    <fragment
-            android:id="@+id/readDetailsFragment"
-            android:name="com.aungmoehein.moehein.read.ReadDetailsFragment"
-            android:label="fragment_read_details"
-            tools:layout="@layout/fragment_read_details" >
-        <argument
-                android:name="title"
-                app:argType="string" />
-        <argument
-                android:name="writer"
-                app:argType="string" />
-        <argument
-                android:name="recom"
-                app:argType="string" />
-        <argument
-                android:name="comment"
-                app:argType="string" />
-    </fragment>
+
     <fragment
             android:id="@+id/readEditFragment"
             android:name="com.aungmoehein.moehein.read.ReadEditFragment"
@@ -220,9 +178,7 @@
         <action
                 android:id="@+id/editAction"
                 app:destination="@id/reviewEditFragment" />
-        <action
-                android:id="@+id/deleteAction"
-                app:destination="@id/reviewDeleteFragment" />
+
         <action
                 android:id="@+id/nameAction"
                 app:destination="@id/reveiwNameFragment" />
@@ -254,11 +210,6 @@
             android:name="com.aungmoehein.moehein.review.ReviewEditFragment"
             android:label="fragment_review_edit"
             tools:layout="@layout/fragment_review_edit" />
-    <fragment
-            android:id="@+id/reviewDeleteFragment"
-            android:name="com.aungmoehein.moehein.review.ReviewDeleteFragment"
-            android:label="fragment_review_delete"
-            tools:layout="@layout/fragment_review_delete" />
     <fragment
             android:id="@+id/reviewCatFragment"
             android:name="com.aungmoehein.moehein.review.ReviewCatFragment"

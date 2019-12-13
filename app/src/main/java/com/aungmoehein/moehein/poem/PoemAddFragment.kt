@@ -1,7 +1,9 @@
 package com.aungmoehein.moehein.poem
 
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log.i
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +20,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import me.myatminsoe.mdetect.MDetect
 import me.myatminsoe.mdetect.Rabbit
+import org.jetbrains.anko.hintTextColor
+import org.jetbrains.anko.support.v4.toast
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -65,21 +69,35 @@ class PoemAddFragment : Fragment() {
         save_poem.setOnClickListener {
             val add_title = roomText(poem_title.text.toString())
             val add_context = roomText(poem_context.text.toString())
+            var formatted_add_context = ""
+            add_context.lines().forEach {
+               if( it.isNotBlank()){
+                   if(formatted_add_context.isEmpty())
+                       formatted_add_context = it
+                   else
+                       formatted_add_context += "\n$it"
+               }
+            }
             val add_writer = roomText(poem_writer.text.toString())
            if(add_title.isEmpty()){
-               poem_title.hint = MDetect.getText("ခေါင်းစဉ်ရေးပါ")
+               poem_title.hint = MDetect.getText("ကဗျာ၊စကားစုအမည်ကိုရေးပါ")
+               poem_title.hintTextColor = Color.RED
            }
-            else if (add_context.isEmpty())
+            else if (add_context.isEmpty()){
                poem_context.hint = MDetect.getText("ကဗျာ/စကားစုကိုရေးပါ")
-            else if(add_writer.isEmpty())
+               poem_context.hintTextColor = Color.RED
+           }
+            else if(add_writer.isEmpty()){
                poem_writer.hint = MDetect.getText("စာရေးသူအမည်ရေးပါ")
+               poem_writer.hintTextColor = Color.RED
+           }
             else{
                val scope = CoroutineScope(Dispatchers.IO)
                scope.launch {
                    val db = MoeHein.getInstance(context!!)
-                   val poem = Poem(title = add_title ,context = add_context,writer = add_writer )
+                   val poem = Poem(title = add_title ,context = formatted_add_context,writer = add_writer )
                    val checkConflict = db.poemDao().checkPoemConflict(add_title,add_writer)
-                   if(checkConflict == null)
+                   if(checkConflict.toString().equals("0") )
                    db.poemDao().insertPoem(poem)
                }
                activity!!.onBackPressed()

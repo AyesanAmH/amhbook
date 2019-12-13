@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.aungmoehein.moehein.R
@@ -37,7 +39,7 @@ class ReadNameFragment : Fragment() {
         val readAdapter = ReadNameAdapter(context!!)
         read_name_recycler.adapter = readAdapter
         read_name_recycler.layoutManager = LinearLayoutManager(context)
-        viewModel.allread.observe(this, Observer { read ->
+        viewModel.allread.observe(this as LifecycleOwner, Observer { read ->
             read?.let { readAdapter.setRead(it)}
         })
     }

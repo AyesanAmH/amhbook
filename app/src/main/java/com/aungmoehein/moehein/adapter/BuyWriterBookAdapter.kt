@@ -13,6 +13,8 @@ import com.aungmoehein.moehein.R
 import com.aungmoehein.moehein.buy.BuyFragmentDirections
 import com.aungmoehein.moehein.db.Buy
 import com.aungmoehein.moehein.db.MoeHein
+import com.aungmoehein.moehein.review.ReviewFragment
+import kotlinx.android.synthetic.main.details_buy_layout.view.*
 import kotlinx.android.synthetic.main.pop_up_layout.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +28,7 @@ class BuyWriterBookAdapter(context: Context, buywriterbooklist: List<Buy>): Recy
     val context = context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BuyWriterBookAdapter.BuyWriterBookViewHolder {
-        return BuyWriterBookViewHolder(layoutInflater.inflate(R.layout.writer_other_list,parent,false),this)
+        return BuyWriterBookViewHolder(layoutInflater.inflate(R.layout.writer_other_list,parent,false),this,context)
     }
 
     override fun getItemCount(): Int {
@@ -41,6 +43,8 @@ class BuyWriterBookAdapter(context: Context, buywriterbooklist: List<Buy>): Recy
             val builder = AlertDialog.Builder(context)
                 .setView(dialog)
             val alertDialog = builder.show()
+            dialog.pop_up_edit.text = MDetect.getText("ပြင်မည်")
+            dialog.pop_up_delete.text = MDetect.getText("ဖျက်မည်")
             dialog.pop_up_delete.setOnClickListener {
                 alertDialog.dismiss()
                 val scope = CoroutineScope(Dispatchers.IO)
@@ -60,7 +64,7 @@ class BuyWriterBookAdapter(context: Context, buywriterbooklist: List<Buy>): Recy
 
 
 
-    class BuyWriterBookViewHolder(itemView: View,adapter: BuyWriterBookAdapter) : RecyclerView.ViewHolder(itemView),View.OnClickListener{
+    class BuyWriterBookViewHolder(itemView: View,adapter: BuyWriterBookAdapter,val context: Context) : RecyclerView.ViewHolder(itemView),View.OnClickListener{
 
         init {
             itemView.setOnClickListener(this)
@@ -71,13 +75,17 @@ class BuyWriterBookAdapter(context: Context, buywriterbooklist: List<Buy>): Recy
         val adapter = adapter
 
         override fun onClick(v: View?) {
-            val buyBooksDetails = BuyFragmentDirections.buyDetailAction(
-                adapter.booklist[adapterPosition].title,
-                adapter.booklist[adapterPosition].writer,
-                adapter.booklist[adapterPosition].quantity,
-                adapter.booklist[adapterPosition].comment
-            )
-            Navigation.findNavController(itemView).navigate(buyBooksDetails)
+            val dialog = LayoutInflater.from(context).inflate(R.layout.details_buy_layout,null)
+            val builder = AlertDialog.Builder(context).setView(dialog)
+            builder.show()
+            dialog.details_buy_title.text = MDetect.getText("စာအုပ်အမည် - "+adapter.booklist[adapterPosition].title)
+            dialog.details_buy_writer.text = MDetect.getText("စာရေးသူ - "+adapter.booklist[adapterPosition].writer)
+            dialog.details_buy_qty.text = MDetect.getText("အရေအတွက် - "+ ReviewFragment().myanNum(adapter.booklist[adapterPosition].quantity.toString())+"အုပ်")
+            if (adapter.booklist[adapterPosition].comment.isNotEmpty()){
+                dialog.details_buy_comment.visibility = View.VISIBLE
+                dialog.details_buy_comment.text = MDetect.getText("မှတ်ချက်  ။      ။\n"+adapter.booklist[adapterPosition].comment)
+            }
+
         }
     }
 }

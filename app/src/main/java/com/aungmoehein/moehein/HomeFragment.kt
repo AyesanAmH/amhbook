@@ -15,9 +15,12 @@ import kotlinx.android.synthetic.main.button_music.*
 import kotlinx.android.synthetic.main.button_poem.*
 import kotlinx.android.synthetic.main.button_review.*
 import kotlinx.android.synthetic.main.button_buy.*
+import kotlinx.android.synthetic.main.fragment_review_add.*
 import kotlinx.android.synthetic.main.poem_top_view.*
 import kotlinx.android.synthetic.main.poem_top_view.poem_title
 import me.myatminsoe.mdetect.MDetect
+import org.jetbrains.anko.support.v4.longToast
+import org.jetbrains.anko.support.v4.toast
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -51,17 +54,32 @@ class HomeFragment : Fragment() {
 
         setText()
 
-
         //random number
         activity = context as MainActivity
         val ran = activity.random
         if(ran.toInt() != 0){
             poem_title.text = MDetect.getText(activity.ptitle)
             poem_content.text = MDetect.getText(activity.pcontext)
+            val count = activity.pcontext.lines().count()
+            val lines = activity.pcontext
+            var content = "$lines"
+            if(count< 4  ){
+                when(count){
+                    1 -> content = "\n$lines\n\n"
+                    2 -> content = "\n$lines\n"
+                    3 -> content = "$lines\n"
+                }
+                poem_content.text = MDetect.getText(content)
+                poem_content.setExpand(true)
+                poem_top_writer.visibility = View.VISIBLE
+                poem_detail.visibility = View.GONE
+            }else
+                poem_content.setExpand(false)
             poem_top_writer.text = MDetect.getText(activity.pwriter)
             poem_detail.text = MDetect.getText(poem_detail.text.toString())
         }
         else{
+            poem_content.setExpand(false)
             poem_title.text = MDetect.getText(poem_title.text.toString())
             poem_content.text = MDetect.getText(poem_content.text.toString())
             poem_top_writer.text = MDetect.getText(poem_top_writer.text.toString())
@@ -101,15 +119,18 @@ class HomeFragment : Fragment() {
 
         //Expandable Text
         poem_detail.setOnClickListener {
-            if (poem_detail.text.equals(MDetect.getText("မူလ"))) {
-                poem_content.setExpand(false)
-                poem_detail.text = MDetect.getText("အပြည့်အစုံ")
-                poem_top_writer.visibility = View.INVISIBLE
-            } else {
-                poem_content.setExpand(true)
-                poem_detail.text = MDetect.getText("မူလ")
-                poem_top_writer.visibility = View.VISIBLE
+            if (poem_detail.visibility != View.GONE){
+                if (poem_detail.text.equals(MDetect.getText("မူလ"))) {
+                    poem_content.setExpand(false)
+                    poem_detail.text = MDetect.getText("အပြည့်အစုံ")
+                    poem_top_writer.visibility = View.INVISIBLE
+                } else {
+                    poem_content.setExpand(true)
+                    poem_detail.text = MDetect.getText("မူလ")
+                    poem_top_writer.visibility = View.VISIBLE
+                }
             }
+
         }
 
 

@@ -31,7 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#4DE4A1"
-                    android:src="@drawable/icon_poem"
+                    android:src="@drawable/ic_emoji_nature_24px"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"
                     app:layout_constraintStart_toStartOf="parent"

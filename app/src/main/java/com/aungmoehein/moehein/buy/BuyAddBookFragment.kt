@@ -1,6 +1,7 @@
 package com.aungmoehein.moehein.buy
 
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log.i
 import androidx.fragment.app.Fragment
@@ -21,6 +22,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import me.myatminsoe.mdetect.MDetect
 import me.myatminsoe.mdetect.Rabbit
+import org.jetbrains.anko.hintTextColor
 import java.util.*
 
 /**
@@ -95,10 +97,13 @@ class BuyAddBookFragment : Fragment() {
 
             if(add_title.isEmpty()){
                 buy_title.hint = MDetect.getText("စာအုပ်အမည်ရေးပါ")
+                buy_title.hintTextColor = Color.RED
             }else if(add_writer.isEmpty()){
                 buy_writer.hint = MDetect.getText("စာရေးသူအမည်ရေးပါ")
+                buy_writer.hintTextColor = Color.RED
             }else if(add_quantity.isEmpty()){
                 buy_quantity.hint = MDetect.getText("စာအုပ်အရေအတွက်ရေးပါ")
+                buy_quantity.hintTextColor = Color.RED
             }
             else{
                 val scope = CoroutineScope(Dispatchers.IO)

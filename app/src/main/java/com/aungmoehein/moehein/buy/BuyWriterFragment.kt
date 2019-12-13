@@ -37,11 +37,11 @@ class BuyWriterFragment : Fragment() {
         recycler.layoutManager = LinearLayoutManager(context)
 
 
-        viewModel.allbuywriter.observe(this, Observer { buywriter ->
+        viewModel.allbuywriter.observe(viewLifecycleOwner, Observer { buywriter ->
             buywriter?.let { buyBookWriterAdapter.setBuyWriter(it) }
         })
 
-        viewModel.allbuy.observe(this, Observer { buywriterbooks ->
+        viewModel.allbuy.observe(viewLifecycleOwner, Observer { buywriterbooks ->
             buywriterbooks?.let { buyBookWriterAdapter.setWriterBook(it) }
         })
 

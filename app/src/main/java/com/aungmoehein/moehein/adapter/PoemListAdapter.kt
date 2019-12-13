@@ -43,6 +43,8 @@ class PoemListAdapter(context: Context):RecyclerView.Adapter<PoemListAdapter.Poe
             val builder = AlertDialog.Builder(context)
                 .setView(dialog)
             val alertDialog = builder.show()
+            dialog.pop_up_edit.text = MDetect.getText("ပြင်မည်")
+            dialog.pop_up_delete.text = MDetect.getText("ဖျက်မည်")
             dialog.pop_up_delete.setOnClickListener {
                 alertDialog.dismiss()
                 val scope = CoroutineScope(Dispatchers.IO)

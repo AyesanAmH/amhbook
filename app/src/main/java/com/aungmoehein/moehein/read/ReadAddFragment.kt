@@ -1,7 +1,9 @@
 package com.aungmoehein.moehein.read
 
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log.i
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +19,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import me.myatminsoe.mdetect.MDetect
 import me.myatminsoe.mdetect.Rabbit
+import org.jetbrains.anko.hintTextColor
 
 /**
  * A simple [Fragment] subclass.
@@ -86,10 +89,14 @@ class ReadAddFragment : Fragment() {
             val add_comment = roomText(read_comment.text.toString())
 
 
-            if(add_title.isEmpty())
+            if(add_title.isEmpty()){
                 read_title.hint = MDetect.getText("စာအုပ်အမည်ရေးပါ")
-            else if (add_writer.isEmpty())
+                read_title.hintTextColor = Color.RED
+            }
+            else if (add_writer.isEmpty()){
                 read_writer.hint = MDetect.getText("စာရေးသူအမည်ရေးပါ")
+                read_writer.hintTextColor = Color.RED
+            }
             else{
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch {
@@ -97,6 +104,8 @@ class ReadAddFragment : Fragment() {
                     val checkConflict = db.readDao().checkConflict(add_title)
                     if(checkConflict == null)
                         db.readDao().insertRead(Read(title = add_title,writer = add_writer,recom = add_recom,comment = add_comment))
+
+
                 }
                 activity!!.onBackPressed()
             }

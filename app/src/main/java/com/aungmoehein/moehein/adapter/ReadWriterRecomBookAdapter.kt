@@ -13,51 +13,51 @@ import com.aungmoehein.moehein.R
 import com.aungmoehein.moehein.db.MoeHein
 import com.aungmoehein.moehein.db.Read
 import com.aungmoehein.moehein.read.ReadFragmentDirections
+import kotlinx.android.synthetic.main.details_read_layout.view.*
 import kotlinx.android.synthetic.main.pop_up_layout.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import me.myatminsoe.mdetect.MDetect
 
-class ReadWriterRecomBookAdapter(context: Context, readList: List<Read>):RecyclerView.Adapter<ReadWriterRecomBookAdapter.ReadWriterViewHolder>(){
+class ReadWriterRecomBookAdapter(val context: Context,val readList: List<Read>):RecyclerView.Adapter<ReadWriterRecomBookAdapter.ReadWriterViewHolder>(){
     private val layoutInflater = LayoutInflater.from(context)
     val db = MoeHein.getInstance(context)
-    val context = context
-    val read = readList
-
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ReadWriterRecomBookAdapter.ReadWriterViewHolder {
-        return ReadWriterViewHolder(layoutInflater.inflate(R.layout.writer_other_list,parent,false),this)
+        return ReadWriterViewHolder(layoutInflater.inflate(R.layout.writer_other_list,parent,false),this,context)
     }
 
     override fun getItemCount(): Int {
-        return read.size
+        return readList.size
     }
 
     override fun onBindViewHolder(
         holder: ReadWriterRecomBookAdapter.ReadWriterViewHolder,
         position: Int
     ) {
-        holder.title.text = MDetect.getText(read[position].title)
+        holder.title.text = MDetect.getText(readList[position].title)
 
         holder.pop_up_btn.setOnClickListener {
             val dialog = LayoutInflater.from(context).inflate(R.layout.pop_up_layout,null)
             val builder = AlertDialog.Builder(context)
                 .setView(dialog)
             val alertDialog = builder.show()
+            dialog.pop_up_edit.text = MDetect.getText("ပြင်မည်")
+            dialog.pop_up_delete.text = MDetect.getText("ဖျက်မည်")
             dialog.pop_up_delete.setOnClickListener {
                 alertDialog.dismiss()
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch {
-                    db.readDao().deleteRead(read[position])
+                    db.readDao().deleteRead(readList[position])
                 }
             }
 
             dialog.pop_up_edit.setOnClickListener {
-                val redit = ReadFragmentDirections.editAction(read[position].id,read[position].title,read[position].writer,read[position].recom,read[position].comment)
+                val redit = ReadFragmentDirections.editAction(readList[position].id,readList[position].title,readList[position].writer,readList[position].recom,readList[position].comment)
                 Navigation.findNavController(holder.pop_up_btn).navigate(redit)
                 alertDialog.dismiss()
 
@@ -66,7 +66,7 @@ class ReadWriterRecomBookAdapter(context: Context, readList: List<Read>):Recycle
     }
 
 
-    class ReadWriterViewHolder(itemView : View, adapter: ReadWriterRecomBookAdapter):RecyclerView.ViewHolder(itemView),View.OnClickListener {
+    class ReadWriterViewHolder(itemView : View,val adapter: ReadWriterRecomBookAdapter,val context: Context):RecyclerView.ViewHolder(itemView),View.OnClickListener {
 
         init {
             itemView.setOnClickListener(this)
@@ -74,17 +74,21 @@ class ReadWriterRecomBookAdapter(context: Context, readList: List<Read>):Recycle
 
         val title = itemView.findViewById<TextView>(R.id.writer_other_title)
         val pop_up_btn = itemView.findViewById<ImageButton>(R.id.pop_up_btn)
-        val adapter = adapter
 
 
         override fun onClick(v: View?) {
-            val readDetails = ReadFragmentDirections.detailsAction(
-                adapter.read[adapterPosition].title,
-                adapter.read[adapterPosition].writer,
-                adapter.read[adapterPosition].recom,
-                adapter.read[adapterPosition].comment
-            )
-            Navigation.findNavController(itemView).navigate(readDetails)
+            val dialog = LayoutInflater.from(context).inflate(R.layout.details_read_layout,null)
+            val builder = AlertDialog.Builder(context).setView(dialog)
+            builder.show()
+            val position = adapter.readList[adapterPosition]
+            dialog.details_read_title.text = MDetect.getText("စာအုပ်အမည် - ${position.title}" )
+            dialog.details_read_writer.text = MDetect.getText("စာရေးသူ - ${position.writer}")
+            if(position.recom.isEmpty())
+                dialog.details_read_recom.visibility = View.GONE
+            dialog.details_read_recom.text = MDetect.getText("အကြံပြုသူ - ${position.recom}")
+            if (position.comment.isEmpty())
+                dialog.details_read_comment.visibility = View.GONE
+            dialog.details_read_comment.text = MDetect.getText("မှတ်ချက်  ။      ။\n${position.comment}")
         }
 
     }
