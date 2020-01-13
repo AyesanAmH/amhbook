@@ -16,6 +16,9 @@
         <action
                 android:id="@+id/reviewAction"
                 app:destination="@id/reviewFragment" />
+        <action
+                android:id="@+id/eventAction"
+                app:destination="@id/eventListFragment" />
     </fragment>
     <fragment android:id="@+id/navigation_library" android:name="com.aungmoehein.moehein.LibraryFragment"
               android:label="fragment_library" tools:layout="@layout/fragment_library"/>
@@ -172,19 +175,11 @@
             android:name="com.aungmoehein.moehein.review.ReviewFragment"
             android:label="fragment_review"
             tools:layout="@layout/fragment_review" >
-        <action
-                android:id="@+id/addAction"
-                app:destination="@id/reviewAddFragment" />
-        <action
-                android:id="@+id/editAction"
-                app:destination="@id/reviewEditFragment" />
+
 
         <action
                 android:id="@+id/nameAction"
                 app:destination="@id/reveiwNameFragment" />
-        <action
-                android:id="@+id/reviewAction"
-                app:destination="@id/reviewWriterFragment" />
         <action
                 android:id="@+id/catAction"
                 app:destination="@id/reviewCatFragment" />
@@ -194,27 +189,77 @@
         <action
                 android:id="@+id/latestAction"
                 app:destination="@id/reviewLatestFragment" />
+        <action
+                android:id="@+id/writerAction"
+                app:destination="@id/reviewWriterFragment" />
+        <action
+                android:id="@+id/addAction"
+                app:destination="@id/reviewAddFragment" />
+        <action
+                android:id="@+id/detailAction"
+                app:destination="@id/reviewDetailFragment" />
+
     </fragment>
     <fragment
             android:id="@+id/reviewWriterFragment"
             android:name="com.aungmoehein.moehein.review.ReviewWriterFragment"
             android:label="fragment_review_writere"
-            tools:layout="@layout/fragment_review_writer" />
+            tools:layout="@layout/fragment_review_writer" >
+        <action
+                android:id="@+id/editAction"
+                app:destination="@id/reviewEditFragment" />
+        <action
+                android:id="@+id/detailAction"
+                app:destination="@id/reviewDetailFragment" />
+    </fragment>
     <fragment
             android:id="@+id/reviewFavFragment"
             android:name="com.aungmoehein.moehein.review.ReviewFavFragment"
             android:label="fragment_review_fav"
-            tools:layout="@layout/fragment_review_fav" />
+            tools:layout="@layout/fragment_review_fav" >
+        <action
+                android:id="@+id/editAction"
+                app:destination="@id/reviewEditFragment" />
+        <action
+                android:id="@+id/detailAction"
+                app:destination="@id/reviewDetailFragment" />
+    </fragment>
     <fragment
             android:id="@+id/reviewEditFragment"
             android:name="com.aungmoehein.moehein.review.ReviewEditFragment"
             android:label="fragment_review_edit"
-            tools:layout="@layout/fragment_review_edit" />
+            tools:layout="@layout/fragment_review_edit" >
+        <argument
+                android:name="id"
+                app:argType="long" />
+        <argument
+                android:name="name"
+                app:argType="string" />
+        <argument
+                android:name="writer"
+                app:argType="string" />
+        <argument
+                android:name="cat"
+                app:argType="string" />
+        <argument
+                android:name="review"
+                app:argType="string" />
+        <argument
+                android:name="fav"
+                app:argType="boolean" />
+    </fragment>
     <fragment
             android:id="@+id/reviewCatFragment"
             android:name="com.aungmoehein.moehein.review.ReviewCatFragment"
             android:label="fragment_review_cat"
-            tools:layout="@layout/fragment_review_cat" />
+            tools:layout="@layout/fragment_review_cat" >
+        <action
+                android:id="@+id/editAction"
+                app:destination="@id/reviewEditFragment" />
+        <action
+                android:id="@+id/detailAction"
+                app:destination="@id/reviewDetailFragment" />
+    </fragment>
     <fragment
             android:id="@+id/reviewAddFragment"
             android:name="com.aungmoehein.moehein.review.ReviewAddFragment"
@@ -222,12 +267,69 @@
             tools:layout="@layout/fragment_review_add" />
     <fragment
             android:id="@+id/reveiwNameFragment"
-            android:name="com.aungmoehein.moehein.review.ReveiwNameFragment"
+            android:name="com.aungmoehein.moehein.review.ReviewNameFragment"
             android:label="fragment_reveiw_name"
-            tools:layout="@layout/fragment_reveiw_name" />
+            tools:layout="@layout/fragment_reveiw_name" >
+        <action
+                android:id="@+id/editAction"
+                app:destination="@id/reviewEditFragment" />
+        <action
+                android:id="@+id/detailAction"
+                app:destination="@id/reviewDetailFragment" />
+    </fragment>
     <fragment
             android:id="@+id/reviewLatestFragment"
             android:name="com.aungmoehein.moehein.review.ReviewLatestFragment"
             android:label="fragment_review_latest"
-            tools:layout="@layout/fragment_review_latest" />
+            tools:layout="@layout/fragment_review_latest" >
+        <action
+                android:id="@+id/detailAction"
+                app:destination="@id/reviewDetailFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/reviewDetailFragment"
+            android:name="com.aungmoehein.moehein.review.ReviewDetailFragment"
+            android:label="fragment_review_detail"
+            tools:layout="@layout/fragment_review_detail" >
+        <argument
+                android:name="id"
+                app:argType="long" />
+        <argument
+                android:name="name"
+                app:argType="string" />
+        <argument
+                android:name="writer"
+                app:argType="string" />
+        <argument
+                android:name="cat"
+                app:argType="string" />
+        <argument
+                android:name="fav"
+                app:argType="boolean" />
+        <argument
+                android:name="review"
+                app:argType="string" />
+    </fragment>
+    <fragment
+            android:id="@+id/eventAddFragment"
+            android:name="com.aungmoehein.moehein.event.EventAddFragment"
+            android:label="Add Event"
+            tools:layout="@layout/fragment_event_add" />
+    <fragment
+            android:id="@+id/eventListFragment"
+            android:name="com.aungmoehein.moehein.event.EventListFragment"
+            android:label="fragment_event_list"
+            tools:layout="@layout/fragment_event_list" >
+        <action
+                android:id="@+id/addAction"
+                app:destination="@id/eventAddFragment" />
+        <action
+                android:id="@+id/editAction"
+                app:destination="@id/eventEditFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/eventEditFragment"
+            android:name="com.aungmoehein.moehein.event.EventEditFragment"
+            android:label="fragment_event_edit"
+            tools:layout="@layout/fragment_event_edit" />
 </navigation>

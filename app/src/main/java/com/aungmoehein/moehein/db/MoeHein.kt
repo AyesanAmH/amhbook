@@ -7,12 +7,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = [Poem::class,Buy::class,Read::class,Review::class],version = 1)
+@Database(entities = [Poem::class,Buy::class,Read::class,Review::class,Event::class],version = 1)
 abstract class MoeHein:RoomDatabase() {
     abstract fun poemDao() : PoemDao
     abstract fun buyDao() : BuyDao
     abstract fun readDao():ReadDao
     abstract fun reviewDao():ReviewDao
+    abstract fun eventDao():EventDao
     companion object {
         private var INSTANCE: MoeHein? = null
         fun getInstance(context: Context): MoeHein {

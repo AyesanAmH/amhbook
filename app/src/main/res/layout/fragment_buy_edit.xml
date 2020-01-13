@@ -66,8 +66,6 @@
                 android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
                 android:maxLines="10"
                 android:minLines="6"
-                android:paddingLeft="14sp"
-                android:paddingRight="14sp"
                 android:scrollbars="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

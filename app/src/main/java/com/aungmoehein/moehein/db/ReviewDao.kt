@@ -39,6 +39,16 @@ interface ReviewDao {
     @Query("select writer from review_table group by writer order by count(writer) desc")
     fun getSugWriter():Array<String>
 
+    @Query("select * from review_table group by name order by name asc")
+    fun getAllReviewName():LiveData<List<Review>>
 
+    @Query("select * from review_table group by writer order by writer asc")
+    fun getAllReviewWriter():LiveData<List<Review>>
+
+    @Query("select * from review_table group by cat order by cat asc")
+    fun getAllReviewCat():LiveData<List<Review>>
+
+    @Query("select * from review_table where favourite = :fav   group by name order by name asc ")
+    fun getAllReviewFav(fav: Boolean):LiveData<List<Review>>
 
 }

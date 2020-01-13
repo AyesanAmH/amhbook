@@ -31,14 +31,12 @@ class   BuyNameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //recycler
         val viewModel = ViewModelProviders.of(this).get(BuyViewModel::class.java)
         val buyBookListAdapter = BuyNameAdapter(context!!)
         recycler.adapter = buyBookListAdapter
         recycler.layoutManager = LinearLayoutManager(context)
-        viewModel.allbuy.observe(this, Observer {buy ->
-            buy?.let { buyBookListAdapter.setBuy(it) }
-        })
+        viewModel.allbuy.observe(viewLifecycleOwner, Observer {buy ->
+            buy?.let { buyBookListAdapter.setBuy(it) } })
     }
 
 

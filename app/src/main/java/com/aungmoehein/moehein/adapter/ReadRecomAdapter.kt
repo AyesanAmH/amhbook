@@ -1,8 +1,6 @@
 package com.aungmoehein.moehein.adapter
 
 import android.content.Context
-import android.util.Log
-import android.util.Log.i
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,19 +14,16 @@ import com.aungmoehein.moehein.db.MoeHein
 import com.aungmoehein.moehein.db.Read
 import me.myatminsoe.mdetect.MDetect
 
-class ReadRecomAdapter(context:Context):RecyclerView.Adapter<ReadRecomAdapter.ReadRecomViewHolder>() {
-    private val layoutInflater = LayoutInflater.from(context)
+class ReadRecomAdapter(val context:Context):RecyclerView.Adapter<ReadRecomAdapter.ReadRecomViewHolder>() {
     private var readRecom =  emptyList<Read>()
     private var readBooks = emptyList<Read>()
-    private var read = mutableListOf<Read>()
     val db = MoeHein.getInstance(context)
-    val context = context
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ReadRecomAdapter.ReadRecomViewHolder {
-        return ReadRecomViewHolder( layoutInflater.inflate(
+        return ReadRecomViewHolder( LayoutInflater.from(context).inflate(
             R.layout.writer_other_list_layout,
             parent,
             false)
@@ -55,21 +50,16 @@ class ReadRecomAdapter(context:Context):RecyclerView.Adapter<ReadRecomAdapter.Re
                 else
                     holder.writer_book_recycler.visibility = View.GONE
 
-                var readBook= mutableListOf<Read>()
+                var read= mutableListOf<Read>()
 
                 readBooks.forEach {
                     if(it.recom == readRecom[position].recom)
-                        readBook.add(it)
+                        read.add(it)
                 }
 
-                read = readBook
-                val adapter = ReadWriterRecomBookAdapter(context, read)
+                val adapter = ReadBookAdapter(context, read)
                 holder.writer_book_recycler?.adapter = adapter
-                holder.writer_book_recycler?.layoutManager = LinearLayoutManager(
-                    holder.writer_book_recycler.context,
-                    RecyclerView.VERTICAL,
-                    false
-                )
+                holder.writer_book_recycler?.layoutManager = LinearLayoutManager(context)
             }
         }
 

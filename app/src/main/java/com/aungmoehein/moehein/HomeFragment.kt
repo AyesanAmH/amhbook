@@ -3,23 +3,28 @@ package com.aungmoehein.moehein
 
 
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log.i
+import android.view.*
+import android.view.GestureDetector
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.Group
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.button_read.*
-import kotlinx.android.synthetic.main.button_lovepresent.*
+import kotlinx.android.synthetic.main.button_event.*
 import kotlinx.android.synthetic.main.button_music.*
 import kotlinx.android.synthetic.main.button_poem.*
 import kotlinx.android.synthetic.main.button_review.*
 import kotlinx.android.synthetic.main.button_buy.*
-import kotlinx.android.synthetic.main.fragment_review_add.*
+import kotlinx.android.synthetic.main.music_player.*
 import kotlinx.android.synthetic.main.poem_top_view.*
 import kotlinx.android.synthetic.main.poem_top_view.poem_title
 import me.myatminsoe.mdetect.MDetect
-import org.jetbrains.anko.support.v4.longToast
+import org.jetbrains.anko.support.v4.find
 import org.jetbrains.anko.support.v4.toast
 
 
@@ -45,8 +50,6 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -63,7 +66,7 @@ class HomeFragment : Fragment() {
             val count = activity.pcontext.lines().count()
             val lines = activity.pcontext
             var content = "$lines"
-            if(count< 4  ){
+            if(count< 5  ){
                 when(count){
                     1 -> content = "\n$lines\n\n"
                     2 -> content = "\n$lines\n"
@@ -112,28 +115,35 @@ class HomeFragment : Fragment() {
 
 
         review_btn.setOnClickListener{
-            val review = HomeFragmentDirections.reviewAction()
-            Navigation.findNavController(it).navigate(review)
+            val action = HomeFragmentDirections.reviewAction()
+            Navigation.findNavController(it).navigate(action)
+        }
+
+
+        event_btn.setOnClickListener {
+            val action = HomeFragmentDirections.eventAction()
+            Navigation.findNavController(it).navigate(action)
         }
 
 
         //Expandable Text
         poem_detail.setOnClickListener {
-            if (poem_detail.visibility != View.GONE){
-                if (poem_detail.text.equals(MDetect.getText("မူလ"))) {
-                    poem_content.setExpand(false)
-                    poem_detail.text = MDetect.getText("အပြည့်အစုံ")
-                    poem_top_writer.visibility = View.INVISIBLE
-                } else {
-                    poem_content.setExpand(true)
-                    poem_detail.text = MDetect.getText("မူလ")
-                    poem_top_writer.visibility = View.VISIBLE
-                }
-            }
-
+           expand()
         }
 
 
+
+        //double touch
+        val detector = GestureDetector(context,DoubleTapDetector(::expand))
+        val touchListener = View.OnTouchListener { v, event ->
+            detector.onTouchEvent(event)
+        }
+
+//        poem_group.setAllOnClickListener(View.OnClickListener {
+//            toast("click")
+//        })
+
+        poem_group.setAllOnTouchlistener(touchListener)
 
     }
 
@@ -147,4 +157,31 @@ class HomeFragment : Fragment() {
         book_btn_text.text = MDetect.getText("ဖတ်မည်")
     }
 
+    fun expand(){
+        if (poem_detail.visibility != View.GONE){
+            if (poem_detail.text.equals(MDetect.getText("မူလ"))) {
+                poem_content.setExpand(false)
+                poem_detail.text = MDetect.getText("အပြည့်အစုံ")
+                poem_top_writer.visibility = View.INVISIBLE
+            } else {
+                poem_content.setExpand(true)
+                poem_detail.text = MDetect.getText("မူလ")
+                poem_top_writer.visibility = View.VISIBLE
+            }
+        }
+
+
+    }
+
+//    fun Group.setAllOnClickListener(listener : View.OnClickListener?){
+//        referencedIds.forEach { id ->
+//            rootView.findViewById<View>(id).setOnClickListener(listener)
+//        }
+//    }
+
+    fun Group.setAllOnTouchlistener(listener: View.OnTouchListener?){
+        referencedIds.forEach { id ->
+            rootView.findViewById<View>(id).setOnTouchListener(listener)
+        }
+    }
 }

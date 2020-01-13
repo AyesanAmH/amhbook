@@ -44,26 +44,18 @@ class PoemListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-        //recycler
         val viewModel = ViewModelProviders.of(this).get(PoemViewModel::class.java)
         val poemListAdapter = PoemListAdapter(context!!)
+
         recycler.adapter = poemListAdapter
         recycler.layoutManager =LinearLayoutManager(context!!)
-        viewModel.allPoems.observe(this, Observer { poems ->
-            poems?.let { poemListAdapter.setPoems(it) }
-        })
+        viewModel.allPoems.observe(viewLifecycleOwner, Observer { poems ->
+            poems?.let { poemListAdapter.setPoems(it) } })
 
 
-        //floating button
         fab.setOnClickListener {
             val poemAdd = PoemListFragmentDirections.poemAddAction()
-            Navigation.findNavController(it).navigate(poemAdd)
-        }
-
-
+            Navigation.findNavController(it).navigate(poemAdd) }
     }
-
 
 }

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
+        android:id="@+id/poem_top_click"
         android:background="@drawable/layout_review"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -27,7 +28,7 @@
             android:id="@+id/poem_content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:paddingStart="32dp"
             android:layout_marginTop="2dp"
             android:layout_marginEnd="8dp"
             android:minLines="4"
@@ -73,5 +74,11 @@
             app:layout_constraintTop_toBottomOf="@+id/poem_content"
             app:layout_constraintVertical_bias="0.39" />
 
+    <androidx.constraintlayout.widget.Group
+            android:id="@+id/poem_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="poem_title,poem_content,poem_detail,poem_top_writer"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

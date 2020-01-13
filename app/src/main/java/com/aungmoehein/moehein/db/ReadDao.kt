@@ -23,7 +23,6 @@ interface ReadDao {
     @Query("select * from read_table where title = :title")
     fun checkConflict(title: String):Read
 
-
     @Query("select * from read_table group by writer order by writer asc")
     fun getAllReadWriter():LiveData<List<Read>>
 

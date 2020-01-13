@@ -19,14 +19,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import me.myatminsoe.mdetect.MDetect
 
-class PoemListAdapter(context: Context):RecyclerView.Adapter<PoemListAdapter.PoemViewHolder>(){
-    private val layoutInflater = LayoutInflater.from(context)
+class PoemListAdapter(val context: Context):RecyclerView.Adapter<PoemListAdapter.PoemViewHolder>(){
     private var poems = emptyList<Poem>()
     val db = MoeHein.getInstance(context)
-    val context = context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PoemListAdapter.PoemViewHolder {
-        return PoemViewHolder(layoutInflater.inflate(R.layout.poem_list_layout,parent,false),this)
+        return PoemViewHolder(LayoutInflater.from(context).inflate(R.layout.poem_list_layout,parent,false),this)
     }
 
     override fun getItemCount(): Int {

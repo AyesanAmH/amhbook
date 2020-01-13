@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 
 import com.aungmoehein.moehein.R
+import com.aungmoehein.moehein.Utils.roomText
 import com.aungmoehein.moehein.db.MoeHein
 import com.aungmoehein.moehein.db.Read
 import com.aungmoehein.moehein.db.Review
@@ -43,49 +44,42 @@ class ReviewAddFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fun roomText(text:String): String {
-            if(MDetect.isUnicode()){
-                return text
-            }
-            return Rabbit.zg2uni(text)
-        }
-
         val scope = CoroutineScope(Dispatchers.IO)
         scope.launch {
             val db = MoeHein.getInstance(context!!)
             val cats = MDetect.getStringArray(db.reviewDao().getAllCat())
             val writer = MDetect.getStringArray(db.reviewDao().getSugWriter())
+
+
             async (Dispatchers.Main){
                 val adapter =   ArrayAdapter<String>(context!!,
                     android.R.layout.simple_dropdown_item_1line,cats)
-                review_cat.setAdapter(adapter)
-                review_cat.threshold = 1
-
                 val writerAdapter = ArrayAdapter<String>(context!!,
                     android.R.layout.simple_dropdown_item_1line,writer)
-                review_writer.setAdapter(writerAdapter)
-                review_writer.threshold = 1
 
-            }
+
+                review_cat.setAdapter(adapter)
+                review_cat.threshold = 1
+                review_writer.setAdapter(writerAdapter)
+                review_writer.threshold = 1 }
+
+
             review_cat.onFocusChangeListener = View.OnFocusChangeListener{
-                view,b ->
-                if(b)
-                    review_cat.showDropDown()
-            }
+                view,b -> if(b) review_cat.showDropDown() }
             review_writer.onFocusChangeListener = View.OnFocusChangeListener{
-                    view,b ->
-                if(b)
-                    review_writer   .showDropDown()
-            }
+                    view,b -> if(b) review_writer   .showDropDown() }
+
         }
 
         review_title.hint = MDetect.getText("စာအုပ်အမည်")
         review_writer.hint = MDetect.getText("စာရေးသူ")
         review_cat.hint = MDetect.getText("စာအုပ်အမျိုးအစား")
         review_context.hint = MDetect.getText("သုံးသပ်ချက်")
+
         fav_check_box.text = MDetect.getText("နှစ်သက်သည့်စာရင်းတွင်ထည့်မည်")
         save_review.text = MDetect.getText("သိမ်းမည်")
         cancel_review.text = MDetect.getText("မသိမ်းတော့ပါ")
+
 
         save_review.setOnClickListener {
             val rtitle = roomText(review_title.text.toString())
@@ -94,40 +88,33 @@ class ReviewAddFragment : Fragment() {
             val rcontext = roomText(review_context.text.toString())
             val fav = fav_check_box.isChecked
 
-            if(rtitle.isEmpty()){
+
+            if(rtitle.isBlank()){
                 review_title.hint = MDetect.getText("စာအုပ်အမည်ရေးပါ")
-                review_title.hintTextColor = Color.RED
-            }
-            else if (rwriter.isEmpty()){
-                read_writer.hint = MDetect.getText("စာရေးသူအမည်ရေးပါ")
-                read_writer.hintTextColor = Color.RED
-            }
-            else if(rcat .isEmpty()){
+                review_title.hintTextColor = Color.RED }
+
+            else if (rwriter.isBlank()){
+                review_writer.hint = MDetect.getText("စာရေးသူအမည်ရေးပါ")
+                review_writer.hintTextColor = Color.RED }
+
+            else if(rcat .isBlank()){
                 review_cat.hint = MDetect.getText("စာအုပ်အမျိုးအစားရေးပါ")
-                review_cat.hintTextColor = Color.RED
-            }
-            else if(rcontext .isEmpty()){
+                review_cat.hintTextColor = Color.RED }
+
+            else if(rcontext .isBlank()){
                 review_context.hint = MDetect.getText("သုံးသပ်ချက်ရေးပါ")
-                review_context.hintTextColor = Color.RED
-            }
+                review_context.hintTextColor = Color.RED }
+
             else{
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch {
                     val db = MoeHein.getInstance(context!!)
                     val checkConflict = db.reviewDao().checkConflict(rtitle)
                    if(checkConflict == null)
-                       db.reviewDao().insertReview(Review(title = rtitle,writer = rwriter,cat = rcat,review = rcontext,fav = fav))
-                    val add = db.reviewDao().getAllCat()
-                }
-                activity!!.onBackPressed()
-            }
+                       db.reviewDao().insertReview(Review(title = rtitle,
+                           writer = rwriter,cat = rcat,review = rcontext, fav = fav)) }
+                activity!!.onBackPressed() }
         }
 
-
-
-        cancel_review.setOnClickListener {
-            activity!!.onBackPressed()
-        }
-    }
-
+        cancel_review.setOnClickListener { activity!!.onBackPressed() } }
 }

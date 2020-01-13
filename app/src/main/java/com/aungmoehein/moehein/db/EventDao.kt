@@ -1,0 +1,19 @@
+package com.aungmoehein.moehein.db
+
+import androidx.lifecycle.LiveData
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+@Dao
+interface EventDao {
+    @Query("select * from event_table")
+    fun getAllEvent():LiveData<List<Event>>
+
+    @Insert
+    fun insertEvent(event: Event)
+
+    @Delete
+    fun deleteEvent(event: Event)
+
+}

@@ -68,8 +68,7 @@ class ReadNameAdapter(val context: Context):RecyclerView.Adapter<ReadNameAdapter
 
     internal fun setRead(read:List<Read>){
         this.read = read
-        notifyDataSetChanged()
-    }
+        notifyDataSetChanged() }
 
     class ReadNameViewHolder(itemView: View, adapter: ReadNameAdapter,val context: Context):RecyclerView.ViewHolder(itemView),View.OnClickListener
     {

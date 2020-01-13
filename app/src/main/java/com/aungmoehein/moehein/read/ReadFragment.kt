@@ -35,17 +35,13 @@ class ReadFragment : Fragment() {
         adapter.addFragment(ReadNameFragment(),MDetect.getText("စာအုပ်"))
         adapter.addFragment(ReadWriterFragment(),MDetect.getText("စာရေးသူ"))
         adapter.addFragment(ReadRecomFragment(),MDetect.getText("အကြံပြုသူ"))
+
         view_pager.adapter = adapter
         tab_layout.setupWithViewPager(view_pager)
 
-
         addRead.setOnClickListener {
             val addRead = ReadFragmentDirections.addRead()
-            Navigation.findNavController(it).navigate(addRead)
-        }
-
-
+            Navigation.findNavController(it).navigate(addRead) }
     }
-
 
 }

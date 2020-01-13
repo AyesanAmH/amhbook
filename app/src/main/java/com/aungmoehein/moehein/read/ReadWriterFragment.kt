@@ -30,21 +30,16 @@ class ReadWriterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val viewModel = ViewModelProviders.of(this).get(ReadViewModel::class.java)
         val readWriterAdapter = ReadWriterAdapter(context!!)
+
         read_recycler.adapter = readWriterAdapter
         read_recycler.layoutManager = LinearLayoutManager(context)
 
-        viewModel.allread.observe(this, Observer { read ->
-            read?.let { readWriterAdapter.setReadWriterBooks(it) }
-        })
-
-       viewModel.allreadwriter.observe(this, Observer { readwriter ->
-           readwriter?.let { readWriterAdapter.setReadWriter(it) }
-       })
-
+        viewModel.allread.observe(viewLifecycleOwner, Observer { read ->
+            read?.let { readWriterAdapter.setReadWriterBooks(it) } })
+        viewModel.allreadwriter.observe(viewLifecycleOwner, Observer { readwriter ->
+           readwriter?.let { readWriterAdapter.setReadWriter(it) } })
     }
-
 
 }

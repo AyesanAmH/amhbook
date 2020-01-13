@@ -34,12 +34,11 @@ class PoemDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val ptitle = PoemDetailFragmentArgs.fromBundle(arguments!!).poemtitle
-        val pcontext = PoemDetailFragmentArgs.fromBundle(arguments!!).poemcontext
-        val pwriter = PoemDetailFragmentArgs.fromBundle(arguments!!).poemWriter
-        poem_detail_title.text = MDetect.getText(ptitle)
-        poem_detail_context.text = MDetect.getText(pcontext)
-        poem_detail_writer.text = MDetect.getText(pwriter)
+
+        val arg = PoemDetailFragmentArgs.fromBundle(arguments!!)
+        poem_detail_title.text = MDetect.getText(arg.poemtitle)
+        poem_detail_context.text = MDetect.getText(arg.poemcontext)
+        poem_detail_writer.text = MDetect.getText(arg.poemWriter)
 
     }
 

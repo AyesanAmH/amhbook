@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.aungmoehein.moehein.R
 import com.aungmoehein.moehein.adapter.ReviewTopAdapter
@@ -34,7 +35,7 @@ class ReviewLatestFragment : Fragment() {
         val reviewAdapter = ReviewTopAdapter(context!!)
         review_latest_recycler.adapter = reviewAdapter
         review_latest_recycler.layoutManager = GridLayoutManager(context,3)
-        viewModel.allreviews.observe(this, Observer { reveiws ->
+        viewModel.allreviews.observe(viewLifecycleOwner, Observer { reveiws ->
             reveiws.let { reviewAdapter.setReview(it) }
         })
 

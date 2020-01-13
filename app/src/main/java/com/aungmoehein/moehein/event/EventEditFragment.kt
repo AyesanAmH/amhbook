@@ -1,4 +1,4 @@
-package com.aungmoehein.moehein.review
+package com.aungmoehein.moehein.event
 
 
 import android.os.Bundle
@@ -12,14 +12,14 @@ import com.aungmoehein.moehein.R
 /**
  * A simple [Fragment] subclass.
  */
-class ReveiwNameFragment : Fragment() {
+class EventEditFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reveiw_name, container, false)
+        return inflater.inflate(R.layout.fragment_event_edit, container, false)
     }
 
 

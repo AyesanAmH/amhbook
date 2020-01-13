@@ -12,6 +12,7 @@ import android.widget.Adapter
 import android.widget.ArrayAdapter
 
 import com.aungmoehein.moehein.R
+import com.aungmoehein.moehein.Utils.roomText
 import com.aungmoehein.moehein.db.Buy
 import com.aungmoehein.moehein.db.MoeHein
 import kotlinx.android.synthetic.main.fragment_add_buy_book.*
@@ -41,19 +42,12 @@ class BuyAddBookFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //ZawNi
-        fun roomText(text:String): String {
-            if(MDetect.isUnicode()){
-                return text
-            }
-            return Rabbit.zg2uni(text)
-        }
-
         val scope = CoroutineScope(Dispatchers.IO)
         scope.launch {
             val db = MoeHein.getInstance(context!!)
             val writer = MDetect.getStringArray(db.buyDao().getSugWriter())
             val qty = db.buyDao().getSugQty()
+
             async(Dispatchers.Main){
                 val writerAdapter = ArrayAdapter<String>(context!!,
                     android.R.layout.simple_dropdown_item_1line,writer)
@@ -63,19 +57,13 @@ class BuyAddBookFragment : Fragment() {
                 val qtyAdapter = ArrayAdapter<Long>(context!!,
                     android.R.layout.simple_dropdown_item_1line,qty)
                 buy_quantity.setAdapter(qtyAdapter)
-                buy_quantity.threshold = 1
-            }
+                buy_quantity.threshold = 1 }
+
 
             buy_writer.onFocusChangeListener = View.OnFocusChangeListener{
-                view,b ->
-                if(b)
-                    buy_writer.showDropDown()
-            }
+                    view,b -> if(b) buy_writer.showDropDown() }
             buy_quantity.onFocusChangeListener = View.OnFocusChangeListener{
-                    view,b ->
-                if(b)
-                    buy_quantity.showDropDown()
-            }
+                    view,b -> if(b) buy_quantity.showDropDown() }
         }
 
         buy_title.hint = MDetect.getText("စာအုပ်အမည်")
@@ -89,39 +77,34 @@ class BuyAddBookFragment : Fragment() {
 
 
         save_buy.setOnClickListener {
-
             val add_title = roomText(buy_title.text.toString())
             val add_writer = roomText(buy_writer.text.toString())
             val add_quantity = roomText(buy_quantity.text.toString())
             val add_comment = roomText(buy_comment.text.toString())
 
-            if(add_title.isEmpty()){
+            if(add_title.isBlank()){
                 buy_title.hint = MDetect.getText("စာအုပ်အမည်ရေးပါ")
-                buy_title.hintTextColor = Color.RED
-            }else if(add_writer.isEmpty()){
+                buy_title.hintTextColor = Color.RED }
+
+            else if(add_writer.isBlank()){
                 buy_writer.hint = MDetect.getText("စာရေးသူအမည်ရေးပါ")
-                buy_writer.hintTextColor = Color.RED
-            }else if(add_quantity.isEmpty()){
+                buy_writer.hintTextColor = Color.RED }
+
+            else if(add_quantity.isBlank()){
                 buy_quantity.hint = MDetect.getText("စာအုပ်အရေအတွက်ရေးပါ")
-                buy_quantity.hintTextColor = Color.RED
-            }
+                buy_quantity.hintTextColor = Color.RED }
+
             else{
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch {
                     val db = MoeHein.getInstance(context!!)
                     val checkConflict = db.buyDao().checkBuyConflict(add_title)
                     if(checkConflict == null)
-                        db.buyDao().insertBuy(Buy(title = add_title,writer = add_writer,quantity = add_quantity.toLong(),comment = add_comment))
-
-                }
-                activity!!.onBackPressed()
-            }
+                        db.buyDao().insertBuy(Buy(title = add_title,writer = add_writer,quantity = add_quantity.toLong(),comment = add_comment)) }
+                activity!!.onBackPressed() }
         }
 
-        //cancel buy
-        cancel_buy.setOnClickListener {
-            activity!!.onBackPressed()
-        }
+        cancel_buy.setOnClickListener { activity!!.onBackPressed() }
 
 
     }

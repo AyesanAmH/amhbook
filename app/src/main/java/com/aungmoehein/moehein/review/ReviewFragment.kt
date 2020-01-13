@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.aungmoehein.moehein.R
+import com.aungmoehein.moehein.Utils.myanNum
 import com.aungmoehein.moehein.adapter.ReviewTopAdapter
 import com.aungmoehein.moehein.db.MoeHein
 import com.aungmoehein.moehein.db.Review
@@ -61,7 +62,7 @@ class ReviewFragment : Fragment() {
         scope.launch {
             val db = MoeHein.getInstance(context!!)
             val qty_name = myanNum(db.reviewDao().countName().toString())
-            val qty_writer= myanNum(db.reviewDao().countWriter().count().toString())
+            val qty_writer = myanNum(db.reviewDao().countWriter().count().toString())
             val qty_cat = myanNum(db.reviewDao().countCat().count().toString())
             val qty_fav = myanNum(db.reviewDao().countFav(true).toString())
 
@@ -69,8 +70,8 @@ class ReviewFragment : Fragment() {
             review_quantity_writer.text = MDetect.getText("အရေအတွက် - $qty_writer")
             review_quantity_cat.text = MDetect.getText("အရေအတွက် - $qty_cat")
             review_quantity_fav.text = MDetect.getText("အရေအတွက် - $qty_fav")
-
         }
+
 
         review_type_name.text = MDetect.getText("စာအုပ်")
         review_type_writer.text = MDetect.getText("စာရေးသူ")
@@ -78,57 +79,56 @@ class ReviewFragment : Fragment() {
         review_type_fav.text = MDetect.getText("နှစ်သက်သော")
 
 
-        review_add.setOnClickListener {
-            val reviewAdd = ReviewFragmentDirections.addAction()
-            Navigation.findNavController(it).navigate(reviewAdd)
-        }
+            review_add.setOnClickListener {
+                val reviewAdd = ReviewFragmentDirections.addAction()
+                Navigation.findNavController(it).navigate(reviewAdd) }
 
-        review_all.setOnClickListener {
-            val reviewAll = ReviewFragmentDirections.latestAction()
-            Navigation.findNavController(it).navigate(reviewAll)
-        }
-
-        val viewModel = ViewModelProviders.of(this).get(ReviewViewModel::class.java)
-        val reviewAdapter = ReviewTopAdapter(context!!)
-        recycler_latest_book.adapter = reviewAdapter
-        recycler_latest_book.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-        viewModel.allreviews.observe(this, Observer { reviews ->
-            reviews?.let { reviewAdapter.setReview(it) }
-            if(reviewAdapter.reviews.isNotEmpty()){
-                review_latest.visibility = View.VISIBLE
-                review_scroll.visibility = View.VISIBLE
-                no_review_books.visibility = View.GONE
-            }else{
-                no_review_books.visibility = View.VISIBLE
-                review_latest.visibility = View.GONE
-                review_scroll.visibility = View.GONE
-            }
-
-        })
-
-    }
+            review_all.setOnClickListener {
+                val reviewAll = ReviewFragmentDirections.latestAction()
+                Navigation.findNavController(it).navigate(reviewAll) }
 
 
-    fun myanNum(num:String):String{
-            val mNum = StringBuilder()
-            num.forEach {
-                when(it){
-                    '0' -> mNum.append("၀")
-                    '1' -> mNum.append("၁")
-                    '2' -> mNum.append(("၂"))
-                    '3' -> mNum.append(("၃"))
-                    '4' -> mNum.append(("၄"))
-                    '5' -> mNum.append(("၅"))
-                    '6'-> mNum.append(("၆"))
-                    '7' -> mNum.append(("၇"))
-                    '8' -> mNum.append(("၈"))
-                    '9' -> mNum.append(("၉"))
+            val viewModel = ViewModelProviders.of(this).get(ReviewViewModel::class.java)
+            val reviewAdapter = ReviewTopAdapter(context!!)
+            recycler_latest_book.adapter = reviewAdapter
+            recycler_latest_book.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+            viewModel.allreviews.observe(viewLifecycleOwner, Observer { reviews ->
+                reviews?.let { reviewAdapter.setReview(it) }
+                if (reviewAdapter.reviews.isNotEmpty()) {
+                    review_latest.visibility = View.VISIBLE
+                    review_scroll.visibility = View.VISIBLE
+                    no_review_books.visibility = View.GONE
+                } else {
+                    no_review_books.visibility = View.VISIBLE
+                    review_latest.visibility = View.GONE
+                    review_scroll.visibility = View.GONE
                 }
+            })
+
+
+            review_name_layout.setOnClickListener {
+                val action = ReviewFragmentDirections.nameAction()
+                Navigation.findNavController(it).navigate(action)
             }
 
-            return mNum.toString()
+            review_writer_layout.setOnClickListener {
+                val action = ReviewFragmentDirections.writerAction()
+                Navigation.findNavController(it).navigate(action)
+            }
 
+            review_cat_layout.setOnClickListener {
+                val action = ReviewFragmentDirections.catAction()
+                Navigation.findNavController(it).navigate(action)
+            }
+
+            review_fav_layout.setOnClickListener {
+                val action = ReviewFragmentDirections.favAction()
+                Navigation.findNavController(it).navigate(action)
+            }
+
+        }
     }
 
 
-}

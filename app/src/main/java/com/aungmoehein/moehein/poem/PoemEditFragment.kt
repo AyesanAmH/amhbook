@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 
 import com.aungmoehein.moehein.R
+import com.aungmoehein.moehein.Utils
+import com.aungmoehein.moehein.Utils.roomText
 import com.aungmoehein.moehein.viewmodel.PoemViewModel
 import com.aungmoehein.moehein.db.Poem
 import com.aungmoehein.moehein.db.MoeHein
@@ -38,14 +40,7 @@ class  PoemEditFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //ZawNi
-        fun roomText(text:String): String {
-            if(MDetect.isUnicode()){
-                return text
-            }
-            return Rabbit.zg2uni(text)
-        }
-
+        val arg = PoemEditFragmentArgs.fromBundle(arguments!!)
 
         //set hint
         edit_poem_title.hint = MDetect.getText("အမည်")
@@ -54,13 +49,9 @@ class  PoemEditFragment : Fragment() {
 
 
         //Set Button Text
-        val pid = PoemEditFragmentArgs.fromBundle(arguments!!).id
-        val ptitle = PoemEditFragmentArgs.fromBundle(arguments!!).title
-        val pcontext = PoemEditFragmentArgs.fromBundle(arguments!!).context
-        val pwriter = PoemEditFragmentArgs.fromBundle(arguments!!).writer
-        edit_poem_title.setText(MDetect.getText(ptitle))
-        edit_poem_context.setText(MDetect.getText(pcontext))
-        edit_poem_writer.setText(MDetect.getText(pwriter))
+        edit_poem_title.setText(MDetect.getText(arg.title))
+        edit_poem_context.setText(MDetect.getText(arg.context))
+        edit_poem_writer.setText(MDetect.getText(arg.writer))
         edit_poem.text = MDetect.getText("ပြင်မည်")
         cancel_poem.text = MDetect.getText("မပြင်တော့ပါ")
 
@@ -68,7 +59,7 @@ class  PoemEditFragment : Fragment() {
 
         //edit poem
         edit_poem.setOnClickListener {
-            val add_title = roomText(edit_poem_title.text.toString())
+            val add_title = Utils.roomText(edit_poem_title.text.toString())
             val add_context = roomText(edit_poem_context.text.toString())
             var formatted_add_context = ""
             add_context.lines().forEach {
@@ -80,29 +71,24 @@ class  PoemEditFragment : Fragment() {
                 }
             }
             val add_writer = roomText(edit_poem_writer.text.toString())
-            if(add_title.equals("")){
+            if(add_title.isBlank()){
                 edit_poem_title.hint = MDetect.getText("ခေါင်းစဉ်ရေးပါ")
             }
-            else if (add_context.equals(""))
+            else if (add_context.isBlank())
                 edit_poem_context.hint = MDetect.getText("ကဗျာ/စကားစုကိုရေးပါ")
-            else if(add_writer.equals(""))
+            else if(add_writer.isBlank())
                 edit_poem_writer.hint = MDetect.getText("စာရေးသူအမည်ရေးပါ")
             else{
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch {
                     val db = MoeHein.getInstance(context!!)
-                    val poem = Poem(id = pid,title = add_title ,context = formatted_add_context,writer = add_writer)
+                    val poem = Poem(id = arg.id,title = add_title ,context = formatted_add_context,writer = add_writer)
                         db.poemDao().updatePoem(poem)
                 }
-                activity!!.onBackPressed()
-            }
-
+                activity!!.onBackPressed() }
         }
 
-        //cancel poem
-        cancel_poem.setOnClickListener {
-            activity!!.onBackPressed()
-        }
+        cancel_poem.setOnClickListener { activity!!.onBackPressed() }
     }
 
 

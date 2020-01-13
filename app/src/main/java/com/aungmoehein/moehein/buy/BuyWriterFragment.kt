@@ -30,21 +30,16 @@ class BuyWriterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val viewModel = ViewModelProviders.of(this).get(BuyViewModel::class.java)
         val buyBookWriterAdapter = BuyWriterAdapter(context!!)
+
         recycler.adapter = buyBookWriterAdapter
         recycler.layoutManager = LinearLayoutManager(context)
 
-
         viewModel.allbuywriter.observe(viewLifecycleOwner, Observer { buywriter ->
-            buywriter?.let { buyBookWriterAdapter.setBuyWriter(it) }
-        })
-
+            buywriter?.let { buyBookWriterAdapter.setBuyWriter(it) } })
         viewModel.allbuy.observe(viewLifecycleOwner, Observer { buywriterbooks ->
-            buywriterbooks?.let { buyBookWriterAdapter.setWriterBook(it) }
-        })
-
+            buywriterbooks?.let { buyBookWriterAdapter.setWriterBook(it) } })
     }
 
 

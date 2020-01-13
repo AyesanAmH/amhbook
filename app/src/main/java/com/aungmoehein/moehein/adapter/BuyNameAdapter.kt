@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.aungmoehein.moehein.R
+import com.aungmoehein.moehein.Utils.myanNum
 import com.aungmoehein.moehein.buy.BuyFragmentDirections
 import com.aungmoehein.moehein.db.Buy
 import com.aungmoehein.moehein.db.MoeHein
@@ -22,10 +23,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import me.myatminsoe.mdetect.MDetect
 
-class BuyNameAdapter(context: Context):RecyclerView.Adapter<BuyNameAdapter.BuyViewHolder>() {
+class BuyNameAdapter(val context: Context):RecyclerView.Adapter<BuyNameAdapter.BuyViewHolder>() {
     private val layoutInflater = LayoutInflater.from(context)
     val db = MoeHein.getInstance(context)
-    val context = context
     private var buy = emptyList<Buy>()
 
     override fun onCreateViewHolder(
@@ -35,9 +35,7 @@ class BuyNameAdapter(context: Context):RecyclerView.Adapter<BuyNameAdapter.BuyVi
         return BuyViewHolder(layoutInflater.inflate(R.layout.name_list_layout,parent,false),this,context)
     }
 
-    override fun getItemCount(): Int {
-        return buy.size
-    }
+    override fun getItemCount(): Int { return buy.size }
 
     override fun onBindViewHolder(holder: BuyNameAdapter.BuyViewHolder, position: Int) {
         holder.title.text = MDetect.getText(buy[position].title)
@@ -73,25 +71,22 @@ class BuyNameAdapter(context: Context):RecyclerView.Adapter<BuyNameAdapter.BuyVi
         notifyDataSetChanged()
     }
 
-    class BuyViewHolder(itemView:View,adapter: BuyNameAdapter,val context: Context):RecyclerView.ViewHolder(itemView),View.OnClickListener {
+    class BuyViewHolder(itemView:View,val adapter: BuyNameAdapter,val context: Context):RecyclerView.ViewHolder(itemView),View.OnClickListener {
 
-        init {
-            itemView.setOnClickListener(this)
-        }
+        init { itemView.setOnClickListener(this) }
 
         val title = itemView.findViewById<TextView>(R.id.title)
         val pop_up_button = itemView.findViewById<ImageButton>(R.id.pop_up_btn)
-        val buyListAdapter = adapter
 
         override fun onClick(v: View?) {
             val dialog = LayoutInflater.from(context).inflate(R.layout.details_buy_layout,null)
             val builder = AlertDialog.Builder(context).setView(dialog)
             builder.show()
-            val position = buyListAdapter.buy[adapterPosition]
+            val position = adapter.buy[adapterPosition]
             dialog.details_buy_title.text = MDetect.getText("စာအုပ်အမည် - ${position.title}")
             dialog.details_buy_writer.text = MDetect.getText("စာရေးသူ - ${position.writer}")
-            dialog.details_buy_qty.text = MDetect.getText("အရေအတွက် - ${ReviewFragment().myanNum(position.quantity.toString())}အုပ်")
-            if (buyListAdapter.buy[adapterPosition].comment.isNotEmpty()){
+            dialog.details_buy_qty.text = MDetect.getText("အရေအတွက် - ${myanNum(position.quantity.toString())}အုပ်")
+            if (adapter.buy[adapterPosition].comment.isNotEmpty()){
                 dialog.details_buy_comment.visibility = View.VISIBLE
                 dialog.details_buy_comment.text = MDetect.getText("မှတ်ချက်  ။      ။\n${position.comment}")
             }

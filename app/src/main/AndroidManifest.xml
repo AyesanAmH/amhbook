@@ -19,6 +19,22 @@
             </intent-filter>
         </activity>
 
+        <receiver android:name=".event.NotificationReceiver"/>
+
+        <receiver android:name=".event.TimeChangedReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.TIME_SET"/>
+            </intent-filter>
+        </receiver>
+
+
+        <receiver android:name=".event.BootCompleteReceiver"
+                android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

@@ -10,4 +10,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="NumberPicker">
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

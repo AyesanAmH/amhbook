@@ -33,15 +33,13 @@ class ReadNameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         val viewModel = ViewModelProviders.of(this).get(ReadViewModel::class.java)
         val readAdapter = ReadNameAdapter(context!!)
+
         read_name_recycler.adapter = readAdapter
         read_name_recycler.layoutManager = LinearLayoutManager(context)
-        viewModel.allread.observe(this as LifecycleOwner, Observer { read ->
-            read?.let { readAdapter.setRead(it)}
-        })
+        viewModel.allread.observe(viewLifecycleOwner, Observer { read ->
+            read?.let { readAdapter.setRead(it)} })
     }
 
 

@@ -31,19 +31,16 @@ class ReadRecomFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val viewModel = ViewModelProviders.of(this).get(ReadViewModel::class.java)
         val readRecomAdapter = ReadRecomAdapter(context!!)
+
         read_recom_recycler.adapter = readRecomAdapter
         read_recom_recycler.layoutManager = LinearLayoutManager(context)
 
-        viewModel.allread.observe(this, Observer { allrecom ->
-            allrecom?.let { readRecomAdapter.setReadWriterBooks(it) }
-        })
-
-        viewModel.allreadrecom.observe(this, Observer { allrebooks ->
-            allrebooks?.let { readRecomAdapter.setRecomWriter(it) }
-        })
+        viewModel.allread.observe(viewLifecycleOwner, Observer { allrecom ->
+            allrecom?.let { readRecomAdapter.setReadWriterBooks(it) } })
+        viewModel.allreadrecom.observe(viewLifecycleOwner, Observer { allrebooks ->
+            allrebooks?.let { readRecomAdapter.setRecomWriter(it) } })
     }
 
 

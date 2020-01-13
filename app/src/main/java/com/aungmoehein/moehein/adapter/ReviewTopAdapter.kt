@@ -5,24 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.aungmoehein.moehein.R
 import com.aungmoehein.moehein.db.MoeHein
 import com.aungmoehein.moehein.db.Review
 import com.aungmoehein.moehein.review.ReviewFragmentDirections
-import kotlinx.android.synthetic.main.review_latest_book.view.*
 import me.myatminsoe.mdetect.MDetect
 
-class ReviewTopAdapter(context: Context):RecyclerView.Adapter<ReviewTopAdapter.ReviewTopHolder>() {
-    private val layoutInflater = LayoutInflater.from(context)
+class ReviewTopAdapter(val context: Context):RecyclerView.Adapter<ReviewTopAdapter.ReviewTopHolder>() {
     private val db = MoeHein.getInstance(context)
     var reviews = emptyList<Review>()
-    val context = context
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ReviewTopAdapter.ReviewTopHolder {
-        return ReviewTopHolder(layoutInflater.inflate(R.layout.review_latest_book,parent,false),this)
+        return ReviewTopHolder(LayoutInflater.from(context).inflate(R.layout.review_latest_book,parent,false),this)
     }
 
     override fun getItemCount(): Int {
@@ -39,12 +37,15 @@ class ReviewTopAdapter(context: Context):RecyclerView.Adapter<ReviewTopAdapter.R
         notifyDataSetChanged()
 
     }
-    class ReviewTopHolder(itemView:View,adapter: ReviewTopAdapter):RecyclerView.ViewHolder(itemView),View.OnClickListener {
+    class ReviewTopHolder(itemView:View,val adapter: ReviewTopAdapter):RecyclerView.ViewHolder(itemView),View.OnClickListener {
         init {
             itemView.setOnClickListener(this)
         }
         override fun onClick(v: View?) {
-
+            val position = adapter.reviews[adapterPosition]
+            val detail = ReviewFragmentDirections.detailAction(position.id,
+                position.title,position.writer,position.cat,position.fav,position.review)
+            Navigation.findNavController(itemView).navigate(detail)
         }
 
         val title  = itemView.findViewById<TextView>(R.id.review_latest_book_name)

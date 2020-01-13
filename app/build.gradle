@@ -72,6 +72,8 @@ dependencies {
     //anko
     implementation "org.jetbrains.anko:anko:0.10.8"
 
+    //card view
+    implementation "androidx.cardview:cardview:1.0.0"
 
 
 }

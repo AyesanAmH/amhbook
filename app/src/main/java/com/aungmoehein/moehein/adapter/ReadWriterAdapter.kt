@@ -1,7 +1,6 @@
 package com.aungmoehein.moehein.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,13 +58,9 @@ class ReadWriterAdapter(context: Context):RecyclerView.Adapter<ReadWriterAdapter
             }
 
             read = readBook
-            val adapter = ReadWriterRecomBookAdapter(context, read)
+            val adapter = ReadBookAdapter(context, read)
             holder.writer_book_recycler?.adapter = adapter
-            holder.writer_book_recycler?.layoutManager = LinearLayoutManager(
-                holder.writer_book_recycler.context,
-                RecyclerView.VERTICAL,
-                false
-            )
+            holder.writer_book_recycler?.layoutManager = LinearLayoutManager(context)
         }
 
     }

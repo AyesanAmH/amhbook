@@ -20,14 +20,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import me.myatminsoe.mdetect.MDetect
 
-class ReadWriterRecomBookAdapter(val context: Context,val readList: List<Read>):RecyclerView.Adapter<ReadWriterRecomBookAdapter.ReadWriterViewHolder>(){
+class ReadBookAdapter(val context: Context, val readList: List<Read>):RecyclerView.Adapter<ReadBookAdapter.ReadWriterViewHolder>(){
     private val layoutInflater = LayoutInflater.from(context)
     val db = MoeHein.getInstance(context)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ReadWriterRecomBookAdapter.ReadWriterViewHolder {
+    ): ReadBookAdapter.ReadWriterViewHolder {
         return ReadWriterViewHolder(layoutInflater.inflate(R.layout.writer_other_list,parent,false),this,context)
     }
 
@@ -36,7 +36,7 @@ class ReadWriterRecomBookAdapter(val context: Context,val readList: List<Read>):
     }
 
     override fun onBindViewHolder(
-        holder: ReadWriterRecomBookAdapter.ReadWriterViewHolder,
+        holder: ReadBookAdapter.ReadWriterViewHolder,
         position: Int
     ) {
         holder.title.text = MDetect.getText(readList[position].title)
@@ -66,7 +66,7 @@ class ReadWriterRecomBookAdapter(val context: Context,val readList: List<Read>):
     }
 
 
-    class ReadWriterViewHolder(itemView : View,val adapter: ReadWriterRecomBookAdapter,val context: Context):RecyclerView.ViewHolder(itemView),View.OnClickListener {
+    class ReadWriterViewHolder(itemView : View, val adapter: ReadBookAdapter, val context: Context):RecyclerView.ViewHolder(itemView),View.OnClickListener {
 
         init {
             itemView.setOnClickListener(this)
@@ -83,10 +83,10 @@ class ReadWriterRecomBookAdapter(val context: Context,val readList: List<Read>):
             val position = adapter.readList[adapterPosition]
             dialog.details_read_title.text = MDetect.getText("စာအုပ်အမည် - ${position.title}" )
             dialog.details_read_writer.text = MDetect.getText("စာရေးသူ - ${position.writer}")
-            if(position.recom.isEmpty())
+            if(position.recom.isBlank())
                 dialog.details_read_recom.visibility = View.GONE
             dialog.details_read_recom.text = MDetect.getText("အကြံပြုသူ - ${position.recom}")
-            if (position.comment.isEmpty())
+            if (position.comment.isBlank())
                 dialog.details_read_comment.visibility = View.GONE
             dialog.details_read_comment.text = MDetect.getText("မှတ်ချက်  ။      ။\n${position.comment}")
         }

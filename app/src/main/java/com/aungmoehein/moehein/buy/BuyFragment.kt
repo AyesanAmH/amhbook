@@ -35,11 +35,9 @@ class BuyFragment : Fragment() {
         view_pager.adapter = adapter
         tab_layout.setupWithViewPager(view_pager)
 
-        //add fragment
         addBuy.setOnClickListener {
            val addBu = BuyFragmentDirections.addBuy()
-            Navigation.findNavController(it).navigate(addBu)
-        }
+            Navigation.findNavController(it).navigate(addBu) }
     }
 
 }
