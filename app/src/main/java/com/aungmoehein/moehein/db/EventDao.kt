@@ -1,10 +1,8 @@
 package com.aungmoehein.moehein.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
+
 @Dao
 interface EventDao {
     @Query("select * from event_table")
@@ -15,5 +13,8 @@ interface EventDao {
 
     @Delete
     fun deleteEvent(event: Event)
+
+    @Update
+    fun updateEvent(event: Event)
 
 }

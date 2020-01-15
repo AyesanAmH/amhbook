@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
  <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_botton"
+            xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_bottom"
             app:startDestination="@id/navigation_home">
 
     <fragment android:id="@+id/navigation_home" android:name="com.aungmoehein.moehein.HomeFragment"
@@ -18,7 +19,7 @@
                 app:destination="@id/reviewFragment" />
         <action
                 android:id="@+id/eventAction"
-                app:destination="@id/eventListFragment" />
+                app:destination="@id/navigation" />
     </fragment>
     <fragment android:id="@+id/navigation_library" android:name="com.aungmoehein.moehein.LibraryFragment"
               android:label="fragment_library" tools:layout="@layout/fragment_library"/>
@@ -310,26 +311,58 @@
                 android:name="review"
                 app:argType="string" />
     </fragment>
-    <fragment
-            android:id="@+id/eventAddFragment"
-            android:name="com.aungmoehein.moehein.event.EventAddFragment"
-            android:label="Add Event"
-            tools:layout="@layout/fragment_event_add" />
-    <fragment
-            android:id="@+id/eventListFragment"
-            android:name="com.aungmoehein.moehein.event.EventListFragment"
-            android:label="fragment_event_list"
-            tools:layout="@layout/fragment_event_list" >
-        <action
-                android:id="@+id/addAction"
-                app:destination="@id/eventAddFragment" />
-        <action
-                android:id="@+id/editAction"
-                app:destination="@id/eventEditFragment" />
-    </fragment>
-    <fragment
-            android:id="@+id/eventEditFragment"
-            android:name="com.aungmoehein.moehein.event.EventEditFragment"
-            android:label="fragment_event_edit"
-            tools:layout="@layout/fragment_event_edit" />
+    <navigation
+            android:id="@+id/navigation"
+            app:startDestination="@id/eventListFragment" >
+        <fragment
+                android:id="@+id/eventListFragment"
+                android:name="com.aungmoehein.moehein.event.EventListFragment"
+                android:label="fragment_event_list"
+                tools:layout="@layout/fragment_event_list">
+            <action
+                    android:id="@+id/addAction"
+                    app:destination="@id/eventAddFragment" />
+            <action
+                    android:id="@+id/editAction"
+                    app:destination="@id/eventEditFragment" />
+        </fragment>
+        <fragment
+                android:id="@+id/eventEditFragment"
+                android:name="com.aungmoehein.moehein.event.EventEditFragment"
+                android:label="fragment_event_edit"
+                tools:layout="@layout/fragment_event_edit">
+            <argument
+                    android:name="id"
+                    app:argType="long" />
+            <argument
+                    android:name="name"
+                    app:argType="string" />
+            <argument
+                    android:name="date"
+                    app:argType="string" />
+            <argument
+                    android:name="time"
+                    app:argType="string" />
+            <argument
+                    android:name="place"
+                    app:argType="string" />
+            <argument
+                    android:name="stralarm"
+                    app:argType="string" />
+            <argument
+                    android:name="mlsalarm"
+                    app:argType="long" />
+            <argument
+                    android:name="mmtime"
+                    app:argType="string" />
+            <argument
+                    android:name="day"
+                    app:argType="long" />
+        </fragment>
+        <fragment
+                android:id="@+id/eventAddFragment"
+                android:name="com.aungmoehein.moehein.event.EventAddFragment"
+                android:label="Add Event"
+                tools:layout="@layout/fragment_event_add" />
+    </navigation>
 </navigation>

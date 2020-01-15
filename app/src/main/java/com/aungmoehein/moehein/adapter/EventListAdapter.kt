@@ -8,11 +8,13 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.aungmoehein.moehein.DoubleTapDetector
 import com.aungmoehein.moehein.R
 import com.aungmoehein.moehein.db.Event
 import com.aungmoehein.moehein.db.MoeHein
+import com.aungmoehein.moehein.event.EventListFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,15 +40,27 @@ class EventListAdapter(val context: Context) : RecyclerView.Adapter<EventListAda
         val position = events[position]
         holder.name.text = MDetect.getText(position.name)
         holder.date.text = MDetect.getText(position.date)
-        holder.time.text = MDetect.getText(position.time)
+        holder.time.text = MDetect.getText(position.mmtime)
         holder.place.text = MDetect.getText(position.place)
         holder.alarm.text = position.strAlarm
 
+
         val scope = CoroutineScope(Dispatchers.IO)
         holder.event_delete.setOnClickListener {
+            holder.place_layout.visibility = View.GONE
+            holder.alarm_layout.visibility = View.GONE
+            holder.event_edit.visibility = View.GONE
+            holder.event_delete.visibility = View.GONE
             scope.launch {
                 db.eventDao().deleteEvent(position)
             }
+        }
+
+        holder.event_edit.setOnClickListener {
+           val action = EventListFragmentDirections.editAction(position.id,
+               position.name,position.date,position.time,position.place,position.strAlarm,
+               position.mlsAlarm,position.mmtime,position.day.toLong())
+            Navigation.findNavController(it).navigate(action)
         }
 
 
@@ -97,10 +111,6 @@ class EventListAdapter(val context: Context) : RecyclerView.Adapter<EventListAda
                 event_edit.visibility = View.GONE
                 event_delete.visibility = View.GONE }
         }
-        fun Group.setAllOnTouchlistener(listener: View.OnTouchListener?){
-            referencedIds.forEach { id ->
-                rootView.findViewById<View>(id).setOnTouchListener(listener)
-            }
-        }
+
     }
 }
