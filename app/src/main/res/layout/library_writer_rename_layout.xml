@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+
+    <TextView
+            android:id="@+id/rename_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Rename"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+            android:id="@+id/rename_shelf"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/layout_add_edit_text"
+            android:selectAllOnFocus="true"
+            android:text="Shelf Name"
+            android:paddingStart="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rename_title" />
+
+    <Button
+            android:id="@+id/rename_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CANCEL"
+            app:layout_constraintEnd_toStartOf="@+id/rename_save"
+            app:layout_constraintTop_toBottomOf="@+id/rename_shelf" />
+
+    <Button
+            android:id="@+id/rename_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:text="OK"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rename_shelf" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

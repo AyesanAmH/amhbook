@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 
 import com.aungmoehein.moehein.R
 import com.aungmoehein.moehein.Utils
+import com.aungmoehein.moehein.Utils.roomText
 import com.aungmoehein.moehein.db.Event
 import com.aungmoehein.moehein.db.MoeHein
 import kotlinx.android.synthetic.main.event_remainder_day.view.*
@@ -53,21 +54,33 @@ class EventEditFragment : Fragment() {
 
         val args = EventEditFragmentArgs.fromBundle(arguments!!)
         var id = args.id
-        var name = args.name
-        var time = args.time
+        val name = args.name
+        val time = args.time
         var mmtime = args.mmtime
-        var event_day = args.day
+        val event_day = args.day
         var date = args.date
-        var place = args.place
-        var stralarm = args.stralarm
+        val place = args.place
+        val stralarm = args.stralarm
         var mlsalarm = args.mlsalarm
 
+        //save values
+        var save_edit_name = roomText(name)
+        var save_edit_time = roomText(time)
+        var save_edit_mm_time = roomText(mmtime)
+        var save_edit_event_day = event_day
+        var save_edit_date = roomText(date)
+        var save_edit_place = roomText(place)
+        var save_edit_stralarm = roomText(stralarm)
+        var save_edit_mlsalarm = mlsalarm
 
-        //set date
+        i("alarm","$mlsalarm")
+
+
+//        //set date
         event_edit_calendar.date = event_day
-        event_edit_name.setText(name)
+        event_edit_name.setText(MDetect.getText(name))
         event_edit_time.text = time
-        event_edit_place.setText(place)
+        event_edit_place.setText(MDetect.getText(place))
         event_edit_remainder.text = stralarm
 
 
@@ -194,10 +207,10 @@ class EventEditFragment : Fragment() {
 
                 dialog.event_remainder_save.setOnClickListener {
 
-//                    if(event_remainder_calendar.timeInMillis < Calendar.getInstance().timeInMillis)
-//                        EventUtils.expired_alarm(context!!)
-//
-//                    else{
+                    if(event_remainder_calendar.timeInMillis < Calendar.getInstance().timeInMillis)
+                        EventUtils.expired_alarm(context!!)
+
+                    else{
                         val namedMonth= event_remainder_calendar.getDisplayName(
                             Calendar.MONTH, Calendar.LONG, Locale.getDefault())
 
@@ -213,7 +226,7 @@ class EventEditFragment : Fragment() {
                         check_alarm_time = false
                         alertDialog.dismiss()
 
-
+                    }
                 }
             }
         }
@@ -224,8 +237,8 @@ class EventEditFragment : Fragment() {
         event_edit_save.setOnClickListener {
 
             //save name and place
-            val save_name = event_edit_name.text.toString()
-            val save_place = event_edit_place.text.toString()
+            val save_name =Utils.roomText(event_edit_name.text.toString())
+            val save_place = Utils.roomText(event_edit_place.text.toString())
 
 
             //save date
@@ -281,17 +294,27 @@ class EventEditFragment : Fragment() {
                 event_place.hintTextColor = Color.RED }
 
             else{
-                if(check_alarm_time)
-                    save_str_alarm = MDetect.getText("ကြိုတင်အသိပေးချိန်သတ်မှတ်ထားခြင်းမရှိပါ")
+//                if(check_alarm_time)
+//                    save_str_alarm = MDetect.getText("ကြိုတင်အသိပေးချိန်သတ်မှတ်ထားခြင်းမရှိပါ")
 
                 //no check conflict (event like DevCon)
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch {
                     val db = MoeHein.getInstance(context!!)
-                    val event = Event(id = args.id,name = save_name, day = event_day_calendar.timeInMillis,time = EventUtils.showTime(event_day_calendar), mmtime = save_time, date = save_date,place = save_place,strAlarm = save_str_alarm, mlsAlarm = event_remainder_calendar.timeInMillis)
+                    save_edit_name = save_name
+                    save_edit_event_day = event_day_calendar.timeInMillis
+                    save_edit_time = roomText( EventUtils.showTime(event_day_calendar))
+                    save_edit_mm_time = save_time
+                    save_edit_date = save_date
+                    save_edit_place = save_place
+                    save_edit_stralarm = save_str_alarm
+                    save_edit_mlsalarm = event_remainder_calendar.timeInMillis
+                    val event = Event(id = args.id,name = save_edit_name, day = save_edit_event_day,time =save_edit_time, mmtime =save_edit_mm_time , date = save_edit_date ,place = save_edit_place,strAlarm = save_edit_stralarm, mlsAlarm = save_edit_mlsalarm,setAlarm = false)
                     db.eventDao().updateEvent(event)
+//
                 }
                 activity!!.onBackPressed()
+
             }
         }
 

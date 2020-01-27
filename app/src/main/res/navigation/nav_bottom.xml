@@ -5,9 +5,14 @@
         android:id="@+id/nav_bottom"
             app:startDestination="@id/navigation_home">
 
-    <fragment android:id="@+id/navigation_home" android:name="com.aungmoehein.moehein.HomeFragment"
-              android:label="Moe Hein" tools:layout="@layout/fragment_home">
-        <action android:id="@+id/poemListAction" app:destination="@id/poemListFragment"/>
+    <fragment
+            android:id="@+id/navigation_home"
+            android:name="com.aungmoehein.moehein.HomeFragment"
+            android:label="Book Info"
+            tools:layout="@layout/fragment_home">
+        <action
+                android:id="@+id/poemListAction"
+                app:destination="@id/poemListFragment" />
         <action
                 android:id="@+id/buyAction"
                 app:destination="@id/buyFragment" />
@@ -21,8 +26,12 @@
                 android:id="@+id/eventAction"
                 app:destination="@id/navigation" />
     </fragment>
-    <fragment android:id="@+id/navigation_library" android:name="com.aungmoehein.moehein.LibraryFragment"
-              android:label="fragment_library" tools:layout="@layout/fragment_library"/>
+    <fragment android:id="@+id/navigation_library" android:name="com.aungmoehein.moehein.library.LibraryFragment"
+              android:label="fragment_library" tools:layout="@layout/fragment_library">
+        <action
+                android:id="@+id/writerBookAction"
+                app:destination="@id/libraryWriterBookFragment" />
+    </fragment>
 
     <fragment android:id="@+id/poemListFragment" android:name="com.aungmoehein.moehein.poem.PoemListFragment"
               android:label="Poem List" tools:layout="@layout/fragment_poem_list">
@@ -76,29 +85,6 @@
 
     </fragment>
 
-    <fragment
-            android:id="@+id/buyBookFragment"
-            android:name="com.aungmoehein.moehein.buy.BuyNameFragment"
-            android:label="fragment_buy_book"
-            tools:layout="@layout/fragment_buy_book" />
-    <fragment
-            android:id="@+id/buyWriterFragment"
-            android:name="com.aungmoehein.moehein.buy.BuyWriterFragment"
-            android:label="fragment_buy_writer"
-            tools:layout="@layout/fragment_buy_writer" >
-        <argument
-                android:name="title"
-                app:argType="string" />
-        <argument
-                android:name="writer"
-                app:argType="string" />
-        <argument
-                android:name="quantity"
-                app:argType="long" />
-        <argument
-                android:name="comment"
-                app:argType="string" />
-    </fragment>
     <fragment
             android:id="@+id/addBuyBookFragment2"
             android:name="com.aungmoehein.moehein.buy.BuyAddBookFragment"
@@ -318,19 +304,27 @@
                 android:id="@+id/eventListFragment"
                 android:name="com.aungmoehein.moehein.event.EventListFragment"
                 android:label="fragment_event_list"
-                tools:layout="@layout/fragment_event_list">
+                tools:layout="@layout/fragment_event_list" >
             <action
                     android:id="@+id/addAction"
                     app:destination="@id/eventAddFragment" />
             <action
                     android:id="@+id/editAction"
                     app:destination="@id/eventEditFragment" />
+            <action
+                    android:id="@+id/expireAction"
+                    app:destination="@id/eventExpireFragment" />
         </fragment>
+        <fragment
+                android:id="@+id/eventAddFragment"
+                android:name="com.aungmoehein.moehein.event.EventAddFragment"
+                android:label="fragment_event_add"
+                tools:layout="@layout/fragment_event_add" />
         <fragment
                 android:id="@+id/eventEditFragment"
                 android:name="com.aungmoehein.moehein.event.EventEditFragment"
                 android:label="fragment_event_edit"
-                tools:layout="@layout/fragment_event_edit">
+                tools:layout="@layout/fragment_event_edit" >
             <argument
                     android:name="id"
                     app:argType="long" />
@@ -338,10 +332,16 @@
                     android:name="name"
                     app:argType="string" />
             <argument
+                    android:name="day"
+                    app:argType="long" />
+            <argument
                     android:name="date"
                     app:argType="string" />
             <argument
                     android:name="time"
+                    app:argType="string" />
+            <argument
+                    android:name="mmtime"
                     app:argType="string" />
             <argument
                     android:name="place"
@@ -352,17 +352,55 @@
             <argument
                     android:name="mlsalarm"
                     app:argType="long" />
-            <argument
-                    android:name="mmtime"
-                    app:argType="string" />
-            <argument
-                    android:name="day"
-                    app:argType="long" />
         </fragment>
         <fragment
-                android:id="@+id/eventAddFragment"
-                android:name="com.aungmoehein.moehein.event.EventAddFragment"
-                android:label="Add Event"
-                tools:layout="@layout/fragment_event_add" />
+                android:id="@+id/eventExpireFragment"
+                android:name="com.aungmoehein.moehein.event.EventExpireFragment"
+                android:label="fragment_event_expire"
+                tools:layout="@layout/fragment_event_expire" >
+            <action
+                    android:id="@+id/editAction"
+                    app:destination="@id/eventEditFragment" />
+        </fragment>
     </navigation>
+    <fragment
+            android:id="@+id/libraryBookAddFragment"
+            android:name="com.aungmoehein.moehein.library.LibraryBookAddFragment"
+            android:label="LibraryBookAddFragment" >
+        <argument
+                android:name="name"
+                app:argType="string" />
+    </fragment>
+    <fragment
+            android:id="@+id/libraryWriterBookFragment"
+            android:name="com.aungmoehein.moehein.library.LibraryWriterBookFragment"
+            android:label="LibraryWriterBookFragment" >
+        <action
+                android:id="@+id/addAction"
+                app:destination="@id/libraryBookAddFragment" />
+        <argument
+                android:name="name"
+                app:argType="string" />
+        <action
+                android:id="@+id/editAction"
+                app:destination="@id/libraryBookEditFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/libraryBookEditFragment"
+            android:name="com.aungmoehein.moehein.library.LibraryBookEditFragment"
+            android:label="fragment_library_book_edit"
+            tools:layout="@layout/fragment_library_book_edit" >
+        <argument
+                android:name="id"
+                app:argType="long" />
+        <argument
+                android:name="name"
+                app:argType="string" />
+        <argument
+                android:name="writer"
+                app:argType="string" />
+        <argument
+                android:name="cat"
+                app:argType="string" />
+    </fragment>
 </navigation>

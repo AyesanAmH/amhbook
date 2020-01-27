@@ -1,13 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@color/md_white_1000"
-             tools:context=".LibraryFragment">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".library.LibraryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-<!--    <include layout="@layout/music_player"> </include>-->
+    <TextView
+            android:id="@+id/shelf_names"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Book Shelves"
+            android:textColor="@color/md_black_1000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/add_shelf_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+            android:id="@+id/add_shelf_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginEnd="24dp"
+            android:background="#fff"
+            android:src="@drawable/ic_library_add_black_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shelf_names">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,10 +32,11 @@ class ReviewDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val arg = ReviewDetailFragmentArgs.fromBundle(arguments!!)
-
+        val writer = arg.writer
+        val cat = arg.cat
         review_detail_name.text = MDetect.getText(arg.name)
-        review_detail_writer.text = MDetect.getText(arg.writer)
-        review_detail_cat.text = MDetect.getText(arg.cat)
+        review_detail_writer.text = MDetect.getText("စာရေးသူ - $writer")
+        review_detail_cat.text = MDetect.getText("စာပေအမျိုးအစား - $cat")
         review_detail_context.text = MDetect.getText(arg.review)
         review_detail_fav.setImageResource(R.drawable.home_24px)
         if (arg.fav)

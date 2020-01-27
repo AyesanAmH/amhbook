@@ -10,7 +10,7 @@
     <item
             android:id="@+id/navigation_library"
             android:icon="@drawable/local_library_24px"
-            android:title="@string/title_dashboard"
+            android:title="Library"
             />
 
 

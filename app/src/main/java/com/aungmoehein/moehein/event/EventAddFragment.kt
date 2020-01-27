@@ -8,10 +8,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.annotation.RestrictTo
 import androidx.appcompat.app.AlertDialog
 
 import com.aungmoehein.moehein.R
+import com.aungmoehein.moehein.Utils
 import com.aungmoehein.moehein.Utils.myanNum
 import com.aungmoehein.moehein.db.Event
 import com.aungmoehein.moehein.db.MoeHein
@@ -30,6 +32,7 @@ import kotlinx.android.synthetic.main.fragment_event_add.event_place
 import kotlinx.android.synthetic.main.fragment_event_add.event_time
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import me.myatminsoe.mdetect.MDetect
 import org.jetbrains.anko.hintTextColor
@@ -62,6 +65,29 @@ class EventAddFragment : Fragment() {
 
         event_save.text = MDetect.getText("သိမ်းမည်")
         event_cancel.text = MDetect.getText("မသိမ်းတော့ပါ")
+
+        val scope = CoroutineScope(Dispatchers.IO)
+        scope.launch {
+            val db = MoeHein.getInstance(context!!)
+            val name = MDetect.getStringArray(db.eventDao().getSugName())
+            val place  = MDetect.getStringArray(db.eventDao().getSugPlace())
+
+            async(Dispatchers.Main){
+                val nameAdapter = ArrayAdapter<String>(context!!,
+                    android.R.layout.simple_dropdown_item_1line,name)
+                event_name.setAdapter(nameAdapter)
+                event_name.threshold = 1
+                event_name.onFocusChangeListener = View.OnFocusChangeListener {
+                        v, hasFocus -> if(hasFocus) event_name.showDropDown()  }
+
+                val placeAdapter = ArrayAdapter<String>(context!!,
+                    android.R.layout.simple_dropdown_item_1line,place)
+                event_place.setAdapter(placeAdapter)
+                event_place.threshold = 1
+                event_place.onFocusChangeListener = View.OnFocusChangeListener {
+                        v, hasFocus -> if(hasFocus) event_place.showDropDown() }
+            }
+        }
 
 
         //declare variables
@@ -146,7 +172,6 @@ class EventAddFragment : Fragment() {
 
                 //days before event
                 var day = 1
-                i("day",day.toString())
                 var diffDays = (event_day_calendar.timeInMillis - current_calendar.timeInMillis)/ (24*60*60*1000)
                 while (diffDays>0){
                     days.add(MDetect.getText("${myanNum(day.toString())}ရက်အလို"))
@@ -203,7 +228,6 @@ class EventAddFragment : Fragment() {
                         event_remainder.text = "$show_remaind_day ($namedMonth - ${showTime(event_remainder_calendar)})"
                         event_remainder.textColor = Color.BLACK
 
-                        AlarmUtils.setAlarm(context!!,event_remainder_calendar.timeInMillis)
 
                         event_remainder_clear.visibility = View.VISIBLE
                         check_alarm_time = false
@@ -263,6 +287,7 @@ class EventAddFragment : Fragment() {
                     "${event_remainder_calendar.get(Calendar.YEAR)}"
 
             var save_str_alarm = "$save_remaind_day ($namedMonth - ${showTime(event_remainder_calendar)})"
+            var save_alarm:Long = 0
 
 
 
@@ -281,12 +306,15 @@ class EventAddFragment : Fragment() {
             else{
                 if(check_alarm_time)
                     save_str_alarm = MDetect.getText("ကြိုတင်အသိပေးချိန်သတ်မှတ်ထားခြင်းမရှိပါ")
+                else
+                    save_alarm = event_remainder_calendar.timeInMillis
 
-                //no check conflict (event like DevCon)
+
+                //no check conflict (event like Barcamp)
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch {
                     val db = MoeHein.getInstance(context!!)
-                    val event = Event(name = save_name, day = event_day_calendar.timeInMillis,time = showTime(event_day_calendar), mmtime = save_time, date = save_date,place = save_place,strAlarm = save_str_alarm, mlsAlarm = event_remainder_calendar.timeInMillis)
+                    val event = Event(name = Utils.roomText(save_name), day = event_day_calendar.timeInMillis,time = showTime(event_day_calendar), mmtime = save_time, date = save_date,place = Utils.roomText(save_place),strAlarm = save_str_alarm, mlsAlarm = save_alarm,setAlarm = false)
                     db.eventDao().insertEvent(event)
                 }
                 activity!!.onBackPressed()

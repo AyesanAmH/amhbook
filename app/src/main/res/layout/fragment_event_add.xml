@@ -41,7 +41,7 @@
                         android:layout_gravity="center"
                         android:src="@drawable/ic_vpn_key_black_24dp" />
 
-                <EditText
+                <AutoCompleteTextView
                         android:id="@+id/event_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
                         android:layout_marginStart="16dp"
                         android:src="@drawable/ic_museum_24px" />
 
-                <EditText
+                <AutoCompleteTextView
                         android:id="@+id/event_place"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

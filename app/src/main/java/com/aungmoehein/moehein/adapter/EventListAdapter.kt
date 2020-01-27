@@ -12,8 +12,10 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.aungmoehein.moehein.DoubleTapDetector
 import com.aungmoehein.moehein.R
+import com.aungmoehein.moehein.Utils
 import com.aungmoehein.moehein.db.Event
 import com.aungmoehein.moehein.db.MoeHein
+import com.aungmoehein.moehein.event.AlarmUtils
 import com.aungmoehein.moehein.event.EventListFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,11 +40,24 @@ class EventListAdapter(val context: Context) : RecyclerView.Adapter<EventListAda
 
     override fun onBindViewHolder(holder: EventListAdapter.EventViewHolder, position: Int) {
         val position = events[position]
-        holder.name.text = MDetect.getText(position.name)
-        holder.date.text = MDetect.getText(position.date)
-        holder.time.text = MDetect.getText(position.mmtime)
-        holder.place.text = MDetect.getText(position.place)
-        holder.alarm.text = position.strAlarm
+            holder.name.text = MDetect.getText(position.name)
+            holder.date.text = MDetect.getText(position.date)
+            holder.time.text = MDetect.getText(position.mmtime)
+            holder.place.text = MDetect.getText(position.place)
+            holder.alarm.text = position.strAlarm
+
+        if (!position.setAlarm){
+            val scope = CoroutineScope(Dispatchers.IO)
+            val event = Event(id = position.id,
+                name = position.name,day = position.day,date = position.date,time = position.time,mmtime = position.mmtime,
+                place = position.place,strAlarm = position.strAlarm,mlsAlarm = position.mlsAlarm,setAlarm = true)
+            scope.launch {
+                val db = MoeHein.getInstance(context)
+                db.eventDao().updateEvent(event)
+            }
+            AlarmUtils.setAlarm(context,position.mlsAlarm,position.id.toInt())
+        }
+
 
 
         val scope = CoroutineScope(Dispatchers.IO)
@@ -53,13 +68,14 @@ class EventListAdapter(val context: Context) : RecyclerView.Adapter<EventListAda
             holder.event_delete.visibility = View.GONE
             scope.launch {
                 db.eventDao().deleteEvent(position)
+                AlarmUtils.cancelAlarm(context,position.id.toInt())
             }
         }
 
         holder.event_edit.setOnClickListener {
            val action = EventListFragmentDirections.editAction(position.id,
-               position.name,position.date,position.time,position.place,position.strAlarm,
-               position.mlsAlarm,position.mmtime,position.day.toLong())
+               position.name,position.day,position.date,position.time,position.mmtime,
+               position.place,position.strAlarm,position.mlsAlarm)
             Navigation.findNavController(it).navigate(action)
         }
 
@@ -97,7 +113,8 @@ class EventListAdapter(val context: Context) : RecyclerView.Adapter<EventListAda
             return true
         }
 
-        internal fun expand(){
+        private
+        fun expand(){
             if(place_layout.visibility == View.GONE){
                 place_layout.visibility = View.VISIBLE
                 alarm_layout.visibility = View.VISIBLE

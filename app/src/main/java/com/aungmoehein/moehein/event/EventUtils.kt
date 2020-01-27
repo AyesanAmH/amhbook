@@ -9,29 +9,29 @@ object EventUtils {
 
     fun mDay(day:String):String{
         return when(day){
-            "2" -> MDetect.getText("တနင်္လာ")
-            "3" -> MDetect.getText("အင်္ဂါ")
-            "4" -> MDetect.getText("ဗုဒ္ဓဟူး")
-            "5" -> MDetect.getText("ကြာသပတေး")
-            "6" -> MDetect.getText("သောကြာ")
-            "7" -> MDetect.getText("စ နေ")
-            "1" -> MDetect.getText("တနင်္ဂနွေ")
+            "2" -> "တနင်္လာ"
+            "3" -> "အင်္ဂါ"
+            "4" -> "ဗုဒ္ဓဟူး"
+            "5" -> "ကြာသပ တေး"
+            "6" -> "သောကြာ"
+            "7" -> "စ နေ"
+            "1" -> "တနင်္ဂနွေ"
             else -> ""
         }
     }
 
     fun mAMPM(hour:Int):String{
         if(hour >= 3 && hour <= 10)
-            return MDetect.getText("နံနက်")
+            return "နံနက်"
 
         else if(hour >= 11 && hour <= 14)
-            return MDetect.getText("နေ့လယ်")
+            return "နေ့လယ်"
 
         else if(hour >= 15 && hour <=18 )
-            return MDetect.getText("ည နေ")
+            return "ည နေ"
 
         else if(hour <= 2 || (hour >= 19 && hour <= 23))
-            return MDetect.getText("ည")
+            return "ည"
 
         else return ""
 

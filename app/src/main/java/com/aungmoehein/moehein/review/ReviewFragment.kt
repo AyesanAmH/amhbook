@@ -100,8 +100,10 @@ class ReviewFragment : Fragment() {
                     review_latest.visibility = View.VISIBLE
                     review_scroll.visibility = View.VISIBLE
                     no_review_books.visibility = View.GONE
+                    no_review_books_card.visibility = View.GONE
                 } else {
                     no_review_books.visibility = View.VISIBLE
+                    no_review_books_card.visibility = View.VISIBLE
                     review_latest.visibility = View.GONE
                     review_scroll.visibility = View.GONE
                 }

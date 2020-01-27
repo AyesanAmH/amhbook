@@ -15,6 +15,7 @@ data class Event(
     @ColumnInfo(name = "mmtime") val mmtime:String,
     @ColumnInfo(name = "place") val place:String,
     @ColumnInfo(name = "strAlarm") val strAlarm:String,
-    @ColumnInfo(name = "mlsAlarm") val mlsAlarm:Long
+    @ColumnInfo(name = "mlsAlarm") val mlsAlarm:Long,
+    @ColumnInfo(name = "setalarm")val setAlarm:Boolean
     ) {
 }

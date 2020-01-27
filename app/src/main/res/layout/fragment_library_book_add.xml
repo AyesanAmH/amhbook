@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        tools:context=".library.LibraryBookAddFragment">
+
+    <EditText
+            android:id="@+id/library_add_name"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/layout_add_edit_text"
+            android:textColor="@color/md_black_1000"
+            android:paddingLeft="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            android:id="@+id/library_add_writer"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:textSize="18sp"
+            android:paddingTop="12dp"
+            android:background="@drawable/layout_add_edit_text"
+            android:textColor="@color/md_black_1000"
+            android:paddingLeft="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/library_add_name" />
+
+    <AutoCompleteTextView
+            android:id="@+id/library_add_cat"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/layout_add_edit_text"
+            android:textColor="@color/md_black_1000"
+            android:paddingLeft="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/library_add_writer" />
+
+    <Button
+            android:id="@+id/cancel_book_add"
+            android:layout_width="128dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/layout_cancel_button"
+            android:text="Cancel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/library_add_cat" />
+
+    <Button
+            android:id="@+id/save_book_add"
+            android:layout_width="128dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/layout_add_button"
+            android:text="Save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/library_add_cat" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

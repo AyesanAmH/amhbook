@@ -14,6 +14,7 @@ import com.aungmoehein.moehein.R
 import com.aungmoehein.moehein.adapter.EventListAdapter
 import com.aungmoehein.moehein.viewmodel.EventViewModel
 import kotlinx.android.synthetic.main.fragment_event_list.*
+import org.jetbrains.anko.support.v4.act
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -46,13 +47,16 @@ class EventListFragment : Fragment() {
         recycler.adapter = eventAdapter
         recycler.layoutManager = LinearLayoutManager(context)
         viewModel.allevents.observe(viewLifecycleOwner, androidx.lifecycle.Observer { events ->
-            events?.let { eventAdapter.setEvent(it) } })
+            events?.let {
+                eventAdapter.setEvent(it) } })
 
 
         fab.setOnClickListener {
             val action = EventListFragmentDirections.addAction()
             Navigation.findNavController(it).navigate(action)
         }
+
+
     }
 
 
