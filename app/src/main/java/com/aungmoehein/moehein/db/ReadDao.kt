@@ -8,7 +8,7 @@ import androidx.room.*
 @Dao
 interface ReadDao {
 
-    @Query("select * from read_table order by title asc")
+    @Query("select * from read_table order by title desc")
     fun getAllRead():LiveData<List<Read>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

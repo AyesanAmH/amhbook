@@ -23,11 +23,6 @@ import java.util.*
  */
 class EventListFragment : Fragment() {
     lateinit var dialog:View
-    val event_day_calendar = Calendar.getInstance()
-    val dateFormat = SimpleDateFormat("yyyy-M-dd")
-    var check_event_time  = true
-    val event_remainder_calendar = Calendar.getInstance()
-
 
 
     override fun onCreateView(

@@ -34,15 +34,19 @@ class ReviewDetailFragment : Fragment() {
         val arg = ReviewDetailFragmentArgs.fromBundle(arguments!!)
         val writer = arg.writer
         val cat = arg.cat
+
+
         review_detail_name.text = MDetect.getText(arg.name)
         review_detail_writer.text = MDetect.getText("စာရေးသူ - $writer")
         review_detail_cat.text = MDetect.getText("စာပေအမျိုးအစား - $cat")
         review_detail_context.text = MDetect.getText(arg.review)
-        review_detail_fav.setImageResource(R.drawable.home_24px)
+
         if (arg.fav)
             review_detail_fav.setImageResource(R.drawable.ic_favorite_24px)
         else
           review_detail_fav.setImageResource(R.drawable.icon_love_present)
+
+
         var fav = !arg.fav
         review_detail_fav.setOnClickListener {
             val db = MoeHein.getInstance(context!!)
@@ -51,10 +55,10 @@ class ReviewDetailFragment : Fragment() {
                 db.reviewDao().updateReview(Review(arg.id,arg.name,arg.writer,
                     arg.cat,arg.review,fav))
             }
-            if(fav)
-                review_detail_fav.setImageResource(R.drawable.ic_favorite_24px)
-            else
-                review_detail_fav.setImageResource(R.drawable.icon_love_present)
+
+            if(fav) review_detail_fav.setImageResource(R.drawable.ic_favorite_24px)
+
+            else review_detail_fav.setImageResource(R.drawable.icon_love_present)
             fav = !fav
         }
 

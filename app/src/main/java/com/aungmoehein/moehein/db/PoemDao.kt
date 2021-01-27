@@ -33,5 +33,8 @@ interface PoemDao {
     @Query("select id from poem_table where title = :title and  writer = :writer")
     fun checkPoemConflict(title: String,writer :String):Long
 
+    @Query("select writer from poem_table group by writer order by count(writer) asc")
+    fun getSugWriter():Array<String>
+
 
 }

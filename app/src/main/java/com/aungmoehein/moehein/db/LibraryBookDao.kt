@@ -6,7 +6,7 @@ import androidx.room.*
 @Dao
 interface LibraryBookDao {
 
-    @Query("select * from library_book")
+    @Query("select * from library_book order by name asc")
     fun getAllBooks() : LiveData<List<LibraryBook>>
 
     @Insert

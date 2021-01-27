@@ -39,25 +39,19 @@ class ReadAddFragment : Fragment() {
         scope.launch {
             val db = MoeHein.getInstance(context!!)
             val writer = MDetect.getStringArray(db.readDao().getSugWriter())
-            val recom = MDetect.getStringArray(db.readDao().getSugRecom())
 
 
             async (Dispatchers.Main){
                 val writerAdapter = ArrayAdapter<String>(context!!,
                     android.R.layout.simple_dropdown_item_1line,writer)
-                val recomAdapter = ArrayAdapter<String>(context!!,
-                    android.R.layout.simple_dropdown_item_1line,recom)
 
                 read_writer.setAdapter(writerAdapter)
                 read_writer.threshold = 1
-                read_recom.setAdapter(recomAdapter)
-                read_recom.threshold = 1
 
 
                 read_writer.onFocusChangeListener = View.OnFocusChangeListener{
                         view,b -> if(b) read_writer.showDropDown() }
-                read_recom.onFocusChangeListener = View.OnFocusChangeListener{
-                        view,b -> if(b) read_recom.showDropDown() }
+
             }
         }
 

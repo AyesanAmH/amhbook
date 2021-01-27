@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/poem_top_click"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:id="@+id/poem_top_click"
-        android:background="@drawable/layout_review"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        android:background="@drawable/layout_review">
 
     <TextView
             android:id="@+id/poem_title"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="44dp"
             android:layout_marginEnd="8dp"
@@ -25,61 +25,77 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    <net.expandable.ExpandableTextView
+<!--    <net.expandable.ExpandableTextView-->
+<!--            android:id="@+id/poem_content"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="4dp"-->
+<!--            android:layout_marginEnd="8dp"-->
+<!--            android:minLines="4"-->
+<!--            android:paddingStart="32dp"-->
+<!--            android:paddingLeft="8dp"-->
+<!--            android:text="@string/poem_content"-->
+<!--            android:textColor="@color/md_grey_900"-->
+<!--            android:textSize="18sp"-->
+<!--            app:collapse_lines="4"-->
+<!--            app:expand="true"-->
+<!--            app:expand_enabled="false"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/poem_title" />-->
+<!--   -->
+
+    <at.blogc.android.views.ExpandableTextView
             android:id="@+id/poem_content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingStart="32dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:minLines="4"
+            android:paddingStart="32dp"
             android:paddingLeft="8dp"
             android:text="@string/poem_content"
             android:textColor="@color/md_grey_900"
             android:textSize="18sp"
-            app:collapse_lines="4"
-            app:expand="true"
-            app:expand_enabled="false"
+            android:maxLines="4"
+            android:ellipsize="end"
+            app:animation_duration="150"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/poem_title" />
 
-
-        <TextView
-                android:id="@+id/poem_detail"
-                android:text="@string/poem_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/md_grey_900"
-                app:layout_constraintTop_toBottomOf="@+id/poem_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="32dp"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"/>
+    <TextView
+            android:id="@+id/poem_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="19dp"
+            android:text="@string/poem_detail"
+            android:textColor="@color/md_grey_900"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/poem_context" />
 
     <TextView
             android:id="@+id/poem_top_writer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="4dp"
             android:layout_marginBottom="16dp"
             android:text="@string/poem_writer"
             android:textColor="@color/md_grey_900"
             android:textSize="18sp"
-            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/poem_detail"
-            app:layout_constraintHorizontal_bias="0.27"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/poem_content"
-            app:layout_constraintVertical_bias="0.39" />
+            app:layout_constraintTop_toBottomOf="@+id/poem_content" />
 
-    <androidx.constraintlayout.widget.Group
-            android:id="@+id/poem_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_ids="poem_title,poem_content,poem_detail,poem_top_writer"
-            />
+<!--    <androidx.constraintlayout.widget.Group-->
+<!--            android:id="@+id/poem_group"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:constraint_referenced_ids="poem_title,poem_content,poem_detail,poem_top_writer" />-->
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

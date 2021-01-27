@@ -23,18 +23,18 @@
                 android:layout_weight="1"
                 android:name="androidx.navigation.fragment.NavHostFragment"
                 app:navGraph="@navigation/nav_bottom"
-                app:defaultNavHost="true"
-    />
+                app:defaultNavHost="true" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:itemIconTint="@color/md_teal_900"
+            android:elevation="0dp"
+            android:background="@color/md_white_1000"
             app:itemBackground="@color/md_white_1000"
             app:itemIconSize="30dp"
-            android:elevation="0dp"
+            app:itemIconTint="@color/md_teal_900"
             app:labelVisibilityMode="unlabeled"
-            app:menu="@menu/bottom_nav_menu"/>
+            app:menu="@menu/bottom_nav_menu" />
 
 </LinearLayout>

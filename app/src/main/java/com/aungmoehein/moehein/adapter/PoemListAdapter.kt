@@ -71,7 +71,7 @@ class PoemListAdapter(val context: Context):RecyclerView.Adapter<PoemListAdapter
 
 
 
-    class PoemViewHolder(itemView:View,adapter: PoemListAdapter):RecyclerView.ViewHolder(itemView),View.OnClickListener {
+    class PoemViewHolder(itemView:View,val adapter: PoemListAdapter):RecyclerView.ViewHolder(itemView),View.OnClickListener {
 
         init {
             itemView.setOnClickListener(this)
@@ -79,13 +79,12 @@ class PoemListAdapter(val context: Context):RecyclerView.Adapter<PoemListAdapter
         val title = itemView.findViewById<TextView>(R.id.title)
         val context = itemView.findViewById<TextView>(R.id.context)
         val pop_up_button = itemView.findViewById<ImageButton>(R.id.pop_up_btn)
-        private val poemListAdapter = adapter
 
         override fun onClick(v: View?) {
             val poem_details = PoemListFragmentDirections
-                .poemDetailAction(poemListAdapter.poems[adapterPosition].title,
-                    poemListAdapter.poems[adapterPosition].context,
-                    poemListAdapter.poems[adapterPosition].writer)
+                .poemDetailAction(adapter.poems[adapterPosition].title,
+                    adapter.poems[adapterPosition].context,
+                    adapter.poems[adapterPosition].writer)
 
             Navigation.findNavController(itemView).navigate(poem_details)
         }

@@ -70,11 +70,9 @@ class ReviewFavAdapter(val context: Context):RecyclerView.Adapter<ReviewFavAdapt
         val pop_up_button = itemView.findViewById<ImageButton>(R.id.pop_up_btn)
 
         override fun onClick(v: View?) {
-            val detail = ReviewFavFragmentDirections.detailAction(adapter.fav[adapterPosition].id,
-                adapter.fav[adapterPosition].title,adapter.fav[adapterPosition].writer,
-                adapter.fav[adapterPosition].cat,
-                adapter.fav[adapterPosition].fav,
-                adapter.fav[adapterPosition].review)
+            val position = adapter.fav[adapterPosition]
+            val detail = ReviewFavFragmentDirections.detailAction(position.id,
+               position.title,position.writer, position.cat, position.fav, position.review)
             Navigation.findNavController(itemView).navigate(detail)
         }
 

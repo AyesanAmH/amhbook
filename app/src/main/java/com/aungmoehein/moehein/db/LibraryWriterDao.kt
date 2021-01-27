@@ -6,7 +6,7 @@ import androidx.room.*
 @Dao
 interface LibraryWriterDao {
 
-    @Query("select * from library_writer")
+    @Query("select * from library_writer order by name asc")
     fun getAllWriters() : LiveData<List<LibraryWriter>>
 
     @Insert

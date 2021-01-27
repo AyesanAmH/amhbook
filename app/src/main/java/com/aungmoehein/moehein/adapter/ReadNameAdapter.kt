@@ -23,7 +23,6 @@ import kotlinx.coroutines.launch
 import me.myatminsoe.mdetect.MDetect
 
 class ReadNameAdapter(val context: Context):RecyclerView.Adapter<ReadNameAdapter.ReadNameViewHolder>() {
-    private val layoutInflater = LayoutInflater.from(context)
     val db = MoeHein.getInstance(context)
     private var read = emptyList<Read>()
 
@@ -31,7 +30,7 @@ class ReadNameAdapter(val context: Context):RecyclerView.Adapter<ReadNameAdapter
         parent: ViewGroup,
         viewType: Int
     ): ReadNameAdapter.ReadNameViewHolder {
-        return ReadNameViewHolder(layoutInflater.inflate(R.layout.name_list_layout,parent,false),this,context)
+        return ReadNameViewHolder(LayoutInflater.from(context).inflate(R.layout.name_list_layout,parent,false),this,context)
     }
 
     override fun getItemCount(): Int {
@@ -70,7 +69,7 @@ class ReadNameAdapter(val context: Context):RecyclerView.Adapter<ReadNameAdapter
         this.read = read
         notifyDataSetChanged() }
 
-    class ReadNameViewHolder(itemView: View, adapter: ReadNameAdapter,val context: Context):RecyclerView.ViewHolder(itemView),View.OnClickListener
+    class ReadNameViewHolder(itemView: View,val adapter: ReadNameAdapter,val context: Context):RecyclerView.ViewHolder(itemView),View.OnClickListener
     {
         init {
             itemView.setOnClickListener(this)
@@ -78,7 +77,6 @@ class ReadNameAdapter(val context: Context):RecyclerView.Adapter<ReadNameAdapter
 
         val title = itemView.findViewById<TextView>(R.id.title)
         val pop_up_btn = itemView.findViewById<ImageButton>(R.id.pop_up_btn)
-        val adapter = adapter
         override fun onClick(v: View?) {
             val dialog = LayoutInflater.from(context).inflate(R.layout.details_read_layout,null)
             val builder = AlertDialog.Builder(context).setView(dialog)

@@ -2,7 +2,7 @@
  <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/nav_bottom"
+            android:id="@+id/nav_bottom"
             app:startDestination="@id/navigation_home">
 
     <fragment
@@ -25,6 +25,9 @@
         <action
                 android:id="@+id/eventAction"
                 app:destination="@id/navigation" />
+        <action
+                android:id="@+id/musicAction"
+                app:destination="@id/navigation2" />
     </fragment>
     <fragment android:id="@+id/navigation_library" android:name="com.aungmoehein.moehein.library.LibraryFragment"
               android:label="fragment_library" tools:layout="@layout/fragment_library">
@@ -73,8 +76,7 @@
     <fragment
             android:id="@+id/buyFragment"
             android:name="com.aungmoehein.moehein.buy.BuyFragment"
-            android:label="To Buy List"
-            tools:layout="@layout/fragment_buy" >
+            tools:layout="@layout/fragment_buy">
         <action
                 android:id="@+id/addBuy"
                 app:destination="@id/addBuyBookFragment2" />
@@ -88,11 +90,11 @@
     <fragment
             android:id="@+id/addBuyBookFragment2"
             android:name="com.aungmoehein.moehein.buy.BuyAddBookFragment"
-            android:label="AddBuyBookFragment" />
+            android:label="add Book" />
     <fragment
             android:id="@+id/buyEditFragment"
             android:name="com.aungmoehein.moehein.buy.BuyEditFragment"
-            android:label="BuyEditFragment" >
+            android:label="Edit">
         <argument
                 android:name="id"
                 app:argType="long" />
@@ -121,8 +123,8 @@
     <fragment
             android:id="@+id/readFragment"
             android:name="com.aungmoehein.moehein.read.ReadFragment"
-            android:label="fragment_read"
-            tools:layout="@layout/fragment_read" >
+            android:label="Read"
+            tools:layout="@layout/fragment_read">
         <action
                 android:id="@+id/addRead"
                 app:destination="@+id/readAddFragment" />
@@ -133,14 +135,14 @@
     <fragment
             android:id="@+id/readAddFragment"
             android:name="com.aungmoehein.moehein.read.ReadAddFragment"
-            android:label="fragment_read_add"
+            android:label="Read Add"
             tools:layout="@layout/fragment_read_add" />
 
     <fragment
             android:id="@+id/readEditFragment"
             android:name="com.aungmoehein.moehein.read.ReadEditFragment"
-            android:label="fragment_read_edit"
-            tools:layout="@layout/fragment_read_edit" >
+            android:label="Read Edit"
+            tools:layout="@layout/fragment_read_edit">
         <argument
                 android:name="id"
                 app:argType="long" />
@@ -160,8 +162,8 @@
     <fragment
             android:id="@+id/reviewFragment"
             android:name="com.aungmoehein.moehein.review.ReviewFragment"
-            android:label="fragment_review"
-            tools:layout="@layout/fragment_review" >
+            android:label="Review"
+            tools:layout="@layout/fragment_review">
 
 
         <action
@@ -311,9 +313,6 @@
             <action
                     android:id="@+id/editAction"
                     app:destination="@id/eventEditFragment" />
-            <action
-                    android:id="@+id/expireAction"
-                    app:destination="@id/eventExpireFragment" />
         </fragment>
         <fragment
                 android:id="@+id/eventAddFragment"
@@ -352,15 +351,6 @@
             <argument
                     android:name="mlsalarm"
                     app:argType="long" />
-        </fragment>
-        <fragment
-                android:id="@+id/eventExpireFragment"
-                android:name="com.aungmoehein.moehein.event.EventExpireFragment"
-                android:label="fragment_event_expire"
-                tools:layout="@layout/fragment_event_expire" >
-            <action
-                    android:id="@+id/editAction"
-                    app:destination="@id/eventEditFragment" />
         </fragment>
     </navigation>
     <fragment
@@ -403,4 +393,21 @@
                 android:name="cat"
                 app:argType="string" />
     </fragment>
+    <navigation
+            android:id="@+id/navigation2"
+            app:startDestination="@id/musicFragment" >
+        <fragment
+                android:id="@+id/musicFragment"
+                android:name="com.aungmoehein.moehein.music.MusicFragment"
+                android:label="fragment_music"
+                tools:layout="@layout/fragment_music">
+            <action
+                    android:id="@+id/detailAction"
+                    app:destination="@id/musicDetailFragment" />
+        </fragment>
+        <fragment
+                android:id="@+id/musicDetailFragment"
+                android:name="com.aungmoehein.moehein.music.MusicDetailFragment"
+                android:label="MusicDetailFragment" />
+    </navigation>
 </navigation>

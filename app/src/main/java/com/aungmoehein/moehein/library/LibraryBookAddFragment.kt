@@ -75,7 +75,7 @@ class LibraryBookAddFragment : Fragment() {
                 library_add_cat.hintTextColor = Color.RED
             }
             else{
-                val book = LibraryBook(name = roomText(name),writer = args.name,cat = roomText(cat))
+                val book = LibraryBook(name = name,writer = args.name,cat = cat)
                 scope.launch {
                     val db = MoeHein.getInstance(context!!)
                     val conflict = db.libraryBookDao().checkConflict(roomText(name))

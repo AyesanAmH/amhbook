@@ -30,13 +30,16 @@ class ReviewWriterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val viewModel = ViewModelProviders.of(this).get(ReviewViewModel::class.java)
         val reviewAdapter = ReviewWriterAdapter(context!!)
 
         review_writer_recycler.adapter = reviewAdapter
         review_writer_recycler.layoutManager = LinearLayoutManager(context)
+
         viewModel.allwriters.observe(viewLifecycleOwner, Observer { writer ->
             writer?.let { reviewAdapter.setReveiw(it) } })
+
         viewModel.allnames.observe(viewLifecycleOwner, Observer {names ->
             names?.let { reviewAdapter.setReviewBook(it) }
         })

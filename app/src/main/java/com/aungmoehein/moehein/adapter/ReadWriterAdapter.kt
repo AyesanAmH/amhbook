@@ -15,7 +15,6 @@ import com.aungmoehein.moehein.db.Read
 import me.myatminsoe.mdetect.MDetect
 
 class ReadWriterAdapter(context: Context):RecyclerView.Adapter<ReadWriterAdapter.ReadWriterViewHolder>(){
-    private val layoutInflater = LayoutInflater.from(context)
     private var readWriter =  emptyList<Read>()
     private var readBooks = emptyList<Read>()
     private var read = mutableListOf<Read>()
@@ -28,7 +27,7 @@ class ReadWriterAdapter(context: Context):RecyclerView.Adapter<ReadWriterAdapter
         viewType: Int
     ): ReadWriterAdapter.ReadWriterViewHolder {
         return ReadWriterViewHolder(
-            layoutInflater.inflate(
+            LayoutInflater.from(context).inflate(
                 R.layout.writer_other_list_layout,
                 parent,
                 false

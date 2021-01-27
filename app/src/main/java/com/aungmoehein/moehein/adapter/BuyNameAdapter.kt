@@ -24,7 +24,6 @@ import kotlinx.coroutines.launch
 import me.myatminsoe.mdetect.MDetect
 
 class BuyNameAdapter(val context: Context):RecyclerView.Adapter<BuyNameAdapter.BuyViewHolder>() {
-    private val layoutInflater = LayoutInflater.from(context)
     val db = MoeHein.getInstance(context)
     private var buy = emptyList<Buy>()
 
@@ -32,7 +31,7 @@ class BuyNameAdapter(val context: Context):RecyclerView.Adapter<BuyNameAdapter.B
         parent: ViewGroup,
         viewType: Int
     ): BuyNameAdapter.BuyViewHolder {
-        return BuyViewHolder(layoutInflater.inflate(R.layout.name_list_layout,parent,false),this,context)
+        return BuyViewHolder(LayoutInflater.from(context).inflate(R.layout.name_list_layout,parent,false),this,context)
     }
 
     override fun getItemCount(): Int { return buy.size }

@@ -43,6 +43,7 @@ class LibraryWriterAdapter(val context: Context) : RecyclerView.Adapter<LibraryW
 
     override fun onBindViewHolder(holder: LibraryWriterAdapter.LibraryHolder, position: Int) {
         val writerBooks = mutableListOf<LibraryBook>()
+        val scope = CoroutineScope(Dispatchers.IO)
         books.forEach {
             if(it.writer == list[position].name)
                 writerBooks.add(it) }
@@ -52,7 +53,6 @@ class LibraryWriterAdapter(val context: Context) : RecyclerView.Adapter<LibraryW
 
         holder.pop_up_btn.backgroundColor = Color.TRANSPARENT
         holder.pop_up_btn.setOnClickListener {
-            val scope = CoroutineScope(Dispatchers.IO)
             val dialog = LayoutInflater.from(context).inflate(R.layout.pop_up_layout,null)
             val builder = AlertDialog.Builder(context)
                 .setView(dialog)
@@ -84,8 +84,13 @@ class LibraryWriterAdapter(val context: Context) : RecyclerView.Adapter<LibraryW
                     scope.launch {
                         val libraryWriter = LibraryWriter(id = list[position].id,name = Utils.roomText(renameDialog.rename_shelf.text.toString()),qty = 0)
                         db.libraryWriterDao().updateWriter(libraryWriter)
+                        writerBooks.forEach {
+                            val book = LibraryBook(id = it.id,name = it.name,writer =  Utils.roomText(renameDialog.rename_shelf.text.toString()),cat = it.cat)
+                            db.libraryBookDao().updateBook(book)
+                        }
                         renameAlertDialog.dismiss()
                     }
+
                 }
 
                 renameDialog.rename_cancel.setOnClickListener {

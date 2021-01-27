@@ -8,7 +8,7 @@ import org.w3c.dom.Comment
 @Dao
 interface BuyDao {
 
-    @Query("select * from buy_table order by title asc")
+    @Query("select * from buy_table order by title desc")
     fun getAllBuy():LiveData<List<Buy>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

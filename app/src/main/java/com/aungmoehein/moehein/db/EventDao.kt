@@ -33,6 +33,9 @@ interface EventDao {
     @Query("select place from event_table group by place order by count(place) desc")
     fun getSugPlace() : Array<String>
 
+    @Query("select * from event_table where mlsAlarm < :alarmtime")
+    fun getReceiverEvent(alarmtime : Long) : List<Event>
+
 
 
 }

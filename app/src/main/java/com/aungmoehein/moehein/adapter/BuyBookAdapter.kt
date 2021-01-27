@@ -59,7 +59,7 @@ class BuyBookAdapter(val context: Context, val booklist: List<Buy>): RecyclerVie
 
 
 
-    class BuyWriterBookViewHolder(itemView: View, adapter: BuyBookAdapter, val context: Context) : RecyclerView.ViewHolder(itemView),View.OnClickListener{
+    class BuyWriterBookViewHolder(itemView: View,val  adapter: BuyBookAdapter, val context: Context) : RecyclerView.ViewHolder(itemView),View.OnClickListener{
 
         init {
             itemView.setOnClickListener(this)
@@ -67,7 +67,6 @@ class BuyBookAdapter(val context: Context, val booklist: List<Buy>): RecyclerVie
 
         val title = itemView.findViewById<TextView>(R.id.writer_other_title)
         val pop_up_btn = itemView.findViewById<ImageButton>(R.id.pop_up_btn)
-        val adapter = adapter
 
         override fun onClick(v: View?) {
             val dialog = LayoutInflater.from(context).inflate(R.layout.details_buy_layout,null)

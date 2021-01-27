@@ -21,14 +21,13 @@ import kotlinx.coroutines.launch
 import me.myatminsoe.mdetect.MDetect
 
 class ReadBookAdapter(val context: Context, val readList: List<Read>):RecyclerView.Adapter<ReadBookAdapter.ReadWriterViewHolder>(){
-    private val layoutInflater = LayoutInflater.from(context)
     val db = MoeHein.getInstance(context)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ReadBookAdapter.ReadWriterViewHolder {
-        return ReadWriterViewHolder(layoutInflater.inflate(R.layout.writer_other_list,parent,false),this,context)
+        return ReadWriterViewHolder(LayoutInflater.from(context).inflate(R.layout.writer_other_list,parent,false),this,context)
     }
 
     override fun getItemCount(): Int {

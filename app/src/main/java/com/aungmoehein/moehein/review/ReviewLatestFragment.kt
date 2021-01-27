@@ -31,8 +31,10 @@ class ReviewLatestFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val viewModel = ViewModelProviders.of(this).get(ReviewViewModel::class.java)
         val reviewAdapter = ReviewTopAdapter(context!!)
+
         review_latest_recycler.adapter = reviewAdapter
         review_latest_recycler.layoutManager = GridLayoutManager(context,3)
         viewModel.allreviews.observe(viewLifecycleOwner, Observer { reveiws ->
